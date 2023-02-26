@@ -85,6 +85,13 @@
                 android:textColorHighlight="@color/cardview_dark_background"
                 android:layout_marginTop="20dp"/>
 
+            <ProgressBar
+                android:id="@+id/Progressbar"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
