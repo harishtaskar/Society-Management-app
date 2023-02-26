@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "410617273348",
+    "project_id": "new-generation-society",
+    "storage_bucket": "new-generation-society.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410617273348:android:9ac82583f815d2dd69a951",
+        "android_client_info": {
+          "package_name": "com.example.newgensociety"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "410617273348-eq9rf5tnlv9a9rr8sibr46fe3ssratbd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.newgensociety",
+            "certificate_hash": "210091643a2a5020aa14ab1d75a47599770396cb"
+          }
+        },
+        {
+          "client_id": "410617273348-m1if9pc84h1690leud7bkr63j66u59kp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0sc2rlE2MdS-fm9EQM9wO2T2QDu79Z0U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "410617273348-m1if9pc84h1690leud7bkr63j66u59kp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
