@@ -44,22 +44,37 @@
                     android:textStyle="bold"
                     android:textColor="@color/orange"
                     android:gravity="center_horizontal" />
-
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:id="@+id/Committee_Registration_editT_Syname"
-                    android:background="@drawable/custom_edittext"
-                    android:drawablePadding="8dp"
-                    android:textColorHint="#808080"
+                    android:layout_height="match_parent"
+                    app:boxBackgroundMode="outline"
+                    android:layout_marginTop="20dp"
                     android:hint="Society name"
-                    android:paddingStart="20dp"
-                    android:padding="8dp"
-                    android:inputType="text"
-                    android:textAllCaps="true"
-                    android:textColor="@color/black"
-                    android:textColorHighlight="@color/cardview_dark_background"
-                    android:layout_marginTop="40dp"/>
+                    android:textColorHint="#808080"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:boxStrokeColor="@color/orange"
+                    app:hintTextColor="@color/orange">
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:id="@+id/Committee_Reg_editT_Sname"
+                        android:drawablePadding="8dp"
+                        android:drawableLeft="@drawable/ic_baseline_home_work_24"
+                        android:paddingStart="10dp"
+                        android:padding="8dp"
+                        android:inputType="text"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textColorHighlight="@color/cardview_dark_background"
+                        android:layout_marginTop="40dp"
+                        android:paddingLeft="10dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
 
                 <TextView
                     android:layout_marginTop="20dp"
@@ -78,36 +93,65 @@
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/Committee_Registration_editT_area"
-                        android:layout_width="140dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/custom_edittext"
-                        android:drawablePadding="8dp"
-                        android:hint="@string/area"
-                        android:inputType="text"
-                        android:padding="8dp"
-                        android:paddingStart="20dp"
-                        android:textAllCaps="true"
-                        android:textColor="@color/black"
-                        android:textColorHighlight="@color/cardview_dark_background"
-                        android:textColorHint="#808080" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="170dp"
+                        android:layout_height="60dp"
+                        app:boxBackgroundMode="outline"
+                        android:layout_gravity="top"
+                        android:hint="Area"
+                        android:textColorHint="#808080"
+                        app:boxCornerRadiusBottomStart="10dp"
+                        app:boxCornerRadiusBottomEnd="10dp"
+                        app:boxCornerRadiusTopEnd="10dp"
+                        app:boxCornerRadiusTopStart="10dp"
+                        app:boxStrokeColor="@color/orange"
+                        app:hintTextColor="@color/orange">
 
-                    <EditText
-                        android:id="@+id/Committee_Registration_editT_location"
-                        android:layout_width="110dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/custom_edittext"
-                        android:drawablePadding="8dp"
-                        android:hint="location"
-                        android:inputType="text"
-                        android:padding="8dp"
-                        android:layout_marginLeft="50dp"
-                        android:paddingStart="20dp"
-                        android:textAllCaps="true"
-                        android:textColor="@color/black"
-                        android:textColorHighlight="@color/cardview_dark_background"
-                        android:textColorHint="#808080" />
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="170dp"
+                            android:layout_height="50dp"
+                            android:id="@+id/Committee_Reg_editT_Area"
+                            android:drawablePadding="8dp"
+                            android:paddingStart="10dp"
+                            android:padding="8dp"
+                            android:inputType="text"
+                            android:textColor="@color/black"
+                            android:textColorHighlight="@color/cardview_dark_background"
+                            android:layout_marginTop="40dp"
+                            android:paddingLeft="10dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="145dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="10dp"
+                        app:boxBackgroundMode="outline"
+                        android:layout_gravity="top"
+                        android:hint="Location"
+                        android:textColorHint="#808080"
+                        app:boxCornerRadiusBottomStart="10dp"
+                        app:boxCornerRadiusBottomEnd="10dp"
+                        app:boxCornerRadiusTopEnd="10dp"
+                        app:boxCornerRadiusTopStart="10dp"
+                        app:boxStrokeColor="@color/orange"
+                        app:hintTextColor="@color/orange">
+
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="142dp"
+                            android:layout_height="50dp"
+                            android:id="@+id/Committee_Reg_editT_Location"
+                            android:drawablePadding="8dp"
+                            android:paddingStart="10dp"
+                            android:padding="8dp"
+                            android:inputType="text"
+                            android:textColor="@color/black"
+                            android:textColorHighlight="@color/cardview_dark_background"
+                            android:layout_marginTop="40dp"
+                            android:paddingLeft="10dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
                 </LinearLayout>
@@ -204,72 +248,132 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <EditText
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:id="@+id/Committee_Registration_editT_CMname"
-                        android:background="@drawable/custom_edittext"
-                        android:drawablePadding="8dp"
+                        android:layout_height="60dp"
+                        app:boxBackgroundMode="outline"
+                        android:layout_gravity="top"
+                        android:hint="Committee Member name"
                         android:textColorHint="#808080"
-                        android:hint="Committee member name"
-                        android:paddingStart="20dp"
-                        android:padding="8dp"
-                        android:inputType="text"
-                        android:textAllCaps="true"
-                        android:textColor="@color/black"
-                        android:textColorHighlight="@color/cardview_dark_background"
-                        android:layout_marginTop="10dp"/>
-                    <EditText
+                        app:boxCornerRadiusBottomStart="10dp"
+                        app:boxCornerRadiusBottomEnd="10dp"
+                        app:boxCornerRadiusTopEnd="10dp"
+                        app:boxCornerRadiusTopStart="10dp"
+                        app:boxStrokeColor="@color/orange"
+                        app:hintTextColor="@color/orange">
+
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:id="@+id/Committee_Reg_editT_CMname"
+                            android:drawablePadding="8dp"
+                            android:paddingStart="10dp"
+                            android:padding="10dp"
+                            android:drawableLeft="@drawable/ic_baseline_person_24"
+                            android:inputType="text"
+                            android:textColor="@color/black"
+                            android:textColorHighlight="@color/cardview_dark_background"
+                            android:layout_marginTop="40dp"
+                            android:paddingLeft="10dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:id="@+id/Committee_Registration_editT_CMemail"
-                        android:background="@drawable/custom_edittext"
-                        android:drawablePadding="8dp"
-                        android:textColorHint="#808080"
+                        android:layout_height="match_parent"
+                        app:boxBackgroundMode="outline"
+                        android:layout_marginTop="10dp"
+                        app:boxCornerRadiusBottomStart="10dp"
+                        app:boxCornerRadiusBottomEnd="10dp"
+                        app:boxCornerRadiusTopEnd="10dp"
+                        app:boxCornerRadiusTopStart="10dp"
                         android:hint="Email"
-                        android:paddingStart="20dp"
-                        android:padding="8dp"
-                        android:inputType="text"
-                        android:textAllCaps="true"
-                        android:textColor="@color/black"
-                        android:textColorHighlight="@color/cardview_dark_background"
-                        android:layout_marginTop="10dp"/>
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:id="@+id/Committee_Registration_editT_password"
-                        android:background="@drawable/custom_edittext"
-                        android:drawablePadding="8dp"
                         android:textColorHint="#808080"
+                        app:boxStrokeColor="@color/orange"
+                        app:hintTextColor="@color/orange">
+
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:id="@+id/Committee_Reg_editT_Email"
+                            android:drawablePadding="8dp"
+                            android:textColorHint="#808080"
+                            android:drawableLeft="@drawable/ic_baseline_email_24"
+                            android:paddingStart="10dp"
+                            android:inputType="textEmailAddress"
+                            android:padding="8dp"
+                            android:textColor="@color/black"
+                            android:textColorHighlight="@color/cardview_dark_background"
+                            android:layout_marginTop="15dp"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:boxBackgroundMode="outline"
+                        android:layout_marginTop="15dp"
+                        app:boxCornerRadiusBottomStart="10dp"
+                        app:boxCornerRadiusBottomEnd="10dp"
+                        app:boxCornerRadiusTopEnd="10dp"
+                        app:boxCornerRadiusTopStart="10dp"
                         android:hint="Password"
-                        android:paddingStart="20dp"
-                        android:padding="8dp"
-                        android:inputType="text"
-                        android:textAllCaps="true"
-                        android:textColor="@color/black"
-                        android:textColorHighlight="@color/cardview_dark_background"
-                        android:layout_marginTop="10dp"/>
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:id="@+id/Committee_Registration_editT_confirmpass"
-                        android:background="@drawable/custom_edittext"
-                        android:drawablePadding="8dp"
                         android:textColorHint="#808080"
-                        android:hint="Confirm password"
-                        android:paddingStart="20dp"
-                        android:padding="8dp"
-                        android:inputType="text"
-                        android:textAllCaps="true"
-                        android:textColor="@color/black"
-                        android:textColorHighlight="@color/cardview_dark_background"
-                        android:layout_marginTop="10dp"/>
+                        app:boxStrokeColor="@color/orange"
+                        app:hintTextColor="@color/orange">
 
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:id="@+id/Committee_Reg_editT_Pass"
+                            android:drawablePadding="8dp"
+                            android:drawableLeft="@drawable/ic_baseline_lock_24"
+                            android:paddingStart="10dp"
+                            android:textColorHint="#808080"
+                            android:padding="8dp"
+                            android:inputType="textPassword"
+                            android:filterTouchesWhenObscured="true"
+                            android:textColor="@color/black"
+                            android:textColorHighlight="@color/cardview_dark_background"
+                            android:layout_marginTop="20dp"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:boxBackgroundMode="outline"
+                        android:layout_marginTop="15dp"
+                        app:boxCornerRadiusBottomStart="10dp"
+                        app:boxCornerRadiusBottomEnd="10dp"
+                        app:boxCornerRadiusTopEnd="10dp"
+                        app:boxCornerRadiusTopStart="10dp"
+                        android:hint="Confirm Password"
+                        android:textColorHint="#808080"
+                        app:boxStrokeColor="@color/orange"
+                        app:hintTextColor="@color/orange">
+
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:id="@+id/Committee_Reg_editT_conPass"
+                            android:drawablePadding="8dp"
+                            android:drawableLeft="@drawable/ic_baseline_lock_24"
+                            android:paddingStart="10dp"
+                            android:textColorHint="#808080"
+                            android:padding="8dp"
+                            android:inputType="textPassword"
+                            android:filterTouchesWhenObscured="true"
+                            android:textColor="@color/black"
+                            android:textColorHighlight="@color/cardview_dark_background"
+                            android:layout_marginTop="20dp"/>
+                    </com.google.android.material.textfield.TextInputLayout>
                     <CheckBox
                         android:layout_marginTop="20dp"
                         android:layout_width="150dp"
+                        android:textColor="@color/black"
                         android:text="Terms condition"
                         android:layout_height="50dp">
 

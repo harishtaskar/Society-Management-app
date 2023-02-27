@@ -4,4 +4,5 @@
     <string name="society_member">Society Member</string>
     <string name="address">Address</string>
     <string name="area">Area</string>
+    <string name="login">Login</string>
 </resources>
