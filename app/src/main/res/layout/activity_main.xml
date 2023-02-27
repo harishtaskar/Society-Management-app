@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@drawable/background1"
     tools:context=".MainActivity" >
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -19,12 +19,13 @@
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:layout_marginTop="320dp"
+            android:layout_marginTop="350dp"
             android:text="@string/committee_member"
             android:textSize="20sp"
             android:textColor="@color/white"
             android:background="@drawable/custom_button2"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            tools:targetApi="lollipop" />
 
         <Button
             android:id="@+id/btn_asSocietyMember"

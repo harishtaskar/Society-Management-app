@@ -48,7 +48,7 @@ public class committee_registration_page extends AppCompatActivity {
         setContentView(R.layout.activity_committee_registration_page);
 
         mAuth = FirebaseAuth.getInstance();
-        logintext = findViewById(R.id.loginText);
+        logintext = findViewById(R.id.RegloginText);
         Email = findViewById(R.id.Committee_Registration_editT_CMemail);
         Password = findViewById(R.id.Committee_Registration_editT_password);
         ConPassword = findViewById(R.id.Committee_Registration_editT_confirmpass);

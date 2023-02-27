@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/backgound2"
+    android:background="@drawable/background3"
     tools:context=".MainActivity">
 
 
@@ -31,7 +31,7 @@
                 android:orientation="vertical"
                 android:background="@color/white"
                 android:layout_gravity="center_horizontal"
-                android:padding="24dp">
+                android:padding="17dp">
 
 
                 <TextView
@@ -64,8 +64,9 @@
                 <TextView
                     android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
-                    android:text="Address"
-                    android:textSize="15dp"
+                    android:text="@string/address"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
                     android:textColor="@color/orange"
                     android:layout_height="wrap_content">
 
@@ -83,7 +84,7 @@
                         android:layout_height="50dp"
                         android:background="@drawable/custom_edittext"
                         android:drawablePadding="8dp"
-                        android:hint="Area"
+                        android:hint="@string/area"
                         android:inputType="text"
                         android:padding="8dp"
                         android:paddingStart="20dp"
@@ -192,7 +193,8 @@
                     android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
                     android:text="Persnol Info"
-                    android:textSize="15dp"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
                     android:textColor="@color/orange"
                     android:layout_height="wrap_content">
 
@@ -308,7 +310,7 @@
         android:text="Alrady have account? Login Now"
         android:textSize="14sp"
         android:textAlignment="center"
-        android:id="@+id/loginText"
+        android:id="@+id/RegloginText"
         android:textColor="@color/blue"
         android:layout_marginBottom="20dp"
         android:gravity="center_horizontal" />

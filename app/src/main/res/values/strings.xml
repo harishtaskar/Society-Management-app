@@ -2,4 +2,6 @@
     <string name="app_name">NewGenSociety</string>
     <string name="committee_member">Committee Member</string>
     <string name="society_member">Society Member</string>
+    <string name="address">Address</string>
+    <string name="area">Area</string>
 </resources>
