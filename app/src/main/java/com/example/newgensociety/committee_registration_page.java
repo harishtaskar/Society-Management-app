@@ -10,9 +10,11 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,13 @@ public class committee_registration_page extends AppCompatActivity {
     ProgressBar progressbar;
     TextView logintext;
 
+    private String selectedState, selectedCity;
+    private TextView tvState, tvCity;
+    private Spinner stateSpinner, citySpinner;
+    private ArrayAdapter<CharSequence> stateAdapter, cityAdapter;
+
+
+    // to check whether the user is already registered or not
     @Override
     public void onStart() {
         super.onStart();
@@ -54,6 +63,12 @@ public class committee_registration_page extends AppCompatActivity {
         ConPassword = findViewById(R.id.Committee_Reg_editT_conPass);
         btnRegister = findViewById(R.id.btn_RegCommitteeMember);
         progressbar = findViewById(R.id.Progressbar);
+
+        stateSpinner = findViewById(R.id.Committee_Reg_spinner_state);
+        citySpinner = findViewById(R.id.Committee_Reg_spinner_city);
+        stateAdapter = ArrayAdapter.createFromResource(this,R.array.array_indian_states, R.layout.spinner_layout);
+        stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        stateSpinner.setAdapter(stateAdapter);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override

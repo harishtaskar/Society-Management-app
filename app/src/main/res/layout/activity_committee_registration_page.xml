@@ -51,6 +51,7 @@
                     android:layout_marginTop="20dp"
                     android:hint="Society name"
                     android:textColorHint="#808080"
+                    app:boxBackgroundColor="@color/white"
                     app:boxCornerRadiusBottomStart="10dp"
                     app:boxCornerRadiusBottomEnd="10dp"
                     app:boxCornerRadiusTopEnd="10dp"
@@ -104,6 +105,7 @@
                         app:boxCornerRadiusBottomEnd="10dp"
                         app:boxCornerRadiusTopEnd="10dp"
                         app:boxCornerRadiusTopStart="10dp"
+                        app:boxBackgroundColor="@color/white"
                         app:boxStrokeColor="@color/orange"
                         app:hintTextColor="@color/orange">
 
@@ -135,6 +137,7 @@
                         app:boxCornerRadiusBottomEnd="10dp"
                         app:boxCornerRadiusTopEnd="10dp"
                         app:boxCornerRadiusTopStart="10dp"
+                        app:boxBackgroundColor="@color/white"
                         app:boxStrokeColor="@color/orange"
                         app:hintTextColor="@color/orange">
 
@@ -159,38 +162,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:gravity="top"
                     android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/Committee_Registration_editT_pincode"
-                        android:layout_width="120dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/custom_edittext"
-                        android:drawablePadding="8dp"
-                        android:hint="Pincode"
-                        android:inputType="text"
-                        android:padding="8dp"
-                        android:paddingStart="20dp"
-                        android:textAllCaps="true"
-                        android:textColor="@color/black"
+                    <TextView
+                        android:id="@+id/Committee_Registration_Textview_state"
+                        android:layout_width="60dp"
+                        android:layout_height="20dp"
+                        android:paddingStart="10dp"
+                        android:text="@string/state"
+                        android:layout_gravity="top"
+                        android:textColor="@color/orange"
                         android:textColorHighlight="@color/cardview_dark_background"
                         android:textColorHint="#808080" />
 
-                    <EditText
-                        android:id="@+id/Committee_Registration_editT_state"
-                        android:layout_width="140dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/custom_edittext"
-                        android:drawablePadding="8dp"
-                        android:hint="state"
-                        android:inputType="text"
-                        android:padding="8dp"
-                        android:layout_marginLeft="40dp"
-                        android:paddingStart="20dp"
-                        android:textAllCaps="true"
-                        android:textColor="@color/black"
+
+
+
+                    <TextView
+                        android:id="@+id/Committee_Registration_Textview_city"
+                        android:layout_width="60dp"
+                        android:layout_height="20dp"
+                        android:text="@string/city"
+                        android:layout_marginStart="130dp"
+                        android:layout_gravity="top"
+                        android:textColor="@color/orange"
                         android:textColorHighlight="@color/cardview_dark_background"
-                        android:textColorHint="#808080" />
+                        android:textColorHint="#808080"
+                        android:layout_marginLeft="130dp" />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:layout_width="170dp"
+                        android:layout_height="50dp"
+                        android:padding="6dp"
+                        android:background="@drawable/custom_edittext2"
+                        android:id="@+id/Committee_Reg_spinner_state"
+                        />
+
+
+
+
+
+                    <Spinner
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/Committee_Reg_spinner_city"
+                        android:layout_marginLeft="10dp" />
 
 
                 </LinearLayout>
@@ -259,6 +284,7 @@
                         app:boxCornerRadiusBottomEnd="10dp"
                         app:boxCornerRadiusTopEnd="10dp"
                         app:boxCornerRadiusTopStart="10dp"
+                        app:boxBackgroundColor="@color/white"
                         app:boxStrokeColor="@color/orange"
                         app:hintTextColor="@color/orange">
 
@@ -290,6 +316,7 @@
                         app:boxCornerRadiusTopStart="10dp"
                         android:hint="Email"
                         android:textColorHint="#808080"
+                        app:boxBackgroundColor="@color/white"
                         app:boxStrokeColor="@color/orange"
                         app:hintTextColor="@color/orange">
 
@@ -320,6 +347,7 @@
                         app:boxCornerRadiusTopStart="10dp"
                         android:hint="Password"
                         android:textColorHint="#808080"
+                        app:boxBackgroundColor="@color/white"
                         app:boxStrokeColor="@color/orange"
                         app:hintTextColor="@color/orange">
 
@@ -352,6 +380,7 @@
                         android:hint="Confirm Password"
                         android:textColorHint="#808080"
                         app:boxStrokeColor="@color/orange"
+                        app:boxBackgroundColor="@color/white"
                         app:hintTextColor="@color/orange">
 
 

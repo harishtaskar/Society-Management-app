@@ -45,6 +45,7 @@
                 app:boxBackgroundMode="outline"
                 android:layout_marginTop="20dp"
                 android:hint="Society code"
+                app:boxBackgroundColor="@color/white"
                 android:textColorHint="#808080"
                 app:boxCornerRadiusBottomStart="10dp"
                 app:boxCornerRadiusBottomEnd="10dp"
@@ -78,6 +79,7 @@
                 app:boxCornerRadiusBottomStart="10dp"
                 app:boxCornerRadiusBottomEnd="10dp"
                 app:boxCornerRadiusTopEnd="10dp"
+                app:boxBackgroundColor="@color/white"
                 app:boxCornerRadiusTopStart="10dp"
                 android:hint="Email"
                 android:textColorHint="#808080"
@@ -111,6 +113,7 @@
                 app:boxCornerRadiusTopEnd="10dp"
                 app:boxCornerRadiusTopStart="10dp"
                 android:hint="Password"
+                app:boxBackgroundColor="@color/white"
                 android:textColorHint="#808080"
                 app:boxStrokeColor="@color/orange"
                 app:hintTextColor="@color/orange">
