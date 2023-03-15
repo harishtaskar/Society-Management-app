@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/background1"
+    android:background="@drawable/background5"
     tools:context=".MainActivity" >
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -14,12 +14,20 @@
         android:foregroundGravity="center"
         android:orientation="vertical"
         >
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/group1" />
         <Button
             android:id="@+id/btn_asComitteeMember"
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:layout_marginTop="350dp"
+            android:layout_marginTop="120dp"
             android:text="@string/committee_member"
             android:textSize="20sp"
             android:textColor="@color/white"
@@ -40,6 +48,7 @@
             android:textSize="20sp"
             android:layout_marginBottom="800dp"
              />
+
 
 
 

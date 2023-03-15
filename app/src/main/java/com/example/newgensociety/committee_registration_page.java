@@ -27,7 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class committee_registration_page extends AppCompatActivity {
 
-    EditText Email, Password, ConPassword;
+    EditText Email, Password, ConPassword, SocietyName, Area, Location, PinCode, Country, CMemberName;
     Button btnRegister;
     FirebaseAuth mAuth;
     ProgressBar progressbar;
@@ -64,6 +64,11 @@ public class committee_registration_page extends AppCompatActivity {
         ConPassword = findViewById(R.id.Committee_Reg_editT_conPass);
         btnRegister = findViewById(R.id.btn_RegCommitteeMember);
         progressbar = findViewById(R.id.Progressbar);
+        SocietyName = findViewById(R.id.Committee_Reg_editT_Sname);
+        Area = findViewById(R.id.Committee_Reg_editT_Area);
+        Location = findViewById(R.id.Committee_Reg_editT_Location);
+        Country = findViewById(R.id.Committee_Registration_editT_country);
+        PinCode = findViewById(R.id.Committee_Reg_editT_Pincode);
 
         stateSpinner = findViewById(R.id.Committee_Reg_spinner_state);
         citySpinner = findViewById(R.id.Committee_Reg_spinner_city);
@@ -241,15 +246,28 @@ public class committee_registration_page extends AppCompatActivity {
                     Toast.makeText(committee_registration_page.this, "Password Doesn't Matched", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if (SocietyName.getText().toString().length()==0){
+                    SocietyName.setError("Society name can't be Blank");
+                    Toast.makeText(committee_registration_page.this, "Society name can't be Blank", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (Area.getText().toString().length()==0){
+                    Area.setError("Area name can't be Blank");
+                    Toast.makeText(committee_registration_page.this, "Area name can't be Blank", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (Location.getText().toString().length()==0){
+                    Location.setError("Location name can't be Blank");
+                    Toast.makeText(committee_registration_page.this, "Location name can't be Blank", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(PinCode.getText().toString().length()<6 || PinCode.getText().toString().length()>6){
+                    PinCode.setError("Pin-Code Must be 6 Digit");
+                    Toast.makeText(committee_registration_page.this, "Pin-Code Must be 6 Digit", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                logintext.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(committee_registration_page.this,Committee_LoginPage.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
+
 
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
@@ -269,6 +287,15 @@ public class committee_registration_page extends AppCompatActivity {
                                 }
                             }
                         });
+            }
+        });
+
+        logintext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(committee_registration_page.this,Committee_LoginPage.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
