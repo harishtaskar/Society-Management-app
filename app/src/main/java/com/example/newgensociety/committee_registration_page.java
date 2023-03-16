@@ -24,6 +24,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class committee_registration_page extends AppCompatActivity {
 
@@ -38,6 +40,7 @@ public class committee_registration_page extends AppCompatActivity {
     private Spinner stateSpinner, citySpinner;
     private ArrayAdapter<CharSequence> stateAdapter, cityAdapter;
 
+    private DatabaseReference rootDatabaseRef;
 
     // to check whether the user is already registered or not
     @Override
@@ -69,6 +72,7 @@ public class committee_registration_page extends AppCompatActivity {
         Location = findViewById(R.id.Committee_Reg_editT_Location);
         Country = findViewById(R.id.Committee_Registration_editT_country);
         PinCode = findViewById(R.id.Committee_Reg_editT_Pincode);
+
 
         stateSpinner = findViewById(R.id.Committee_Reg_spinner_state);
         citySpinner = findViewById(R.id.Committee_Reg_spinner_city);
@@ -266,8 +270,9 @@ public class committee_registration_page extends AppCompatActivity {
                     Toast.makeText(committee_registration_page.this, "Pin-Code Must be 6 Digit", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-
+                rootDatabaseRef = FirebaseDatabase.getInstance().getReference().child("CM_name");
+                String CM_name = CMemberName.getText().toString();
+                rootDatabaseRef.setValue(CM_name);
 
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener( new OnCompleteListener<AuthResult>() {

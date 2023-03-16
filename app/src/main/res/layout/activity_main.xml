@@ -34,7 +34,6 @@
             android:background="@drawable/custom_button2"
             android:textAllCaps="false"
             tools:targetApi="lollipop" />
-
         <Button
             android:id="@+id/btn_asSocietyMember"
             android:layout_width="300dp"
