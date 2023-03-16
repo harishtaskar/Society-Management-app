@@ -34,7 +34,7 @@ public class Committee_LoginPage extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            Intent intent = new Intent(getApplicationContext(),Committee_homePage.class);
+            Intent intent = new Intent(getApplicationContext(),CommitteeM_HomePage.class);
             startActivity(intent);
             finish();
         }
@@ -74,7 +74,7 @@ public class Committee_LoginPage extends AppCompatActivity {
                                 progressBar.setVisibility(view.VISIBLE);
                                 if (task.isSuccessful()) {
                                     Toast.makeText(getApplicationContext(),"Login Succsefully", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(),Committee_homePage.class);
+                                    Intent intent = new Intent(getApplicationContext(),CommitteeM_HomePage.class);
                                     startActivity(intent);
                                     finish();
                                 } else {

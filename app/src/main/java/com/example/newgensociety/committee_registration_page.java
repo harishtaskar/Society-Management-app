@@ -49,7 +49,7 @@ public class committee_registration_page extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            Intent intent = new Intent(getApplicationContext(),Committee_homePage.class);
+            Intent intent = new Intent(getApplicationContext(),CommitteeM_HomePage.class);
             startActivity(intent);
             finish();
         }
@@ -270,9 +270,9 @@ public class committee_registration_page extends AppCompatActivity {
                     Toast.makeText(committee_registration_page.this, "Pin-Code Must be 6 Digit", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                rootDatabaseRef = FirebaseDatabase.getInstance().getReference().child("CM_name");
-                String CM_name = CMemberName.getText().toString();
-                rootDatabaseRef.setValue(CM_name);
+//                rootDatabaseRef = FirebaseDatabase.getInstance().getReference().child("CM_name");
+//                String CM_name = CMemberName.getText().toString();
+//                rootDatabaseRef.setValue(CM_name);
 
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
