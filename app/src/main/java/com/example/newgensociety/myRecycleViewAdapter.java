@@ -8,7 +8,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.security.auth.Subject;
 
@@ -50,13 +52,20 @@ public class myRecycleViewAdapter extends RecyclerView.Adapter<myRecycleViewAdap
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView Subject, Notice, CM_name;
+        TextView Subject, Notice, CM_name, date;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             Subject = itemView.findViewById(R.id.Committee_Notice_RecycleView_Subject);
             Notice = itemView.findViewById(R.id.Committee_Notice_RecycleView_Notice);
             CM_name = itemView.findViewById(R.id.Committee_Notice_RecycleView_CM_name);
+            date = itemView.findViewById(R.id.Committee_Notice_RecycleView_date);
+
+            Calendar calendar = Calendar.getInstance();
+            String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+
+            date.setText(currentDate);
+
         }
     }
 }

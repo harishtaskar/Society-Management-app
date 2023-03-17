@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.location.Address;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -20,16 +21,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AdditionalUserInfo;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class committee_registration_page extends AppCompatActivity {
 
-    EditText Email, Password, ConPassword, SocietyName, Area, Location, PinCode, Country, CMemberName;
+    EditText Email, Password, ConPassword, SocietyName, Area, Location, PinCode, Country, CMemberName, Contact;
     Button btnRegister;
     FirebaseAuth mAuth;
     ProgressBar progressbar;
@@ -40,7 +49,8 @@ public class committee_registration_page extends AppCompatActivity {
     private Spinner stateSpinner, citySpinner;
     private ArrayAdapter<CharSequence> stateAdapter, cityAdapter;
 
-    private DatabaseReference rootDatabaseRef;
+    FirebaseFirestore db;
+    DatabaseReference rootDatabaseRef;
 
     // to check whether the user is already registered or not
     @Override
@@ -60,7 +70,9 @@ public class committee_registration_page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_committee_registration_page);
 
+        db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
+        CMemberName = findViewById(R.id.Committee_Reg_editT_CMname);
         logintext = findViewById(R.id.RegloginText);
         Email = findViewById(R.id.Committee_Reg_editT_Email);
         Password = findViewById(R.id.Committee_Reg_editT_Pass);
@@ -72,6 +84,7 @@ public class committee_registration_page extends AppCompatActivity {
         Location = findViewById(R.id.Committee_Reg_editT_Location);
         Country = findViewById(R.id.Committee_Registration_editT_country);
         PinCode = findViewById(R.id.Committee_Reg_editT_Pincode);
+        Contact = findViewById(R.id.Committee_Reg_editT_Contact);
 
 
         stateSpinner = findViewById(R.id.Committee_Reg_spinner_state);
@@ -250,6 +263,11 @@ public class committee_registration_page extends AppCompatActivity {
                     Toast.makeText(committee_registration_page.this, "Password Doesn't Matched", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if (CMemberName.getText().toString().length()==0){
+                    CMemberName.setError("Member name can't be Blank");
+                    Toast.makeText(committee_registration_page.this, "Member name can't be Blank", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (SocietyName.getText().toString().length()==0){
                     SocietyName.setError("Society name can't be Blank");
                     Toast.makeText(committee_registration_page.this, "Society name can't be Blank", Toast.LENGTH_SHORT).show();
@@ -270,6 +288,34 @@ public class committee_registration_page extends AppCompatActivity {
                     Toast.makeText(committee_registration_page.this, "Pin-Code Must be 6 Digit", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if(Contact.getText().toString().length()<10 || Contact.getText().toString().length()>10){
+                    Contact.setError("Contact is not Valid");
+                    Toast.makeText(committee_registration_page.this, "Contact is not Valid", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+//                String Address = "new";
+//                Map<String,Object> cm_member = new HashMap<>();
+//                cm_member.put("Society_name", SocietyName);
+//                cm_member.put("Address", Address);
+//                cm_member.put("Cm_name", CMemberName);
+//                cm_member.put("Cm_email",Email);
+//                cm_member.put("Cm_password",Password);
+//                cm_member.put("cm_contact",Contact);
+//
+//                db.collection("C_Members")
+//                                .add(cm_member)
+//                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                                            @Override
+//                                            public void onSuccess(DocumentReference documentReference) {
+//                                                Toast.makeText(getApplicationContext(),"Successful", Toast.LENGTH_SHORT).show();
+//
+//                                            }
+//                                        }).addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//                                Toast.makeText(getApplicationContext(),"Failed", Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
 //                rootDatabaseRef = FirebaseDatabase.getInstance().getReference().child("CM_name");
 //                String CM_name = CMemberName.getText().toString();
 //                rootDatabaseRef.setValue(CM_name);

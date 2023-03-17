@@ -345,6 +345,36 @@
                         app:boxCornerRadiusBottomEnd="10dp"
                         app:boxCornerRadiusTopEnd="10dp"
                         app:boxCornerRadiusTopStart="10dp"
+                        android:hint="Contact"
+                        android:textColorHint="#808080"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxStrokeColor="@color/orange"
+                        app:hintTextColor="@color/orange">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:id="@+id/Committee_Reg_editT_Contact"
+                            android:drawablePadding="8dp"
+                            android:paddingStart="10dp"
+                            android:padding="10dp"
+                            android:drawableLeft="@drawable/baseline_phone_android_24"
+                            android:inputType="phone"
+                            android:textColor="@color/black"
+                            android:textColorHighlight="@color/cardview_dark_background"
+                            android:layout_marginTop="40dp"
+                            android:paddingLeft="10dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:boxBackgroundMode="outline"
+                        android:layout_marginTop="10dp"
+                        app:boxCornerRadiusBottomStart="10dp"
+                        app:boxCornerRadiusBottomEnd="10dp"
+                        app:boxCornerRadiusTopEnd="10dp"
+                        app:boxCornerRadiusTopStart="10dp"
                         android:hint="Email"
                         android:textColorHint="#808080"
                         app:boxBackgroundColor="@color/white"

@@ -14,6 +14,7 @@
     <string name="publish_notice">Publish Notice</string>
     <string name="subject">Subject :</string>
     <string name="namew">~</string>
+    <string name="dash">________________________________________________________</string>
     <string-array name="array_indian_states">
         <item>Select Your State</item>
         <item>Andaman and Nicobar Islands</item>

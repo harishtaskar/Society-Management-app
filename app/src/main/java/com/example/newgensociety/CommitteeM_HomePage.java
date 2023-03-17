@@ -39,7 +39,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
     ArrayList<Notice> noticeArrayList;
     myRecycleViewAdapter myAdapter;
     FirebaseFirestore db;
-    ProgressDialog progressDialog;
+//    ProgressDialog progressDialog;
 
 
 
@@ -53,10 +53,10 @@ public class CommitteeM_HomePage extends AppCompatActivity {
         cardmain1 = findViewById(R.id.add1);
         cardmain2 = findViewById(R.id.add2);
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("Fetching Data");
-        progressDialog.show();
+//        progressDialog = new ProgressDialog(this);
+//        progressDialog.setCancelable(false);
+//        progressDialog.setMessage("Fetching Data");
+//        progressDialog.show();
 
 
         recyclerView = findViewById(R.id.Committee_Notice_RecycleView);
@@ -176,7 +176,6 @@ public class CommitteeM_HomePage extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
         cardmain2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -195,9 +194,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (error != null){
-                    if(progressDialog.isShowing()){
-                        progressDialog.dismiss();
-                    }
+
                     Log.e("Firestore Error",error.getMessage());
                     return;
                 }
@@ -208,9 +205,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
                     }
 
                     myAdapter.notifyDataSetChanged();
-                    if(progressDialog.isShowing()){
-                        progressDialog.dismiss();
-                    }
+
                 }
 
             }
