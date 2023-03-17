@@ -1,15 +1,28 @@
 package com.example.newgensociety;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
@@ -22,6 +35,13 @@ public class CommitteeM_HomePage extends AppCompatActivity {
     ImageView commitee_img;
     CardView cardmain1,cardmain2;
 
+    RecyclerView recyclerView;
+    ArrayList<Notice> noticeArrayList;
+    myRecycleViewAdapter myAdapter;
+    FirebaseFirestore db;
+    ProgressDialog progressDialog;
+
+
 
 
     @Override
@@ -33,8 +53,15 @@ public class CommitteeM_HomePage extends AppCompatActivity {
         cardmain1 = findViewById(R.id.add1);
         cardmain2 = findViewById(R.id.add2);
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Fetching Data");
+        progressDialog.show();
 
 
+        recyclerView = findViewById(R.id.Committee_Notice_RecycleView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         bottomNavigation = findViewById(R.id.bottomNavigation);
         profile = findViewById(R.id.profile);
         home = findViewById(R.id.home);
@@ -45,6 +72,12 @@ public class CommitteeM_HomePage extends AppCompatActivity {
         bottomNavigation.add(new MeowBottomNavigation.Model(2,R.drawable.homek));
         bottomNavigation.add(new MeowBottomNavigation.Model(3,R.drawable.notice));
 
+
+        db = FirebaseFirestore.getInstance();
+        noticeArrayList = new ArrayList<Notice>();
+        myAdapter = new myRecycleViewAdapter(CommitteeM_HomePage.this,noticeArrayList);
+        recyclerView.setAdapter(myAdapter);
+        EventChangeListener();
 
         bottomNavigation.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {
             @Override
@@ -153,5 +186,34 @@ public class CommitteeM_HomePage extends AppCompatActivity {
         });
 
 
+    }
+
+    private void EventChangeListener() {
+
+        db.collection("Notice")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error != null){
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                    Log.e("Firestore Error",error.getMessage());
+                    return;
+                }
+                assert value != null;
+                for (DocumentChange dc : value.getDocumentChanges()) {
+                    if(dc.getType() == DocumentChange.Type.ADDED){
+                        noticeArrayList.add(dc.getDocument().toObject(Notice.class));
+                    }
+
+                    myAdapter.notifyDataSetChanged();
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                }
+
+            }
+        });
     }
 }

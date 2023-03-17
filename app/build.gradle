@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.newgensociety"
-        minSdk 16
+        minSdk 19
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -38,6 +38,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:21.1.0'
     implementation 'com.etebarian:meow-bottom-navigation:1.2.0'
     implementation 'com.intuit.sdp:sdp-android:1.1.0'
+    implementation 'com.google.firebase:firebase-firestore:24.1.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,14 +15,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import javax.security.auth.Subject;
-
 public class Committee_NoticePubllishing_Page extends AppCompatActivity {
 
     EditText CM_name, Notice_Subject, Notice;
     Button btnPublish;
+    int number = 0;
     FirebaseDatabase db;
-    private DatabaseReference rootDatabaseref;
+    DatabaseReference rootDatabaseRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +32,7 @@ public class Committee_NoticePubllishing_Page extends AppCompatActivity {
         Notice_Subject = findViewById(R.id.Committee_NoticePublish_Subject);
         Notice = findViewById(R.id.Committee_NoticePublish_Notice);
         btnPublish = findViewById(R.id.Committee_Notice_btnPublish);
-        db = FirebaseDatabase.getInstance();
-//        rootDatabaseref = db.getReference("Notice");
+
 
 
 
@@ -57,17 +56,24 @@ public class Committee_NoticePubllishing_Page extends AppCompatActivity {
                     return;
                 }
 
-//                String cm_name = CM_name.getText().toString();
-//                String subject = Notice_Subject.getText().toString();
-//                String notice = Notice.getText().toString();
-//                rootDatabaseref.child("CM_name").setValue(cm_name).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        CM_name.setText("");
-//                        Notice_Subject.setText("");
-//                        Notice.setText("");
-//                    }
-//                });
+                String cm_name = CM_name.getText().toString();
+                String subject = number+Notice_Subject.getText().toString();
+                String notice_dic = Notice.getText().toString();
+
+                Notice notice = new Notice(cm_name, subject, notice_dic);
+
+                db = FirebaseDatabase.getInstance("https://new-generation-society-default-rtdb.asia-southeast1.firebasedatabase.app/");
+                rootDatabaseRef = db.getReference("Notice");
+                rootDatabaseRef.child(subject).setValue(notice).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        number++;
+                        CM_name.setText("");
+                        Notice_Subject.setText("");
+                        Notice.setText("");
+                        Toast.makeText(getApplicationContext(),"Successfully Published", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             }
         });
