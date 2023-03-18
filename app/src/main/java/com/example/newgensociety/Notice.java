@@ -1,16 +1,19 @@
 package com.example.newgensociety;
 
 public class Notice {
-        String cm_name, subject, notice;
+        String cm_name, subject, notice, date;
 
         public Notice() {
         }
 
-        public Notice(String cm_name, String subject, String notice) {
+        public Notice(String cm_name, String subject, String notice, String date) {
                 this.cm_name = cm_name;
                 this.subject = subject;
                 this.notice = notice;
+                this.date = date;
         }
+
+
 
         public String getCm_name() {
                 return cm_name;
@@ -35,4 +38,8 @@ public class Notice {
         public void setSubject(String subject) {
                 this.subject = subject;
         }
+
+        public String getDate() {return date;}
+
+        public void setDate(String date) {this.date = date;}
 }

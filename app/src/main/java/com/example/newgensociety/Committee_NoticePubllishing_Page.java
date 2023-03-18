@@ -18,7 +18,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
+import org.checkerframework.checker.units.qual.A;
+
+import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,6 +67,11 @@ public class Committee_NoticePubllishing_Page extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Notice can not be blank", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                Calendar calendar = Calendar.getInstance();
+                String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+                String date;
+                date = currentDate.toString();
+
 
                 String dash = "~";
                 String cm_name = dash+CM_name.getText().toString();
@@ -73,6 +83,7 @@ public class Committee_NoticePubllishing_Page extends AppCompatActivity {
                 notices.put("cm_name",cm_name);
                 notices.put("subject",subject);
                 notices.put("notice",notice);
+                notices.put("date",date);
                 dbf.collection("Notice")
                         .add(notices)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -88,19 +99,19 @@ public class Committee_NoticePubllishing_Page extends AppCompatActivity {
                         });
 
                 //Firebase Realtime database
-                Notice notice1 = new Notice(cm_name, subject, notice);
-
-                db = FirebaseDatabase.getInstance("https://new-generation-society-default-rtdb.asia-southeast1.firebasedatabase.app/");
-                rootDatabaseRef = db.getReference("Notice");
-                rootDatabaseRef.child(subject).setValue(notice1).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        CM_name.setText("");
-                        Notice_Subject.setText("");
-                        Notice.setText("");
-                        Toast.makeText(getApplicationContext(),"Successfully Published", Toast.LENGTH_SHORT).show();
-                    }
-                });
+//                Notice notice1 = new Notice(cm_name, subject, notice);
+//
+//                db = FirebaseDatabase.getInstance("https://new-generation-society-default-rtdb.asia-southeast1.firebasedatabase.app/");
+//                rootDatabaseRef = db.getReference("Notice");
+//                rootDatabaseRef.child(subject).setValue(notice1).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        CM_name.setText("");
+//                        Notice_Subject.setText("");
+//                        Notice.setText("");
+//                        Toast.makeText(getApplicationContext(),"Successfully Published", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
 
             }
         });

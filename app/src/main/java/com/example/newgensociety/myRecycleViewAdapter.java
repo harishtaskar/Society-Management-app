@@ -40,7 +40,7 @@ public class myRecycleViewAdapter extends RecyclerView.Adapter<myRecycleViewAdap
         holder.Subject.setText(notice.subject);
         holder.Notice.setText(notice.notice);
         holder.CM_name.setText(notice.cm_name);
-
+        holder.Date.setText(notice.date);
     }
 
 
@@ -52,20 +52,14 @@ public class myRecycleViewAdapter extends RecyclerView.Adapter<myRecycleViewAdap
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView Subject, Notice, CM_name, date;
+        TextView Subject, Notice, CM_name, Date;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             Subject = itemView.findViewById(R.id.Committee_Notice_RecycleView_Subject);
             Notice = itemView.findViewById(R.id.Committee_Notice_RecycleView_Notice);
             CM_name = itemView.findViewById(R.id.Committee_Notice_RecycleView_CM_name);
-            date = itemView.findViewById(R.id.Committee_Notice_RecycleView_date);
-
-            Calendar calendar = Calendar.getInstance();
-            String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
-
-            date.setText(currentDate);
-
+            Date = itemView.findViewById(R.id.Committee_Notice_RecycleView_date);
         }
     }
 }
