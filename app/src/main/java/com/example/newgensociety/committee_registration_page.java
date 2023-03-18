@@ -45,6 +45,7 @@ public class committee_registration_page extends AppCompatActivity {
     TextView logintext;
 
     private String selectedState, selectedCity;
+    int Cm_id = 1;
     private TextView tvState, tvCity;
     private Spinner stateSpinner, citySpinner;
     private ArrayAdapter<CharSequence> stateAdapter, cityAdapter;
@@ -85,6 +86,8 @@ public class committee_registration_page extends AppCompatActivity {
         Country = findViewById(R.id.Committee_Registration_editT_country);
         PinCode = findViewById(R.id.Committee_Reg_editT_Pincode);
         Contact = findViewById(R.id.Committee_Reg_editT_Contact);
+        tvState = findViewById(R.id.Committee_Registration_Textview_state);
+        tvCity = findViewById(R.id.Committee_Registration_Textview_city);
 
 
         stateSpinner = findViewById(R.id.Committee_Reg_spinner_state);
@@ -293,29 +296,53 @@ public class committee_registration_page extends AppCompatActivity {
                     Toast.makeText(committee_registration_page.this, "Contact is not Valid", Toast.LENGTH_SHORT).show();
                     return;
                 }
-//                String Address = "new";
-//                Map<String,Object> cm_member = new HashMap<>();
-//                cm_member.put("Society_name", SocietyName);
-//                cm_member.put("Address", Address);
-//                cm_member.put("Cm_name", CMemberName);
-//                cm_member.put("Cm_email",Email);
-//                cm_member.put("Cm_password",Password);
-//                cm_member.put("cm_contact",Contact);
-//
-//                db.collection("C_Members")
-//                                .add(cm_member)
-//                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                                            @Override
-//                                            public void onSuccess(DocumentReference documentReference) {
-//                                                Toast.makeText(getApplicationContext(),"Successful", Toast.LENGTH_SHORT).show();
-//
-//                                            }
-//                                        }).addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                Toast.makeText(getApplicationContext(),"Failed", Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
+                if(selectedState.equals("Select Your State")){
+                    tvState.setError("Select State");
+                    Toast.makeText(committee_registration_page.this, "Select State", Toast.LENGTH_SHORT).show();
+                    stateSpinner.requestFocus();
+                    return;
+                }
+                if(selectedCity.equals("Select Your District")){
+                    tvCity.setError("Select District");
+                    Toast.makeText(committee_registration_page.this, "Contact is not Valid", Toast.LENGTH_SHORT).show();
+                    citySpinner.requestFocus();
+                    return;
+                }
+                String area = Area.getText().toString();
+                String location = Location.getText().toString();
+                String state = selectedState;
+                String city = selectedCity;
+                String pincode = PinCode.getText().toString();
+                String country = Country.getText().toString();
+                String Address = area+", "+location+", "+city+"-"+pincode+", "+state+", "+country;
+                String societyName = SocietyName.getText().toString();
+                String cMemberName = CMemberName.getText().toString();
+                String contact = Contact.getText().toString();
+                Integer cm_id = new Integer(Cm_id);
+
+                Map<String,Object> cm_member = new HashMap<>();
+                cm_member.put("Society_name", societyName);
+                cm_member.put("Address", Address);
+                cm_member.put("Cm_name", cMemberName);
+                cm_member.put("Cm_email",email);
+                cm_member.put("Cm_password",password);
+                cm_member.put("cm_contact",contact);
+                cm_member.put("Cm_id", cm_id);
+
+                db.collection("C_Members")
+                                .add(cm_member)
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                            @Override
+                                            public void onSuccess(DocumentReference documentReference) {
+                                                Toast.makeText(getApplicationContext(),"Successful", Toast.LENGTH_SHORT).show();
+                                                Cm_id++;
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(),"Failed", Toast.LENGTH_SHORT).show();
+                            }
+                        });
 //                rootDatabaseRef = FirebaseDatabase.getInstance().getReference().child("CM_name");
 //                String CM_name = CMemberName.getText().toString();
 //                rootDatabaseRef.setValue(CM_name);

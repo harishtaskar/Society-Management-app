@@ -199,6 +199,8 @@
                         android:layout_height="50dp"
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
                         android:background="@drawable/custom_edittext2"
                         android:id="@+id/Committee_Reg_spinner_state"
                         android:paddingLeft="6dp" />
@@ -227,6 +229,8 @@
                     android:layout_height="50dp"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:id="@+id/Committee_Reg_spinner_city"
                     android:background="@drawable/custom_edittext2"
                     android:layout_marginLeft="0dp"
