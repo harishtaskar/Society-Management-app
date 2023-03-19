@@ -15,6 +15,10 @@
     <string name="subject">Subject :</string>
     <string name="namew">~</string>
     <string name="dash">________________________________________________________</string>
+    <string name="add_discount_if_person_paid_before_due_date">Add Discount if person paid before Due date</string>
+    <string name="maintenence">Maintenence</string>
+    <string name="pay_your_maintenance_before_due_and_get">Pay Your Maintenance Before Due And Get</string>
+    <string name="flat_number">Flat Number :</string>
     <string-array name="array_indian_states">
         <item>Select Your State</item>
         <item>Andaman and Nicobar Islands</item>

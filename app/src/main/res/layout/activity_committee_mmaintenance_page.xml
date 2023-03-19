@@ -14,7 +14,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Maintenence"
+        android:text="@string/maintenence"
         android:layout_marginTop="@dimen/_20sdp"
         android:textSize="30sp"
         android:textColor="@color/teal_700"
@@ -82,7 +82,7 @@
         android:lines="3"
         android:gravity="top"
         android:layout_marginTop="@dimen/_10sdp"
-        android:hint="Discription"
+        android:hint="Discription 'August Month'"
         android:id="@+id/Committee_Maintenance_Discription"
         android:overScrollMode="always"
         android:scrollbarStyle="insideInset"
@@ -90,23 +90,96 @@
         android:scrollbars="vertical"
         android:inputType="textMultiLine"/>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_discount_if_person_paid_before_due_date"
+        android:textColor="@color/black"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textSize="@dimen/_12sdp">
+
+    </TextView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/_10sdp">
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+    <RadioButton
+        android:id="@+id/_5percent"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/black"
+        android:shadowRadius="@integer/material_motion_duration_long_1"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_gravity="left"
+        android:textSize="@dimen/_10sdp"
+        android:text="5%" />
+
+        <RadioButton
+            android:id="@+id/_10percent"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            android:shadowRadius="@integer/material_motion_duration_long_1"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_gravity="left"
+            android:textSize="@dimen/_10sdp"
+            android:text="10%" />
+
+        <RadioButton
+            android:id="@+id/_15percent"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            android:shadowRadius="@integer/material_motion_duration_long_1"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_gravity="left"
+            android:textSize="@dimen/_10sdp"
+            android:text="15%" />
+        </RadioGroup>
+    </LinearLayout>
     <Button
         android:id="@+id/Send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/_20sdp"
         android:paddingEnd="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
         android:layout_gravity="right"
         android:text="Send"
         android:layout_marginRight="@dimen/_10sdp" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-
-
-
-
-
+    <Button
+        android:id="@+id/maintainance_Status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/white"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_gravity="bottom"
+        android:text="Maintaince Status"
+        android:layout_marginRight="@dimen/_10sdp" />
+    </LinearLayout>
 
 </LinearLayout>

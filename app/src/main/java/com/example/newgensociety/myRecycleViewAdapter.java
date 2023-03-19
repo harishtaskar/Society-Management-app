@@ -37,10 +37,10 @@ public class myRecycleViewAdapter extends RecyclerView.Adapter<myRecycleViewAdap
 
         Notice notice = noticesArrayList.get(position);
 
-        holder.Subject.setText(notice.subject);
-        holder.Notice.setText(notice.notice);
-        holder.CM_name.setText(notice.cm_name);
-        holder.Date.setText(notice.date);
+        holder.Subject.setText(notice.getSubject());
+        holder.Notice.setText(notice.getNotice());
+        holder.CM_name.setText(notice.getCm_name());
+        holder.Date.setText(notice.getDate());
     }
 
 
