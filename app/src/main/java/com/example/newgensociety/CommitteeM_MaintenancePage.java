@@ -19,8 +19,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +30,7 @@ import java.util.Map;
 public class CommitteeM_MaintenancePage extends AppCompatActivity {
 
     TextView Duedate;
-    String duedatestring;
+    String DueDateString;
     EditText FlatNo, Discription, Amount;
     Button Send, Maintainance_Status;
     RadioButton _5per, _10per, _15per;
@@ -61,7 +63,7 @@ public class CommitteeM_MaintenancePage extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
                         Duedate.setText(SimpleDateFormat.getDateInstance().format(calendar.getTime()));
-                        duedatestring = Duedate.getText().toString();
+                        DueDateString = Duedate.getText().toString();
                     }
                 },year, month, year);
                 datePickerDialog.show();
@@ -103,16 +105,16 @@ public class CommitteeM_MaintenancePage extends AppCompatActivity {
 
                 String flatno = FlatNo.getText().toString();
                 String discription = Discription.getText().toString();
-                String duedate = duedatestring;
+                String duedate = DueDateString;
                 Integer amount = Integer.parseInt(Amount.getText().toString());
                 Integer Discount = discount;
 
                 Map<String,Object> maintenance = new HashMap<>();
-                maintenance.put("FlatNo", flatno);
-                maintenance.put("Discription", discription);
-                maintenance.put("DueDate", duedate);
-                maintenance.put("Amount",amount);
-                maintenance.put("Discount",Discount);
+                maintenance.put("flat_no", flatno);
+                maintenance.put("discription", discription);
+                maintenance.put("due_date", duedate);
+                maintenance.put("amount",amount);
+                maintenance.put("discount",Discount);
 
                 db.collection("Maintenance")
                         .add(maintenance)

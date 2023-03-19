@@ -14,7 +14,7 @@
         android:gravity="center"
         android:elevation="4dp"
         android:paddingLeft="20dp"
-        android:background="#FF9800"
+        android:background="#2196F3"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:title="@string/app_name"
@@ -23,7 +23,7 @@
         <ImageView
             android:id="@+id/btopen"
             android:layout_width="50dp"
-            android:background="#FF9800"
+            android:background="#2196F3"
             android:layout_height="56dp"
             android:paddingRight="20dp"
             android:layout_gravity="right"
@@ -128,22 +128,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="70dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="60dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/add1"
-                    android:layout_width="130dp"
+                    android:layout_width="160dp"
                     android:layout_height="150dp"
-                    android:layout_margin="10dp"
+                    android:layout_margin="20dp"
                     android:backgroundTint="@color/white"
                     app:cardElevation="5dp">
 
@@ -158,7 +156,6 @@
                             android:id="@+id/commitee_dua_maintainance_img"
                             android:layout_width="96dp"
                             android:layout_height="96dp"
-                            android:padding="15dp"
                             android:src="@drawable/maintenance" />
 
                         <View
@@ -184,7 +181,7 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/add2"
-                    android:layout_width="130dp"
+                    android:layout_width="160dp"
                     android:layout_height="150dp"
                     android:background="@color/white"
                     android:layout_margin="10dp"
@@ -199,7 +196,6 @@
                         <ImageView
                             android:layout_width="92dp"
                             android:layout_height="96dp"
-                            android:padding="15dp"
                             android:src="@drawable/noticeboard" />
 
                         <View
@@ -226,13 +222,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 android:gravity="center"
+                android:paddingStart="25dp"
                 android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/delete"
-                    android:layout_width="130dp"
+                    android:layout_width="160dp"
                     android:layout_height="150dp"
                     android:layout_margin="10dp"
                     android:background="@color/white"
@@ -247,7 +243,6 @@
                         <ImageView
                             android:layout_width="96dp"
                             android:layout_height="96dp"
-                            android:padding="15dp"
                             android:src="@drawable/request" />
 
                         <View
@@ -271,10 +266,10 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/update"
-                    android:layout_width="130dp"
+                    android:layout_width="160dp"
                     android:layout_height="150dp"
                     android:background="@color/white"
-                    android:layout_margin="10dp"
+                    android:layout_margin="20dp"
                     app:cardElevation="5dp">
 
                     <LinearLayout
@@ -286,7 +281,6 @@
                         <ImageView
                             android:layout_width="96dp"
                             android:layout_height="96dp"
-                            android:padding="15dp"
                             android:src="@drawable/meeting" />
 
                         <View
@@ -360,9 +354,9 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:mbn_circleColor="#FF9800"
-        app:mbn_backgroundBottomColor="#FF9800"
-        app:mbn_countBackgroundColor="#ff6f00"
+        app:mbn_circleColor="#2196F3"
+        app:mbn_backgroundBottomColor="#2196F3"
+        app:mbn_countBackgroundColor="#2196F3"
         app:mbn_countTextColor="#ffffff"
         app:mbn_defaultIconColor="#000000"
         app:mbn_rippleColor="#2f424242"

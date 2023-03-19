@@ -11,9 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class myRecycleVA_Maintenance extends RecyclerView.Adapter<myRecycleVA_Maintenance.MyViewHolder>{
+public class myRecycleVA_Maintenance extends RecyclerView.Adapter<myRecycleVA_Maintenance.MyViewHolder1>{
     Context context;
     ArrayList<Maintenance> maintenanceArrayList;
+
     public myRecycleVA_Maintenance(Context context, ArrayList<Maintenance> maintenanceArrayList) {
         this.context = context;
         this.maintenanceArrayList = maintenanceArrayList;
@@ -21,31 +22,31 @@ public class myRecycleVA_Maintenance extends RecyclerView.Adapter<myRecycleVA_Ma
 
     @NonNull
     @Override
-    public myRecycleVA_Maintenance.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public myRecycleVA_Maintenance.MyViewHolder1 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.cm_maintenance_recycle_layout,parent,false);
-        return new MyViewHolder(v);
+        return new MyViewHolder1(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull myRecycleVA_Maintenance.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull myRecycleVA_Maintenance.MyViewHolder1 holder, int position) {
         Maintenance maintenance = maintenanceArrayList.get(position);
 
-        holder.flat_no.setText(maintenance.getFlat_no());
-        holder.amount.setText(maintenance.getAmount());
-        holder.due_date.setText((CharSequence) maintenance.getDue_date());
+        holder.flat_no.setText("Flat Number : "+maintenance.getFlat_no());
+        holder.amount.setText("Amount : "+String.valueOf(maintenance.getAmount()));
+        holder.due_date.setText("Due On : "+maintenance.getDue_date());
         holder.discription.setText(maintenance.getDiscription());
-        holder.discount.setText(maintenance.getDiscount());
+        holder.discount.setText("Pay Before Due and Get "+String.valueOf(maintenance.getDiscount())+"% Discount");
     }
 
     @Override
     public int getItemCount() {
         return maintenanceArrayList.size();
     }
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder1 extends RecyclerView.ViewHolder{
 
         TextView flat_no, amount, due_date, discription, discount;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder1(@NonNull View itemView) {
             super(itemView);
             flat_no = itemView.findViewById(R.id.Committee_MaintenanceR_FlatNo);
             amount = itemView.findViewById(R.id.Committee_MaintenanceR_MainAmount);

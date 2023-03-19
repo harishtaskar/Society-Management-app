@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="@dimen/_20sdp"
-    android:layout_marginRight="@dimen/_20sdp"
+    android:layout_marginLeft="@dimen/_15sdp"
+    android:layout_marginRight="@dimen/_15sdp"
     android:orientation="vertical"
     tools:context=".CommitteeM_MaintenancePage">
 
@@ -154,13 +154,16 @@
     </LinearLayout>
     <Button
         android:id="@+id/Send"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/_20sdp"
         android:paddingEnd="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_5sdp"
         android:layout_gravity="right"
-        android:text="Send"
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:text="Send Maintenance"
         android:layout_marginRight="@dimen/_10sdp" />
 
     <LinearLayout
@@ -170,12 +173,12 @@
     <Button
         android:id="@+id/maintainance_Status"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:paddingStart="@dimen/_20sdp"
         android:paddingEnd="@dimen/_20sdp"
         android:textSize="@dimen/_10sdp"
         android:textColor="@color/black"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="#FFF5B4"
         android:layout_marginEnd="@dimen/_5sdp"
         android:layout_gravity="bottom"
         android:text="Maintaince Status"

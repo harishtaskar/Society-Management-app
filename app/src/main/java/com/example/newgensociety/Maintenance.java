@@ -3,20 +3,44 @@ package com.example.newgensociety;
 import java.util.Date;
 
 public class Maintenance {
-    String flat_no,  discription;
-    Date due_date;
-    Integer amount, discount;
+    String flat_no, discription;
+    int amount, discount;
+    String due_date;
 
     public Maintenance(){
+    }
+
+    public Maintenance(String flat_no, int amount, String due_date, String discription, int discount) {
+        this.flat_no = flat_no;
+        this.discription = discription;
+        this.due_date = due_date;
+        this.amount = amount;
+        this.discount = discount;
 
     }
 
-    public Maintenance(String flat_no, Integer amount, Date due_date, String discription, Integer discount) {
-        this.flat_no = flat_no;
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
         this.amount = amount;
-        this.due_date = due_date;
-        this.discription = discription;
+    }
+
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
         this.discount = discount;
+    }
+
+    public String getDue_date() {
+        return due_date;
+    }
+
+    public void setDue_date(String due_date) {
+        this.due_date = due_date;
     }
 
     public String getFlat_no() {
@@ -27,21 +51,6 @@ public class Maintenance {
         this.flat_no = flat_no;
     }
 
-    public Integer getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
-
-    public Date getDue_date() {
-        return due_date;
-    }
-
-    public void setDue_date(Date due_date) {
-        this.due_date = due_date;
-    }
 
     public String getDiscription() {
         return discription;
@@ -51,11 +60,4 @@ public class Maintenance {
         this.discription = discription;
     }
 
-    public Integer getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(Integer discount) {
-        this.discount = discount;
-    }
 }
