@@ -34,7 +34,7 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:textStyle="bold"
-                    android:textColor="@color/teal_700"
+                    android:textColor="#102AB8"
                     >
                 </TextView>
 

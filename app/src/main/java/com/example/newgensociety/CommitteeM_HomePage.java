@@ -12,8 +12,10 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.google.firebase.firestore.DocumentChange;
@@ -33,6 +35,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
     private MeowBottomNavigation bottomNavigation;
     RelativeLayout profile,home,notice;
 
+//    home page
     ImageView commitee_img;
     CardView cardmain1,cardmain2;
 
@@ -41,6 +44,13 @@ public class CommitteeM_HomePage extends AppCompatActivity {
     myRecycleViewAdapter myAdapter;
     FirebaseFirestore db;
 //    ProgressDialog progressDialog;
+
+    //profile page
+    TextView cpsocietyname,cpsocietyaddress,cpmembername,cpmemberemail,cpabout,cpfeedback,cplogout,cptermsorcondition,cpversion;
+    Button cpeditbtn;
+    CardView addfalt,visitor;
+    ImageView cpmemberimage;
+
 
 
 
@@ -53,6 +63,23 @@ public class CommitteeM_HomePage extends AppCompatActivity {
         commitee_img = findViewById(R.id.commitee_dua_maintainance_img);
         cardmain1 = findViewById(R.id.add1);
         cardmain2 = findViewById(R.id.add2);
+
+        //profile page
+        cpmemberimage = findViewById(R.id.committee_profile_img);
+        addfalt = findViewById(R.id.committee_profile_add_flat);
+        visitor = findViewById(R.id.committee_profile_visiror_notification);
+        addfalt = findViewById(R.id.committee_profile_add_flat);
+        cpsocietyname = findViewById(R.id.committee_profile_society_name);
+        cpsocietyaddress = findViewById(R.id.committee_profile_society_address);
+        cpmembername = findViewById(R.id.committee_profile_member_name);
+        cpmemberemail = findViewById(R.id.committee_profile_member_email);
+        cpmembername = findViewById(R.id.committee_profile_member_name);
+        cpabout = findViewById(R.id.committee_profile_about);
+        cpfeedback = findViewById(R.id.committee_profile_support_feedback);
+        cplogout = findViewById(R.id.committee_profile_logout);
+        cptermsorcondition = findViewById(R.id.committee_profile_terms_condition);
+        cpversion = findViewById(R.id.committee_profile_version);
+        cpeditbtn = findViewById(R.id.committee_profile_edit_button);
 
 //        progressDialog = new ProgressDialog(this);
 //        progressDialog.setCancelable(false);
