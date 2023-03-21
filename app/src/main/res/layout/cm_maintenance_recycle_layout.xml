@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/background5"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/Committee_Maintenance_Recycle"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -47,7 +48,7 @@
                     android:id="@+id/Committee_MaintenanceR_MainAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/_5sdp"
+                    android:padding="@dimen/_3sdp"
                     android:textSize="@dimen/_14sdp"
                     android:textColor="@color/black"
                     >
@@ -61,22 +62,23 @@
                 android:layout_height="wrap_content"
                 android:clipToPadding="true"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/Committee_MaintenanceR_DueDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/_7sdp"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_12sdp"
+                    android:padding="@dimen/_3sdp"
                     android:textColor="#353535"
-                    >
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold">
+
                 </TextView>
 
                 <TextView
                     android:id="@+id/Committee_MaintenanceR_Discription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/_7sdp"
+                    android:padding="@dimen/_3sdp"
                     android:textStyle="bold"
                     style="Bold"
                     android:textSize="@dimen/_12sdp"
@@ -94,7 +96,7 @@
                 android:id="@+id/Committee_MaintenanceR_DiscountText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_5sdp"
+                android:padding="@dimen/_3sdp"
                 android:textSize="@dimen/_11sdp"
                 android:textColor="#35B100">
 

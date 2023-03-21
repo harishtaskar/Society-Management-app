@@ -15,6 +15,9 @@
         android:theme="@style/Theme.NewGenSociety"
         tools:targetApi="31">
         <activity
+            android:name=".CommitteeM_MeetingsPage"
+            android:exported="false" />
+        <activity
             android:name=".Committee_show_maintainance"
             android:exported="false" />
         <activity

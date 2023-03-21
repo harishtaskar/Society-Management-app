@@ -23,7 +23,7 @@
             android:gravity="center"
             android:elevation="4dp"
             android:paddingLeft="20dp"
-            android:background="#99CDF6"
+            android:background="#BEDFFA"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             >
@@ -39,7 +39,7 @@
             <ImageView
                 android:id="@+id/profile_btnback"
                 android:layout_width="50dp"
-                android:background="#99CDF6"
+                android:background="#BEDFFA"
                 android:layout_height="56dp"
                 android:padding="@dimen/_8sdp"
                 android:layout_gravity="left"
@@ -134,7 +134,6 @@
                                 android:layout_height="wrap_content"
                                 android:text="committee Member Name">
 
-
                             </TextView>
 
                             <TextView
@@ -143,8 +142,7 @@
                                 android:gravity="left"
                                 android:textSize="@dimen/_10sdp"
                                 android:layout_marginRight="@dimen/_10sdp"
-                                android:layout_height="wrap_content"
-                                android:text="Harishtaskar420@gmail.com">
+                                android:layout_height="wrap_content">
 
 
                             </TextView>
@@ -378,7 +376,7 @@
             android:id="@+id/toolbar2"
             android:elevation="4dp"
             android:paddingEnd="@dimen/_5sdp"
-            android:background="#99CDF6"
+            android:background="#BEDFFA"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             android:titleTextColor="@color/black"
@@ -386,7 +384,7 @@
             <ImageView
                 android:id="@+id/home_btnback"
                 android:layout_width="50dp"
-                android:background="#99CDF6"
+                android:background="#BEDFFA"
                 android:layout_height="56dp"
                 android:padding="@dimen/_8sdp"
                 android:layout_gravity="left"
@@ -404,7 +402,7 @@
             <ImageView
                 android:id="@+id/home_btnprofile"
                 android:layout_width="50dp"
-                android:background="#A4D4FA"
+                android:background="#BEDFFA"
                 android:layout_height="56dp"
                 android:padding="@dimen/_8sdp"
                 android:layout_gravity="right"
@@ -422,6 +420,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
+                android:padding="@dimen/_5sdp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -430,7 +429,7 @@
                     android:layout_width="160dp"
                     android:layout_height="150dp"
                     android:layout_margin="20dp"
-                    android:backgroundTint="#DEFBBD"
+                    android:backgroundTint="#E3FACA"
                     app:cardElevation="5dp">
 
                     <LinearLayout
@@ -471,7 +470,7 @@
                     android:id="@+id/add2"
                     android:layout_width="160dp"
                     android:layout_height="150dp"
-                    android:backgroundTint="#99E4ED"
+                    android:backgroundTint="#FAD0DE"
                     android:layout_margin="10dp"
                     app:cardElevation="5dp">
 
@@ -511,15 +510,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:paddingStart="25dp"
+                android:padding="5dp"
                 android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/delete"
                     android:layout_width="160dp"
                     android:layout_height="150dp"
-                    android:layout_margin="10dp"
-                    android:backgroundTint="#F1B2FB"
+                    android:layout_margin="20dp"
+                    android:backgroundTint="#FFD9CF"
                     app:cardElevation="5dp">
 
                     <LinearLayout
@@ -553,11 +552,11 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/update"
+                    android:id="@+id/Society_Meetings"
                     android:layout_width="160dp"
                     android:layout_height="150dp"
-                    android:backgroundTint="#B4C0FF"
-                    android:layout_margin="20dp"
+                    android:backgroundTint="#C0C9FB"
+                    android:layout_margin="10dp"
                     app:cardElevation="5dp">
 
                     <LinearLayout
@@ -620,7 +619,7 @@
             android:gravity="center"
             android:elevation="4dp"
             android:paddingLeft="20dp"
-            android:background="#99CDF6"
+            android:background="#BEDFFA"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:popupTheme="@style/ThemeOverlay.AppCompat.Light">
         <TextView
@@ -635,7 +634,7 @@
             <ImageView
                 android:id="@+id/Notices_btnback"
                 android:layout_width="50dp"
-                android:background="#99CDF6"
+                android:background="#BEDFFA"
                 android:layout_height="56dp"
                 android:padding="@dimen/_8sdp"
                 android:layout_gravity="left"
@@ -671,9 +670,9 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:mbn_circleColor="#2196F3"
-        app:mbn_backgroundBottomColor="#99CDF6"
-        app:mbn_countBackgroundColor="#99CDF6"
+        app:mbn_circleColor="#FFFFFF"
+        app:mbn_backgroundBottomColor="#BEDFFA"
+        app:mbn_countBackgroundColor="#BEDFFA"
         app:mbn_countTextColor="#ffffff"
         app:mbn_defaultIconColor="#000000"
         app:mbn_rippleColor="#2f424242"

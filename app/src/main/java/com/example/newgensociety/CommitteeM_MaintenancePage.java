@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ public class CommitteeM_MaintenancePage extends AppCompatActivity {
     String DueDateString;
     EditText FlatNo, Discription, Amount;
     Button Send, Maintainance_Status;
+    RadioGroup RG_Discount;
     RadioButton _5per, _10per, _15per;
     FirebaseFirestore db;
     int year, month, day;
@@ -42,6 +44,7 @@ public class CommitteeM_MaintenancePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_committee_mmaintenance_page);
+        RG_Discount = findViewById(R.id.Committee_Maintenance_RG_discount);
         Duedate = findViewById(R.id.Committee_Maintenance_dueDate);
         FlatNo = findViewById(R.id.Committee_Maintenance_FlatNo);
         Discription = findViewById(R.id.Committee_Maintenance_Discription);
@@ -122,6 +125,12 @@ public class CommitteeM_MaintenancePage extends AppCompatActivity {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
                                 Toast.makeText(getApplicationContext(),"Successful", Toast.LENGTH_SHORT).show();
+                                FlatNo.setText("");
+                                Discription.setText("");
+                                Duedate.setText("");
+                                Amount.setText("");
+                                RG_Discount.clearCheck();
+
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override

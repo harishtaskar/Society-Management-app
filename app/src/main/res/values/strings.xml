@@ -19,6 +19,7 @@
     <string name="maintenence">Maintenence</string>
     <string name="pay_your_maintenance_before_due_and_get">Pay Your Maintenance Before Due And Get</string>
     <string name="flat_number">Flat Number :</string>
+    <string name="flat_no">Flat No</string>
     <string-array name="array_indian_states">
         <item>Select Your State</item>
         <item>Andaman and Nicobar Islands</item>

@@ -1,5 +1,8 @@
 package com.example.newgensociety;
 
+import static android.content.ContentValues.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -16,16 +19,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
@@ -36,8 +44,8 @@ public class CommitteeM_HomePage extends AppCompatActivity {
     RelativeLayout profile,home,notice;
 
 //    home page
-    ImageView commitee_img;
-    CardView cardmain1,cardmain2;
+    ImageView commitee_img, NoticeBack, HomeBack, ProfileBack;
+    CardView cardmain1,cardmain2,Society_meetings;
 
     RecyclerView recyclerView;
     ArrayList<Notice> noticeArrayList;
@@ -50,7 +58,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
     Button cpeditbtn;
     CardView addfalt,visitor;
     ImageView cpmemberimage;
-
+    String S_name;
 
 
 
@@ -61,8 +69,12 @@ public class CommitteeM_HomePage extends AppCompatActivity {
         setContentView(R.layout.activity_committee_mhome_page);
 //        getSupportActionBar().hide();
         commitee_img = findViewById(R.id.commitee_dua_maintainance_img);
+        NoticeBack = findViewById(R.id.Notices_btnback);
+        ProfileBack = findViewById(R.id.profile_btnback);
+        HomeBack = findViewById(R.id.home_btnback);
         cardmain1 = findViewById(R.id.add1);
         cardmain2 = findViewById(R.id.add2);
+        Society_meetings = findViewById(R.id.Society_Meetings);
 
         //profile page
         cpmemberimage = findViewById(R.id.committee_profile_img);
@@ -100,12 +112,63 @@ public class CommitteeM_HomePage extends AppCompatActivity {
         bottomNavigation.add(new MeowBottomNavigation.Model(2,R.drawable.homek));
         bottomNavigation.add(new MeowBottomNavigation.Model(3,R.drawable.notice));
 
+        NoticeBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CommitteeM_HomePage.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        HomeBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CommitteeM_HomePage.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        ProfileBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CommitteeM_HomePage.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         db = FirebaseFirestore.getInstance();
         noticeArrayList = new ArrayList<Notice>();
         myAdapter = new myRecycleViewAdapter(CommitteeM_HomePage.this,noticeArrayList);
         recyclerView.setAdapter(myAdapter);
         EventChangeListener();
+
+        Intent intent1 = getIntent();
+        String CM_Email = intent1.getStringExtra("CM_email");
+        cpmemberemail.setText(CM_Email);
+
+        System.out.println(CM_Email);
+
+        db.collection("C_Members")
+                        .whereEqualTo("Cm_email",CM_Email)
+                                .get()
+                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful()){
+                                                    Toast.makeText(CommitteeM_HomePage.this, "Successful",
+                                                            Toast.LENGTH_SHORT).show();
+                                                    for ( QueryDocumentSnapshot document : task.getResult()){
+                                                        Log.d(TAG, document.getId()+ "=>"+ document.getData());
+                                                        S_name = Objects.requireNonNull(document.get("Society_name")).toString();
+                                                    }
+
+
+                                                }else{
+                                                    Toast.makeText(CommitteeM_HomePage.this, "Failed",
+                                                            Toast.LENGTH_SHORT).show();
+                                                }
+
+                                            }
+                                        });
 
         bottomNavigation.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {
             @Override
@@ -160,6 +223,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
                 }
                 return null;
             }
+
         });
 
         bottomNavigation.setOnShowListener(new Function1<MeowBottomNavigation.Model, Unit>() {
@@ -211,13 +275,21 @@ public class CommitteeM_HomePage extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        Society_meetings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CommitteeM_HomePage.this,CommitteeM_MeetingsPage.class);
+                startActivity(intent);
+            }
+        });
+
 
 
     }
 
     private void EventChangeListener() {
 
-        db.collection("Notice")
+        db.collection("Notice").orderBy("date", Query.Direction.DESCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {

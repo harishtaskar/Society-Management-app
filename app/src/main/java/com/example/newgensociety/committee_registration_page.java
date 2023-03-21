@@ -254,6 +254,9 @@ public class committee_registration_page extends AppCompatActivity {
                 password = String.valueOf(Password.getText());
                 conpassword = String.valueOf(ConPassword.getText());
 
+                Intent intent2 = new Intent(getApplicationContext(),CommitteeM_HomePage.class);
+                intent2.putExtra("CM_email",email);
+
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(committee_registration_page.this, "Enter Email", Toast.LENGTH_SHORT).show();
                     return;
@@ -319,6 +322,8 @@ public class committee_registration_page extends AppCompatActivity {
                 String cMemberName = CMemberName.getText().toString();
                 String contact = Contact.getText().toString();
                 Integer cm_id = new Integer(Cm_id);
+
+
 
                 Map<String,Object> cm_member = new HashMap<>();
                 cm_member.put("Society_name", societyName);
