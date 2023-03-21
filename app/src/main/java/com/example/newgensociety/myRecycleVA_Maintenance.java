@@ -32,7 +32,7 @@ public class myRecycleVA_Maintenance extends RecyclerView.Adapter<myRecycleVA_Ma
         Maintenance maintenance = maintenanceArrayList.get(position);
 
         holder.flat_no.setText("Flat Number : "+maintenance.getFlat_no());
-        holder.amount.setText("Amount : "+String.valueOf(maintenance.getAmount()));
+        holder.amount.setText("Amount : "+String.valueOf(maintenance.getAmount())+"/-");
         holder.due_date.setText("Due On : "+maintenance.getDue_date());
         holder.discription.setText(maintenance.getDiscription());
         holder.discount.setText("Pay Before Due and Get "+String.valueOf(maintenance.getDiscount())+"% Discount");

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ import java.util.Map;
 public class CommitteeM_MaintenancePage extends AppCompatActivity {
 
     TextView Duedate;
+    ImageView Back;
     String DueDateString;
     EditText FlatNo, Discription, Amount;
     Button Send, Maintainance_Status;
@@ -52,6 +54,15 @@ public class CommitteeM_MaintenancePage extends AppCompatActivity {
         Send = findViewById(R.id.Send);
         _5per = findViewById(R.id._5percent);
         _10per = findViewById(R.id._10percent);
+        Back = findViewById(R.id.Maintenance_btn_back);
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CommitteeM_MaintenancePage.this,CommitteeM_HomePage.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         _15per = findViewById(R.id._15percent);
         db = FirebaseFirestore.getInstance();
         Maintainance_Status = findViewById(R.id.maintainance_Status);

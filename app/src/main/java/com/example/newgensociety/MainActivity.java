@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,Committee_LoginPage.class);
                 startActivity(intent);
+                finish();
             }
         });
         SocietyM_login.setOnClickListener(new View.OnClickListener() {

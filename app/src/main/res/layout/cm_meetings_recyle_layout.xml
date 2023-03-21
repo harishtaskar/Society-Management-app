@@ -2,12 +2,16 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/background5"
-    android:id="@+id/Committee_Maintenance_Recycle"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/_10sdp"
+        android:orientation="vertical">
+
+
     <androidx.cardview.widget.CardView
-        android:layout_marginTop="@dimen/_20sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -24,13 +28,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
+                android:orientation="vertical">
                 <TextView
-                    android:id="@+id/Committee_MaintenanceR_FlatNo"
+                    android:id="@+id/Committee_Meetings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_15sdp"
+                    android:textAlignment="center"
+                    android:text="***Meeting***"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:textStyle="bold"
@@ -38,16 +43,43 @@
                     >
                 </TextView>
 
+                <TextView
+                    android:id="@+id/Committee_Meetings_Subject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_13sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:textStyle="bold"
+                    android:textColor="#016A60"
+                    >
+                </TextView>
+
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
+
                 <TextView
-                    android:id="@+id/Committee_MaintenanceR_MainAmount"
-                    android:layout_width="match_parent"
+                    android:id="@+id/Committee_Meetings_date"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/_5sdp"
                     android:padding="@dimen/_3sdp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sdp">
+
+                </TextView>
+                <TextView
+                    android:id="@+id/Committee_Meetings_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:padding="@dimen/_3sdp"
+                    android:textStyle="bold"
                     android:textSize="@dimen/_14sdp"
                     android:textColor="@color/black"
                     >
@@ -63,18 +95,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/Committee_MaintenanceR_DueDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_3sdp"
-                    android:textColor="#353535"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold">
-
-                </TextView>
-
-                <TextView
-                    android:id="@+id/Committee_MaintenanceR_Discription"
+                    android:id="@+id/Committee_Meetings_Description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_3sdp"
@@ -85,24 +106,26 @@
                     >
                 </TextView>
 
+                <TextView
+                    android:id="@+id/Committee_Meetings_No_of_Members"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_3sdp"
+                    android:textColor="#353535"
+                    android:textSize="@dimen/_10sdp"
+                    >
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-            <TextView
-                android:id="@+id/Committee_MaintenanceR_DiscountText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_3sdp"
-                android:textSize="@dimen/_11sdp"
-                android:textColor="#35B100">
+                </TextView>
 
-            </TextView>
+
+
+
             </LinearLayout>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
 
 </androidx.cardview.widget.CardView>

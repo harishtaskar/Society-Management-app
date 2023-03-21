@@ -48,11 +48,10 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Subject of meeting"
+        android:hint="Reason of meeting"
         android:layout_marginTop="@dimen/_16sdp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -107,11 +106,45 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Committee_Meetings_AMPM"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/_AM"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/black"
+                android:shadowRadius="@integer/material_motion_duration_long_1"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_gravity="left"
+                android:textSize="@dimen/_10sdp"
+                android:text="AM" />
+
+            <RadioButton
+                android:id="@+id/_PM"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/black"
+                android:shadowRadius="@integer/material_motion_duration_long_1"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_gravity="left"
+                android:textSize="@dimen/_10sdp"
+                android:text="PM" />
+
+        </RadioGroup>
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/massage"
-        android:layout_marginTop="@dimen/_10sdp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         >
         <com.google.android.material.textfield.TextInputEditText
@@ -119,7 +152,6 @@
             android:layout_height="match_parent"
             android:lines="3"
             android:gravity="top"
-            android:layout_marginTop="@dimen/_10sdp"
             android:hint="Description"
             android:id="@+id/Committee_Meetings_Description"
             android:overScrollMode="always"
@@ -144,6 +176,25 @@
         android:layout_marginStart="@dimen/_5sdp"
         android:text="Schedule Meeting"
         android:layout_marginRight="@dimen/_10sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/Meetings_Status"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/black"
+                android:backgroundTint="#FFF5B4"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_gravity="bottom"
+                android:text="Meetings"
+                android:layout_marginRight="@dimen/_10sdp" />
+        </LinearLayout>
 
 
 

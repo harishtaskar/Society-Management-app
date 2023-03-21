@@ -3,11 +3,13 @@ package com.example.newgensociety;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.renderscript.ScriptGroup;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,6 +32,7 @@ import java.util.Map;
 public class Committee_NoticePubllishing_Page extends AppCompatActivity {
 
     EditText CM_name, Notice_Subject, Notice;
+    ImageView Back;
     Button btnPublish;
     FirebaseDatabase db;
     FirebaseFirestore dbf;
@@ -44,8 +47,15 @@ public class Committee_NoticePubllishing_Page extends AppCompatActivity {
         Notice_Subject = findViewById(R.id.Committee_NoticePublish_Subject);
         Notice = findViewById(R.id.Committee_NoticePublish_Notice);
         btnPublish = findViewById(R.id.Committee_Notice_btnPublish);
-
-
+        Back = findViewById(R.id.Notice_btnback);
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Committee_NoticePubllishing_Page.this,CommitteeM_HomePage.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
         btnPublish.setOnClickListener(new View.OnClickListener() {
