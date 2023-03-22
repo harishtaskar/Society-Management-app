@@ -141,8 +141,8 @@ public class CommitteeM_HomePage extends AppCompatActivity {
         recyclerView.setAdapter(myAdapter);
         EventChangeListener();
 
-        Intent intent1 = getIntent();
-        String CM_Email = intent1.getStringExtra("CM_email");
+        Intent intent = getIntent();
+        String CM_Email = intent.getStringExtra("cm_email");
         cpmemberemail.setText(CM_Email);
 
         System.out.println(CM_Email);

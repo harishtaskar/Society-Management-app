@@ -4,12 +4,14 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/background5"
+    android:backgroundTint="@color/white"
     android:id="@+id/Committee_Notice_RecycleView"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_width="match_parent"
+        android:backgroundTint="@color/white"
         android:layout_height="wrap_content"
         android:background="@color/white"
         app:cardElevation="@dimen/_5sdp"
@@ -61,7 +63,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_width="360dp"
             android:layout_height="1dp"
-            android:background="?android:attr/listDivider"
+            android:background="#393939"
             tools:layout_editor_absoluteX="1dp"
             tools:layout_editor_absoluteY="220dp" />
 

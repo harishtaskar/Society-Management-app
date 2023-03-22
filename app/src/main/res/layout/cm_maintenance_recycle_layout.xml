@@ -2,9 +2,9 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/background5"
     android:id="@+id/Committee_Maintenance_Recycle"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
 
     <androidx.cardview.widget.CardView
         android:layout_marginTop="@dimen/_20sdp"

@@ -250,12 +250,12 @@ public class committee_registration_page extends AppCompatActivity {
             public void onClick(View view) {
                 progressbar.setVisibility(view.VISIBLE);
                 String email, password, conpassword;
-                email = String.valueOf(Email.getText());
+                email = Email.getText().toString();
                 password = String.valueOf(Password.getText());
                 conpassword = String.valueOf(ConPassword.getText());
 
-                Intent intent2 = new Intent(getApplicationContext(),CommitteeM_HomePage.class);
-                intent2.putExtra("CM_email",email);
+                Intent intent = new Intent(committee_registration_page.this,CommitteeM_HomePage.class);
+                intent.putExtra("cm_email", email);
 
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(committee_registration_page.this, "Enter Email", Toast.LENGTH_SHORT).show();
@@ -321,7 +321,7 @@ public class committee_registration_page extends AppCompatActivity {
                 String societyName = SocietyName.getText().toString();
                 String cMemberName = CMemberName.getText().toString();
                 String contact = Contact.getText().toString();
-                Integer cm_id = new Integer(Cm_id);
+                Integer cm_id = Integer.parseInt(String.valueOf(Cm_id));
 
 
 

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".CommitteeM_MaintenancePage">
 
@@ -43,6 +42,7 @@
         android:layout_height="match_parent"
         android:paddingStart="@dimen/_15sdp"
         android:paddingEnd="@dimen/_15sdp"
+        android:background="@color/white"
         android:orientation="vertical">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/flat_no"
         android:layout_marginTop="@dimen/_16sdp"
-
+        app:hintTextColor="#404040"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         >
         <com.google.android.material.textfield.TextInputEditText
