@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background5"
-    tools:context=".CommitteeM_HomePage">
+    tools:context=".SocietyM_HomePage">
 
-<!--    Profile-->
+
     <RelativeLayout
         android:id="@+id/profile"
         android:layout_width="match_parent"
@@ -17,11 +17,11 @@
 
         <Toolbar
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:id="@+id/toolbar"
+            android:layout_height="wrap_content"
+            android:id="@+id/Stoolbar1"
             android:gravity="center"
             android:elevation="4dp"
-            android:paddingStart="20dp"
+            android:paddingLeft="20dp"
             android:background="#BEDFFA"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
@@ -35,14 +35,16 @@
                 android:layout_gravity="center"
                 android:textColor="@color/black"/>
 
+
             <ImageView
-                android:id="@+id/profile_btnback"
+                android:id="@+id/Society_Profile_btnBack"
                 android:layout_width="50dp"
                 android:background="#BEDFFA"
                 android:layout_height="56dp"
-                android:padding="@dimen/_8sdp"
+                android:paddingRight="20dp"
                 android:layout_gravity="left"
                 android:src="@drawable/baseline_arrow_back_24"/>
+
         </Toolbar>
 
         <LinearLayout
@@ -69,7 +71,7 @@
 
 
                     <TextView
-                        android:id="@+id/committee_profile_society_name"
+                        android:id="@+id/SocietyM_profile_society_name"
                         android:layout_marginTop="@dimen/_20sdp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -84,7 +86,7 @@
                     </TextView>
 
                     <TextView
-                        android:id="@+id/committee_profile_society_address"
+                        android:id="@+id/SocietyM_profile_society_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_10sdp"
@@ -109,7 +111,7 @@
 
 
                         <ImageView
-                            android:id="@+id/committee_profile_img"
+                            android:id="@+id/SocietyM_profile_img"
                             android:layout_width="@dimen/_50sdp"
                             android:layout_height="@dimen/_50sdp"
                             android:padding="@dimen/_5sdp"
@@ -126,7 +128,7 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/committee_profile_member_name"
+                                android:id="@+id/SocietyM_profile_member_name"
                                 android:layout_width="match_parent"
                                 android:gravity="left"
                                 android:textColor="@color/black"
@@ -139,7 +141,7 @@
                             </TextView>
 
                             <TextView
-                                android:id="@+id/committee_profile_member_email"
+                                android:id="@+id/SocietyM_profile_member_email"
                                 android:layout_width="match_parent"
                                 android:gravity="left"
                                 android:textColor="@color/black"
@@ -181,12 +183,12 @@
                             android:layout_marginTop="@dimen/_10sdp"
                             android:layout_gravity="left"
                             android:layout_marginLeft="@dimen/_15sdp"
-                            android:text="Edit your community profile"
+                            android:text="Edit your profile"
                             />
 
 
                         <Button
-                            android:id="@+id/committee_profile_edit_button"
+                            android:id="@+id/Society_profile_edit_button"
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:paddingRight="@dimen/_10sdp"
@@ -209,7 +211,7 @@
 
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/committee_profile_add_flat"
+                android:id="@+id/SocietyM_profile_add_flat"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginLeft="@dimen/_10sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
@@ -235,7 +237,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/committee_profile_visiror_notification"
+                android:id="@+id/Society_profile_visitor_notification"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginLeft="@dimen/_10sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
@@ -277,14 +279,14 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/committee_profile_about"
+                        android:id="@+id/Society_profile_about"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_12sdp"
                         android:textColor="@color/black"
                         android:padding="@dimen/_10sdp"
                         android:gravity="left"
-                        android:text="Tell a friend about Newgensociety">
+                        android:text="Tell a friend about NewGenSociety">
                     </TextView>
 
                     <View
@@ -299,7 +301,7 @@
 
 
                     <TextView
-                        android:id="@+id/committee_profile_support_feedback"
+                        android:id="@+id/Society_profile_support_feedback"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_12sdp"
@@ -319,7 +321,7 @@
                         tools:layout_editor_absoluteY="220dp" />
 
                     <TextView
-                        android:id="@+id/committee_profile_logout"
+                        android:id="@+id/SocietyM_profile_logout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_12sdp"
@@ -336,7 +338,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/committee_profile_terms_condition"
+                android:id="@+id/Society_profile_terms_condition"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -347,7 +349,7 @@
             </TextView>
 
             <TextView
-                android:id="@+id/committee_profile_version"
+                android:id="@+id/SocietyM_profile_version"
                 android:layout_width="match_parent"
                 android:gravity="center"
                 android:layout_height="wrap_content"
@@ -357,9 +359,9 @@
 
         </LinearLayout>
 
+
     </RelativeLayout>
 
-<!--    //home-->
     <RelativeLayout
         android:id="@+id/home"
         android:layout_width="match_parent"
@@ -368,24 +370,15 @@
         android:visibility="visible">
         <Toolbar
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:id="@+id/toolbar2"
+            android:layout_height="wrap_content"
+            android:id="@+id/Stoolbar2"
+            android:gravity="center"
             android:elevation="4dp"
-            android:paddingEnd="@dimen/_5sdp"
+            android:paddingLeft="20dp"
             android:background="#BEDFFA"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            android:titleTextColor="@color/black"
             >
-            <ImageView
-                android:id="@+id/home_btnback"
-                android:layout_width="50dp"
-                android:background="#BEDFFA"
-                android:layout_height="56dp"
-                android:padding="@dimen/_8sdp"
-                android:layout_gravity="left"
-                android:src="@drawable/baseline_arrow_back_24"/>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -396,16 +389,24 @@
                 android:textColor="@color/black"/>
 
             <ImageView
-                android:id="@+id/home_btnprofile"
+                android:id="@+id/Society_Home_btn_Profile"
                 android:layout_width="50dp"
                 android:background="#BEDFFA"
                 android:layout_height="56dp"
-                android:padding="@dimen/_8sdp"
+                android:paddingRight="20dp"
                 android:layout_gravity="right"
                 android:src="@drawable/baseline_perm_identity_24"/>
 
-        </Toolbar>
+            <ImageView
+                android:id="@+id/Society_Home_btnBack"
+                android:layout_width="50dp"
+                android:background="#BEDFFA"
+                android:layout_height="56dp"
+                android:paddingRight="20dp"
+                android:layout_gravity="left"
+                android:src="@drawable/baseline_arrow_back_24"/>
 
+        </Toolbar>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -421,7 +422,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/add1"
+                    android:id="@+id/Society_Maintenance"
                     android:layout_width="160dp"
                     android:layout_height="150dp"
                     android:layout_margin="20dp"
@@ -436,7 +437,7 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/commitee_dua_maintainance_img"
+                            android:id="@+id/society_dua_maintenance_img"
                             android:layout_width="96dp"
                             android:layout_height="96dp"
                             android:padding="@dimen/_10sdp"
@@ -445,7 +446,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                             />
+                            />
 
                         <TextView
 
@@ -462,7 +463,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/add2"
+                    android:id="@+id/Society_Notice"
                     android:layout_width="160dp"
                     android:layout_height="150dp"
                     android:backgroundTint="#D0C0FB"
@@ -509,7 +510,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/delete"
+                    android:id="@+id/Society_Help"
                     android:layout_width="160dp"
                     android:layout_height="150dp"
                     android:layout_margin="20dp"
@@ -531,13 +532,13 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                             />
+                            />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
-                            android:text="Requests"
+                            android:text="Help"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
 
@@ -546,7 +547,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/Society_Meetings"
+                    android:id="@+id/Society_Meeting"
                     android:layout_width="160dp"
                     android:layout_height="150dp"
                     android:backgroundTint="#FFD9CF"
@@ -568,13 +569,13 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                             />
+                            />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
-                            android:text="Society meetings"
+                            android:text="Society meeting"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
 
@@ -593,7 +594,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/delete"
+                    android:id="@+id/Society_Complain"
                     android:layout_width="160dp"
                     android:layout_height="150dp"
                     android:layout_margin="20dp"
@@ -621,7 +622,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
-                            android:text="Complains"
+                            android:text="Complain"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
 
@@ -629,7 +630,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/Society_Meetings"
+                    android:id="@+id/Society_AddFlat"
                     android:layout_width="160dp"
                     android:layout_height="150dp"
                     android:backgroundTint="#BEDFFA"
@@ -685,50 +686,49 @@
         android:id="@+id/notice"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
         android:layout_above="@+id/bottomNavigation"
         android:visibility="gone"
         >
         <Toolbar
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:id="@+id/toolbar1"
+            android:layout_height="wrap_content"
+            android:id="@+id/Stoolbar3"
             android:gravity="center"
             android:elevation="4dp"
             android:paddingLeft="20dp"
             android:background="#BEDFFA"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Notices"
-            android:textSize="@dimen/_16sdp"
-            android:textStyle="bold"
-            android:layout_gravity="center"
-            android:textColor="@color/black"/>
+            android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Notice"
+                android:textSize="@dimen/_16sdp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:textColor="@color/black"/>
 
             <ImageView
-                android:id="@+id/Notices_btnback"
+                android:id="@+id/Society_Notice_btnBack"
                 android:layout_width="50dp"
                 android:background="#BEDFFA"
                 android:layout_height="56dp"
-                android:padding="@dimen/_8sdp"
+                android:paddingRight="20dp"
                 android:layout_gravity="left"
                 android:src="@drawable/baseline_arrow_back_24"/>
-        </Toolbar>
 
+        </Toolbar>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/Committee_Notice_RecycleView"
+            <ListView
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/_45sdp"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="match_parent">
+
+            </ListView>
 
         </LinearLayout>
         <!--        <TextView-->
@@ -747,7 +747,7 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:mbn_circleColor="#FFFFFF"
+        app:mbn_circleColor="@color/white"
         app:mbn_backgroundBottomColor="#BEDFFA"
         app:mbn_countBackgroundColor="#BEDFFA"
         app:mbn_countTextColor="#ffffff"

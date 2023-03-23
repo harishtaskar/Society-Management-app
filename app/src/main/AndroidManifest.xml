@@ -15,6 +15,12 @@
         android:theme="@style/Theme.NewGenSociety"
         tools:targetApi="31">
         <activity
+            android:name=".SocietyM_HomePage"
+            android:exported="false" />
+        <activity
+            android:name=".SocietyM_RegistrationPage"
+            android:exported="false" />
+        <activity
             android:name=".Committee_show_Meetings"
             android:exported="false" />
         <activity

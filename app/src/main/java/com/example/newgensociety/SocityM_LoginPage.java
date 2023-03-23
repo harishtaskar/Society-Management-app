@@ -2,15 +2,18 @@ package com.example.newgensociety;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class SocityM_LoginPage extends AppCompatActivity {
 
     EditText Email;
+    TextView SignupText;
     EditText password;
     Button loginButton;
     @Override
@@ -20,6 +23,7 @@ public class SocityM_LoginPage extends AppCompatActivity {
         Email = findViewById(R.id.Society_Login_editT_Email);
         password = findViewById(R.id.Society_Login_editT_Pass);
         loginButton = findViewById(R.id.Society_loginButton);
+        SignupText = findViewById(R.id.signupText);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -28,6 +32,13 @@ public class SocityM_LoginPage extends AppCompatActivity {
                 } else {
                     Toast.makeText(SocityM_LoginPage.this, "Login Failed!", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        SignupText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SocityM_LoginPage.this,SocietyM_RegistrationPage.class);
+                startActivity(intent);
             }
         });
     }

@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.example.newgensociety'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.newgensociety"
-        minSdk 19
-        targetSdk 32
+        minSdk 24
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
