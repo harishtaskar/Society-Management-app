@@ -234,7 +234,7 @@
                     android:id="@+id/Committee_Reg_spinner_city"
                     android:background="@drawable/custom_edittext2"
                     android:layout_marginLeft="0dp"
-                    android:paddingLeft="10dp" />
+                    android:paddingLeft="10dp"/>
             </LinearLayout>
 
                 <LinearLayout
