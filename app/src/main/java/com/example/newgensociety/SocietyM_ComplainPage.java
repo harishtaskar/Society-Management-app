@@ -26,7 +26,6 @@ public class SocietyM_ComplainPage extends AppCompatActivity {
     EditText name, about, description;
     ImageView backarrowc;
     FirebaseFirestore db;
-    boolean isAllFieldsChecked = false;
     Button send;
 
     @Override
@@ -45,7 +44,21 @@ public class SocietyM_ComplainPage extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isAllFieldsChecked = CheckAllFields();
+                if (name.getText().toString().length() == 0) {
+                    name.setError("This field is required");
+                    Toast.makeText(SocietyM_ComplainPage.this, "This field is required", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (about.getText().toString().length() == 0) {
+                    about.setError("This field is required");
+                    Toast.makeText(SocietyM_ComplainPage.this, "This field is required", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (description.getText().toString().length() == 0) {
+                    description.setError("This field is required");
+                    Toast.makeText(SocietyM_ComplainPage.this, "This field is required", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 Calendar calendar = Calendar.getInstance();
                 String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
@@ -89,21 +102,6 @@ public class SocietyM_ComplainPage extends AppCompatActivity {
                 finish();
             }
         });
-
-
-
     }
 
-    private boolean CheckAllFields() {
-        if (about.getText().toString().length() == 0) {
-            about.setError("This field is required");
-            Toast.makeText(SocietyM_ComplainPage.this, "This field is required", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (description.length() == 0) {
-            description.setError("This field is required");
-            return false;
-        }
-        return true;
-    }
 }

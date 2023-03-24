@@ -35,10 +35,9 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_15sdp"
                     android:textAlignment="center"
-                    android:text="***Meeting***"
+                    android:text="--Meeting--"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:textStyle="bold"
                     android:textColor="#102AB8"
                     >
                 </TextView>

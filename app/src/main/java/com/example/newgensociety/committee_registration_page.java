@@ -254,9 +254,6 @@ public class committee_registration_page extends AppCompatActivity {
                 password = String.valueOf(Password.getText());
                 conpassword = String.valueOf(ConPassword.getText());
 
-                Intent intent = new Intent(committee_registration_page.this,CommitteeM_HomePage.class);
-                intent.putExtra("cm_email", email);
-
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(committee_registration_page.this, "Enter Email", Toast.LENGTH_SHORT).show();
                     return;
@@ -323,7 +320,8 @@ public class committee_registration_page extends AppCompatActivity {
                 String contact = Contact.getText().toString();
                 Integer cm_id = Integer.parseInt(String.valueOf(Cm_id));
 
-
+                Intent intent = new Intent(committee_registration_page.this,CommitteeM_HomePage.class);
+                intent.putExtra("cm_email", email);
 
                 Map<String,Object> cm_member = new HashMap<>();
                 cm_member.put("Society_name", societyName);
@@ -341,6 +339,7 @@ public class committee_registration_page extends AppCompatActivity {
                                             public void onSuccess(DocumentReference documentReference) {
                                                 Toast.makeText(getApplicationContext(),"Successful", Toast.LENGTH_SHORT).show();
                                                 Cm_id++;
+
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
                             @Override

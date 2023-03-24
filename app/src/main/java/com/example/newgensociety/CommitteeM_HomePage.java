@@ -45,7 +45,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
 
 //    home page
     ImageView commitee_img, NoticeBack, HomeBack, ProfileBack;
-    CardView cardmain1,cardmain2,Society_meetings;
+    CardView cardmain1,cardmain2,Society_meetings,Complains,Helps;
 
     RecyclerView recyclerView;
     ArrayList<Notice> noticeArrayList;
@@ -75,6 +75,8 @@ public class CommitteeM_HomePage extends AppCompatActivity {
         cardmain1 = findViewById(R.id.add1);
         cardmain2 = findViewById(R.id.add2);
         Society_meetings = findViewById(R.id.Society_Meetings);
+        Complains = findViewById(R.id.Committee_home_Complains);
+        Helps = findViewById(R.id.Committee_home_Helps);
 
         //profile page
         cpmemberimage = findViewById(R.id.committee_profile_img);
@@ -141,14 +143,8 @@ public class CommitteeM_HomePage extends AppCompatActivity {
         recyclerView.setAdapter(myAdapter);
         EventChangeListener();
 
-        Intent intent = getIntent();
-        String CM_Email = intent.getStringExtra("cm_email");
-        cpmemberemail.setText(CM_Email);
-
-        System.out.println(CM_Email);
 
         db.collection("C_Members")
-                        .whereEqualTo("Cm_email",CM_Email)
                                 .get()
                                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                             @Override
@@ -218,9 +214,11 @@ public class CommitteeM_HomePage extends AppCompatActivity {
                         profile.setVisibility(View.VISIBLE);
                         home.setVisibility(View.GONE);
                         notice.setVisibility(View.GONE);
-
                         break;
                 }
+                Intent intent = getIntent();
+                String CM_Email = intent.getStringExtra("cm_email");
+                cpmemberemail.setText(CM_Email);
                 return null;
             }
 
@@ -255,6 +253,8 @@ public class CommitteeM_HomePage extends AppCompatActivity {
                         home.setVisibility(View.GONE);
                         notice.setVisibility(View.VISIBLE);
 
+
+
                         break;
                 }
                 return null;
@@ -279,6 +279,21 @@ public class CommitteeM_HomePage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CommitteeM_HomePage.this,CommitteeM_MeetingsPage.class);
+                startActivity(intent);
+            }
+        });
+        Complains.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CommitteeM_HomePage.this,CommitteeM_showComplains.class);
+                startActivity(intent);
+            }
+        });
+
+        Helps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CommitteeM_HomePage.this,CommitteeM_showHelp.class);
                 startActivity(intent);
             }
         });

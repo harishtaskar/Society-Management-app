@@ -728,7 +728,7 @@
             android:id="@+id/Society_MainNotice_RecycleView"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/_45sdp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             />
         </LinearLayout>
         <!--        <TextView-->
@@ -739,9 +739,6 @@
         <!--            android:text="Notice"/>-->
 
     </RelativeLayout>
-
-
-
 
     <com.etebarian.meowbottomnavigation.MeowBottomNavigation
         android:id="@+id/bottomNavigation"
