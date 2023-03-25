@@ -65,7 +65,7 @@ public class SocietyM_HelpPage extends AppCompatActivity {
 
                 Map<String,Object> help = new HashMap<>();
                 help.put("name",Name);
-                help.put("help No",Flat);
+                help.put("flat no",Flat);
                 help.put("help",Help);
                 help.put("date",date);
                 db.collection("HelpRequests")

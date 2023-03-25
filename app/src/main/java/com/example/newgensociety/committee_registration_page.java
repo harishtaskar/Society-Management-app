@@ -320,8 +320,6 @@ public class committee_registration_page extends AppCompatActivity {
                 String contact = Contact.getText().toString();
                 Integer cm_id = Integer.parseInt(String.valueOf(Cm_id));
 
-                Intent intent = new Intent(committee_registration_page.this,CommitteeM_HomePage.class);
-                intent.putExtra("cm_email", email);
 
                 Map<String,Object> cm_member = new HashMap<>();
                 cm_member.put("Society_name", societyName);
@@ -338,8 +336,13 @@ public class committee_registration_page extends AppCompatActivity {
                                             @Override
                                             public void onSuccess(DocumentReference documentReference) {
                                                 Toast.makeText(getApplicationContext(),"Successful", Toast.LENGTH_SHORT).show();
-                                                Cm_id++;
+                                                String cMemberName = CMemberName.getText().toString();
+                                                String email = Email.getText().toString();
 
+                                                Intent intent = new Intent(committee_registration_page.this,CommitteeM_HomePage.class);
+                                                intent.putExtra("key_cm_email", email);
+                                                intent.putExtra("key_cm_name", cMemberName);
+                                                Cm_id++;
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
                             @Override

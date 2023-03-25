@@ -25,14 +25,15 @@
 
 
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="650dp"
-        android:layout_margin="10dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="20dp"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/custom_edittext">
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="650dp"-->
+<!--        android:layout_margin="10dp"-->
+<!--        app:cardCornerRadius="20dp"-->
+<!--        app:cardElevation="20dp"-->
+<!--        android:layout_marginTop="60dp"-->
+<!--        android:background="@drawable/custom_edittext">-->
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -362,7 +363,7 @@
                             android:paddingStart="10dp"
                             android:padding="10dp"
                             android:drawableLeft="@drawable/baseline_phone_android_24"
-                            android:inputType="text"
+                            android:inputType="number"
                             android:textColor="@color/black"
                             android:textColorHighlight="@color/cardview_dark_background"
                             android:layout_marginTop="40dp"
@@ -467,16 +468,6 @@
                             android:layout_marginTop="20dp"
                             android:paddingLeft="10dp" />
                     </com.google.android.material.textfield.TextInputLayout>
-                    <CheckBox
-                        android:layout_marginTop="20dp"
-                        android:layout_width="match_parent"
-                        android:textColor="@color/black"
-                        android:text="Terms condition"
-                        android:id="@+id/Committee_Reg_CBox_TermCondition"
-                        android:layout_height="50dp">
-
-                    </CheckBox>
-
                 </LinearLayout>
 
                 <ProgressBar
@@ -494,27 +485,34 @@
                     android:textSize="18sp"
                     android:textAllCaps="false"
                     android:background="@drawable/custom_button2"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="@dimen/_20sdp"
                     app:cornerRadius = "20dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Alrady have account? Login Now"
+                    android:textSize="14sp"
+                    android:layout_gravity="center"
+                    android:id="@+id/RegloginText"
+                    android:textColor="@color/blue"
+                    android:layout_marginBottom="40dp"
+                    android:gravity="center_horizontal" />
 
             </LinearLayout>
 
+<!--    </androidx.cardview.widget.CardView>-->
+
         </ScrollView>
 
-
-
-    </androidx.cardview.widget.CardView>
-
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="Alrady have account? Login Now"
-        android:textSize="14sp"
-        android:textAlignment="center"
-        android:id="@+id/RegloginText"
-        android:textColor="@color/blue"
-        android:layout_marginBottom="20dp"
-        android:gravity="center_horizontal" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+    </LinearLayout>
 
 </LinearLayout>

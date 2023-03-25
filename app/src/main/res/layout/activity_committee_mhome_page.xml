@@ -7,6 +7,8 @@
     android:background="@drawable/background5"
     tools:context=".CommitteeM_HomePage">
 
+
+
 <!--    Profile-->
     <RelativeLayout
         android:id="@+id/profile"
@@ -44,6 +46,8 @@
                 android:layout_gravity="left"
                 android:src="@drawable/baseline_arrow_back_24"/>
         </Toolbar>
+
+
 
         <LinearLayout
             android:layout_marginTop="@dimen/_30sdp"
@@ -377,22 +381,16 @@
             android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             android:titleTextColor="@color/black"
             >
-            <ImageView
-                android:id="@+id/home_btnback"
-                android:layout_width="50dp"
-                android:background="#BEDFFA"
-                android:layout_height="56dp"
-                android:padding="@dimen/_8sdp"
-                android:layout_gravity="left"
-                android:src="@drawable/baseline_arrow_back_24"/>
 
             <TextView
+                android:id="@+id/Committee_Home_Cm_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Home"
-                android:textSize="@dimen/_16sdp"
+                android:text="Hi, "
+                android:textSize="@dimen/_13sdp"
                 android:textStyle="bold"
-                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_gravity="left"
                 android:textColor="@color/black"/>
 
             <ImageView
@@ -406,270 +404,272 @@
 
         </Toolbar>
 
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
-                android:padding="@dimen/_5sdp"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/add1"
-                    android:layout_width="160dp"
-                    android:layout_height="150dp"
-                    android:layout_margin="20dp"
-                    android:backgroundTint="#E3FACA"
-                    app:cardElevation="5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_10sdp">
 
-                    <LinearLayout
-                        android:id="@+id/Due_maintenance"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/add1"
+                        android:layout_width="160dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="10dp"
+                        android:backgroundTint="#E3FACA"
+                        app:cardElevation="5dp">
 
-                        <ImageView
-                            android:id="@+id/commitee_dua_maintainance_img"
-                            android:layout_width="96dp"
-                            android:layout_height="96dp"
-                            android:padding="@dimen/_10sdp"
-                            android:src="@drawable/house" />
-
-                        <View
+                        <LinearLayout
+                            android:id="@+id/Due_maintenance"
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                             />
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-                        <TextView
+                            <ImageView
+                                android:id="@+id/commitee_dua_maintainance_img"
+                                android:layout_width="96dp"
+                                android:layout_height="96dp"
+                                android:padding="@dimen/_10sdp"
+                                android:src="@drawable/house" />
 
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="#DEFBBD"
-                            android:padding="5dp"
-                            android:text="Maintenance"
-                            android:textColor="@color/black"
-                            android:textStyle="bold" />
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp" />
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#DEFBBD"
+                                android:padding="5dp"
+                                android:text="Maintenance"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
 
 
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/add2"
-                    android:layout_width="160dp"
-                    android:layout_height="150dp"
-                    android:backgroundTint="#D0C0FB"
-                    android:layout_margin="10dp"
-                    app:cardElevation="5dp">
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/add2"
+                        android:layout_width="160dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="10dp"
+                        android:backgroundTint="#D0C0FB"
+                        app:cardElevation="5dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="92dp"
-                            android:layout_height="96dp"
-                            android:padding="@dimen/_10sdp"
-                            android:src="@drawable/notice" />
-
-                        <View
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            />
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="Notice"
-                            android:textColor="@color/black"
-                            android:textStyle="bold" />
+                            <ImageView
+                                android:layout_width="92dp"
+                                android:layout_height="96dp"
+                                android:padding="@dimen/_10sdp"
+                                android:src="@drawable/notice" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:text="Notice"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
 
 
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/Committee_home_Helps"
+                        android:layout_width="160dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="10dp"
+                        android:backgroundTint="#c0c9fb"
+                        app:cardElevation="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="96dp"
+                                android:layout_height="96dp"
+                                android:padding="@dimen/_10sdp"
+                                android:src="@drawable/help" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:text="Requests"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/Society_Meetings"
+                        android:layout_width="160dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="10dp"
+                        android:backgroundTint="#FFD9CF"
+                        app:cardElevation="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="96dp"
+                                android:layout_height="96dp"
+                                android:padding="@dimen/_10sdp"
+                                android:src="@drawable/meetings" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:text="Society meetings"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_10sdp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/Committee_home_Complains"
+                        android:layout_width="160dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="10dp"
+                        android:backgroundTint="#FFF7CF"
+                        app:cardElevation="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="96dp"
+                                android:layout_height="96dp"
+                                android:padding="@dimen/_10sdp"
+                                android:src="@drawable/complain" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:text="Complains"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/Society_AddFlat"
+                        android:layout_width="160dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="10dp"
+                        android:backgroundTint="#BEDFFA"
+                        app:cardElevation="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="96dp"
+                                android:layout_height="96dp"
+                                android:padding="@dimen/_10sdp"
+                                android:src="@drawable/addflat" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:text="Add Flat"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                </LinearLayout>
 
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="5dp"
-                android:orientation="horizontal">
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/Committee_home_Helps"
-                    android:layout_width="160dp"
-                    android:layout_height="150dp"
-                    android:layout_margin="20dp"
-                    android:backgroundTint="#c0c9fb"
-                    app:cardElevation="5dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="96dp"
-                            android:layout_height="96dp"
-                            android:padding="@dimen/_10sdp"
-                            android:src="@drawable/help" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                             />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="Requests"
-                            android:textColor="@color/black"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/Society_Meetings"
-                    android:layout_width="160dp"
-                    android:layout_height="150dp"
-                    android:backgroundTint="#FFD9CF"
-                    android:layout_margin="10dp"
-                    app:cardElevation="5dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="96dp"
-                            android:layout_height="96dp"
-                            android:padding="@dimen/_10sdp"
-                            android:src="@drawable/meetings" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                             />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="Society meetings"
-                            android:textColor="@color/black"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="5dp"
-                android:orientation="horizontal">
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/Committee_home_Complains"
-                    android:layout_width="160dp"
-                    android:layout_height="150dp"
-                    android:layout_margin="20dp"
-                    android:backgroundTint="#FFF7CF"
-                    app:cardElevation="5dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="96dp"
-                            android:layout_height="96dp"
-                            android:padding="@dimen/_10sdp"
-                            android:src="@drawable/complain" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="Complains"
-                            android:textColor="@color/black"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/Society_Meetings"
-                    android:layout_width="160dp"
-                    android:layout_height="150dp"
-                    android:backgroundTint="#BEDFFA"
-                    android:layout_margin="10dp"
-                    app:cardElevation="5dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="96dp"
-                            android:layout_height="96dp"
-                            android:padding="@dimen/_10sdp"
-                            android:src="@drawable/addflat" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="Add Flat"
-                            android:textColor="@color/black"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
+        </ScrollView>
 
 
         <!--        <TextView-->
@@ -731,6 +731,8 @@
                 />
 
         </LinearLayout>
+
+
         <!--        <TextView-->
         <!--            android:layout_width="wrap_content"-->
         <!--            android:layout_height="wrap_content"-->
@@ -757,6 +759,8 @@
         app:mbn_shadowColor="#1f212121"
         android:layout_alignParentBottom="true"
         />
+
+
 
 
 </RelativeLayout>

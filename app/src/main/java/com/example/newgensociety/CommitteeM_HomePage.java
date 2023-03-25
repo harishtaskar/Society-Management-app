@@ -44,8 +44,9 @@ public class CommitteeM_HomePage extends AppCompatActivity {
     RelativeLayout profile,home,notice;
 
 //    home page
-    ImageView commitee_img, NoticeBack, HomeBack, ProfileBack;
+    ImageView commitee_img, NoticeBack, ProfileBack;
     CardView cardmain1,cardmain2,Society_meetings,Complains,Helps;
+    TextView cm_name;
 
     RecyclerView recyclerView;
     ArrayList<Notice> noticeArrayList;
@@ -71,12 +72,12 @@ public class CommitteeM_HomePage extends AppCompatActivity {
         commitee_img = findViewById(R.id.commitee_dua_maintainance_img);
         NoticeBack = findViewById(R.id.Notices_btnback);
         ProfileBack = findViewById(R.id.profile_btnback);
-        HomeBack = findViewById(R.id.home_btnback);
         cardmain1 = findViewById(R.id.add1);
         cardmain2 = findViewById(R.id.add2);
         Society_meetings = findViewById(R.id.Society_Meetings);
         Complains = findViewById(R.id.Committee_home_Complains);
         Helps = findViewById(R.id.Committee_home_Helps);
+        cm_name = findViewById(R.id.Committee_Home_Cm_name);
 
         //profile page
         cpmemberimage = findViewById(R.id.committee_profile_img);
@@ -114,6 +115,11 @@ public class CommitteeM_HomePage extends AppCompatActivity {
         bottomNavigation.add(new MeowBottomNavigation.Model(2,R.drawable.homek));
         bottomNavigation.add(new MeowBottomNavigation.Model(3,R.drawable.notice));
 
+        String CM_Email = getIntent().getStringExtra("key_cm_email");
+        String CM_name = getIntent().getStringExtra("key_cm_name");
+        cm_name.setText("Hi, "+CM_name);
+        cpmemberemail.setText(CM_Email);
+
         NoticeBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,13 +127,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        HomeBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CommitteeM_HomePage.this,MainActivity.class);
-                startActivity(intent);
-            }
-        });
+
         ProfileBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -216,9 +216,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
                         notice.setVisibility(View.GONE);
                         break;
                 }
-                Intent intent = getIntent();
-                String CM_Email = intent.getStringExtra("cm_email");
-                cpmemberemail.setText(CM_Email);
+
                 return null;
             }
 

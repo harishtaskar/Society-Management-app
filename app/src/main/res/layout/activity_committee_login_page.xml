@@ -8,14 +8,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/background6"
+    android:background="@drawable/background5"
     tools:context=".MainActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        app:cardCornerRadius="30dp"
+        app:cardCornerRadius="20dp"
         app:cardElevation="20dp"
         android:background="@drawable/custom_edittext">
 
@@ -51,8 +51,8 @@
                 app:boxCornerRadiusBottomEnd="10dp"
                 app:boxCornerRadiusTopEnd="10dp"
                 app:boxCornerRadiusTopStart="10dp"
-                app:boxStrokeColor="@color/orange"
-                app:hintTextColor="@color/orange">
+                app:boxStrokeColor="@color/blue"
+                app:hintTextColor="@color/blue">
 
 
             <com.google.android.material.textfield.TextInputEditText
@@ -83,8 +83,8 @@
                 app:boxCornerRadiusTopStart="10dp"
                 android:hint="Email"
                 android:textColorHint="#808080"
-                app:boxStrokeColor="@color/orange"
-                app:hintTextColor="@color/orange">
+                app:boxStrokeColor="@color/blue"
+                app:hintTextColor="@color/blue">
 
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -115,8 +115,8 @@
                 android:hint="Password"
                 app:boxBackgroundColor="@color/white"
                 android:textColorHint="#808080"
-                app:boxStrokeColor="@color/orange"
-                app:hintTextColor="@color/orange">
+                app:boxStrokeColor="@color/blue"
+                app:hintTextColor="@color/blue">
 
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -143,21 +143,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
-
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="45dp"
                 android:id="@+id/loginButton"
                 android:text="@string/login"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:background="@drawable/custom_button2"
                 android:layout_marginTop="30dp"
-                app:cornerRadius = "20dp"/>
-
-
-
-
+                android:layout_marginBottom="@dimen/_15sdp"
+                app:cornerRadius = "15dp"/>
 
         </LinearLayout>
 

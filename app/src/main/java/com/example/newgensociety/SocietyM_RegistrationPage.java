@@ -1,5 +1,6 @@
 package com.example.newgensociety;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,11 +10,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class SocietyM_RegistrationPage extends AppCompatActivity {
 
     Button signup;
+    FirebaseAuth mAuth;
     EditText scode,sname,semail,smobile,spassword,scpasword;
     boolean isAllFieldsChecked = false;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,16 +37,40 @@ public class SocietyM_RegistrationPage extends AppCompatActivity {
         spassword = findViewById(R.id.spassword);
         scpasword = findViewById(R.id.sconfirmpassword);
         signup = findViewById(R.id.ssignup);
+        mAuth = FirebaseAuth.getInstance();
+
 
 
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View v) {
+                String Email = String.valueOf(semail.getText());
+                String Password = String.valueOf(spassword.getText());
+
                 isAllFieldsChecked = CheckAllFields();
                 if (isAllFieldsChecked) {
-                    Intent i = new Intent(SocietyM_RegistrationPage.this,SocietyM_HomePage.class);
-                    startActivity(i);
+                    mAuth.createUserWithEmailAndPassword(Email, Password)
+                            .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+
+                                        Toast.makeText(SocietyM_RegistrationPage.this, "Account Created",
+                                                Toast.LENGTH_SHORT).show();
+//                                        Intent i = new Intent(SocietyM_RegistrationPage.this,SocietyM_HomePage.class);
+//                                        startActivity(i);
+
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Toast.makeText(SocietyM_RegistrationPage.this, "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
+
+                                    }
+                                }
+                            });
+
                 }
             }
         });
@@ -85,4 +119,16 @@ public class SocietyM_RegistrationPage extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser CurrentUser = mAuth.getCurrentUser();
+        if(CurrentUser != null){
+            Intent intent = new Intent(getApplicationContext(),SocietyM_HomePage.class);
+            startActivity(intent);
+            finish();
+        }
     }
+
+}
