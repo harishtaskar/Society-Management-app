@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SocietyM_AddFlat">
+
+    <Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:id="@+id/toolbar1"
+        android:gravity="center"
+        android:elevation="4dp"
+        android:paddingLeft="20dp"
+        android:background="#BEDFFA"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        tools:targetApi="lollipop">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add flat"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textColor="@color/black"/>
+
+        <ImageView
+            android:id="@+id/Btn_Flat_Back"
+            android:layout_width="50dp"
+            android:background="#BEDFFA"
+            android:layout_height="56dp"
+            android:padding="@dimen/_8sdp"
+            android:layout_gravity="left"
+            android:src="@drawable/baseline_arrow_back_24"/>
+    </Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/_15sdp"
+        android:paddingEnd="@dimen/_15sdp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/flat_no"
+            android:layout_marginTop="@dimen/_16sdp"
+            app:hintTextColor="#404040"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Society_AddFlat_flat_no"
+                android:inputType="numberDecimal"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/massage"
+            android:layout_marginTop="@dimen/_10sdp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="top"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:hint="Name"
+                android:id="@+id/Society_AddFlat_Name"
+                android:overScrollMode="always"
+                android:scrollbarStyle="insideInset"
+                android:scrollHorizontally="false"
+                android:scrollbars="vertical"
+                android:inputType="text"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mobile"
+            android:layout_marginTop="@dimen/_15sdp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Society_AddFlat_Mobile"
+                android:inputType="numberDecimal"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/_10sdp">
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Society_AddFlat_RG_Status"
+                android:orientation="vertical">
+                <RadioButton
+                    android:id="@+id/Flat_Owner"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/black"
+                    android:shadowRadius="@integer/material_motion_duration_long_1"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_gravity="left"
+                    android:textSize="@dimen/_10sdp"
+                    android:text=" Falt_Owner" />
+
+                <RadioButton
+                    android:id="@+id/Rented_Flat"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/black"
+                    android:shadowRadius="@integer/material_motion_duration_long_1"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_gravity="left"
+                    android:textSize="@dimen/_10sdp"
+                    android:text=" Rented Flat" />
+
+                <RadioButton
+                    android:id="@+id/Rented_with_Others"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/black"
+                    android:shadowRadius="@integer/material_motion_duration_long_1"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_gravity="left"
+                    android:textSize="@dimen/_10sdp"
+                    android:text=" Rent With Other Flatmates" />
+            </RadioGroup>
+        </LinearLayout>
+        <Button
+            android:id="@+id/Btn_Add_Flat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_gravity="right"
+            android:paddingTop="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text="Add flat"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"/>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

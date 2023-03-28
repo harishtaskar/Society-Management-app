@@ -15,6 +15,21 @@
         android:theme="@style/Theme.NewGenSociety"
         tools:targetApi="31">
         <activity
+            android:name=".SocietyM_AddFlat"
+            android:exported="false" />
+        <activity
+            android:name=".SocietyM_showAddFlat"
+            android:exported="false" />
+        <activity
+            android:name=".SocietyM_EditProfile"
+            android:exported="false" />
+        <activity
+            android:name=".SocietyM_showMaintenance"
+            android:exported="false" />
+        <activity
+            android:name=".CommitteeM_EditProfile"
+            android:exported="false" />
+        <activity
             android:name=".CommitteeM_showHelp"
             android:exported="false" />
         <activity
@@ -43,25 +58,25 @@
             android:name=".SocietyM_RegistrationPage"
             android:exported="false" />
         <activity
-            android:name=".Committee_show_Meetings"
+            android:name=".CommitteeM_show_Meetings"
             android:exported="false" />
         <activity
             android:name=".CommitteeM_MeetingsPage"
             android:exported="false" />
         <activity
-            android:name=".Committee_show_maintainance"
+            android:name=".CommitteeM_show_maintainance"
             android:exported="false" />
         <activity
             android:name=".CommitteeM_MaintenancePage"
             android:exported="false" />
         <activity
-            android:name=".Committee_NoticePubllishing_Page"
+            android:name=".CommitteeM_NoticePubllishing_Page"
             android:exported="false" />
         <activity
             android:name=".CommitteeM_HomePage"
             android:exported="false" />
         <activity
-            android:name=".committee_registration_page"
+            android:name=".committeeM_registration_page"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -75,7 +90,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Committee_LoginPage"
+            android:name=".CommitteeM_LoginPage"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"

@@ -11,15 +11,23 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SocietyM_RegistrationPage extends AppCompatActivity {
 
     Button signup;
     FirebaseAuth mAuth;
+    FirebaseFirestore db;
     EditText scode,sname,semail,smobile,spassword,scpasword;
     boolean isAllFieldsChecked = false;
 
@@ -38,7 +46,7 @@ public class SocietyM_RegistrationPage extends AppCompatActivity {
         scpasword = findViewById(R.id.sconfirmpassword);
         signup = findViewById(R.id.ssignup);
         mAuth = FirebaseAuth.getInstance();
-
+        db = FirebaseFirestore.getInstance();
 
 
 
@@ -46,11 +54,50 @@ public class SocietyM_RegistrationPage extends AppCompatActivity {
             @Override
 
             public void onClick(View v) {
+
                 String Email = String.valueOf(semail.getText());
                 String Password = String.valueOf(spassword.getText());
+                String Society_code = String.valueOf(scode.getText());
+                String Name = String.valueOf(sname.getText());
+                String Mobile = String.valueOf(smobile.getText());
+                Boolean Status = true;
+                String status = "true";
+                Map<String,Object> s_member = new HashMap<>();
+                s_member.put("Society_code", Society_code);
+                s_member.put("Email", Email);
+                s_member.put("Password", Password);
+                s_member.put("Member_Name",Name);
+                s_member.put("Mobile",Mobile);
+                s_member.put("Status", Status);
+
+
 
                 isAllFieldsChecked = CheckAllFields();
                 if (isAllFieldsChecked) {
+
+                    db.collection("Society_Members")
+                            .add(s_member)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Toast.makeText(getApplicationContext(),"Successful", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(SocietyM_RegistrationPage.this, CommitteeM_LoginPage.class);
+                                    intent.putExtra("statusKey",status);
+                                    scode.setText("");
+                                    sname.setText("");
+                                    semail.setText("");
+                                    spassword.setText("");
+                                    scpasword.setText("");
+                                    smobile.setText("");
+
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getApplicationContext(),"Failed", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
                     mAuth.createUserWithEmailAndPassword(Email, Password)
                             .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -112,6 +159,10 @@ public class SocietyM_RegistrationPage extends AppCompatActivity {
             return false;
         } else if (scpasword.length() < 8) {
             scpasword.setError("Password must be minimum 8 characters");
+            return false;
+        }
+        if (!spassword.getText().toString().equals(scpasword.getText().toString())){
+            spassword.setError("Password not matched");
             return false;
         }
 

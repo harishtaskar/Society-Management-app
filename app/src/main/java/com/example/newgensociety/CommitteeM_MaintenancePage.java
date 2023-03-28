@@ -21,11 +21,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -155,7 +152,7 @@ public class CommitteeM_MaintenancePage extends AppCompatActivity {
         Maintainance_Status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CommitteeM_MaintenancePage.this,Committee_show_maintainance.class);
+                Intent intent = new Intent(CommitteeM_MaintenancePage.this, CommitteeM_show_maintainance.class);
                 startActivity(intent);
             }
         });

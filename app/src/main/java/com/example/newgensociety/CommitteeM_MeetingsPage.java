@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -24,7 +23,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -88,7 +86,7 @@ public class CommitteeM_MeetingsPage extends AppCompatActivity {
         Meetings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CommitteeM_MeetingsPage.this,Committee_show_Meetings.class);
+                Intent intent = new Intent(CommitteeM_MeetingsPage.this, CommitteeM_show_Meetings.class);
                 startActivity(intent);
             }
         });

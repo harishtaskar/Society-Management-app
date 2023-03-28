@@ -7,8 +7,6 @@
     android:background="@drawable/background5"
     tools:context=".CommitteeM_HomePage">
 
-
-
 <!--    Profile-->
     <RelativeLayout
         android:id="@+id/profile"

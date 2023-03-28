@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
@@ -32,8 +33,8 @@ public class SocietyM_HomePage extends AppCompatActivity {
     ArrayList<Notice> NoticeArrayList;
     myRecycleVA_Society_Notice myAdapter;
     FirebaseFirestore db;
-
-    CardView complain,maintenance,help,meeting,noticeboard;
+    Button EditProfile;
+    CardView complain,maintenance,help,meeting,noticeboard,profileHelp,Addflat;
     RelativeLayout profile,home,notice;
 
     @Override
@@ -46,6 +47,9 @@ public class SocietyM_HomePage extends AppCompatActivity {
         help = findViewById(R.id.Society_Help);
         meeting = findViewById(R.id.Society_Meeting);
         noticeboard = findViewById(R.id.Society_Notice);
+        EditProfile = findViewById(R.id.Society_profile_edit_button);
+        profileHelp = findViewById(R.id.Society_profile_help);
+        Addflat = findViewById(R.id.Society_AddFlat);
 
         bottomNavigation = findViewById(R.id.bottomNavigation);
         profile = findViewById(R.id.profile);
@@ -156,6 +160,23 @@ public class SocietyM_HomePage extends AppCompatActivity {
                 return null;
             }
         });
+
+        EditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SocietyM_HomePage.this,SocietyM_EditProfile.class);
+                startActivity(intent);
+            }
+        });
+        profileHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SocietyM_HomePage.this,SocietyM_HelpPage.class);
+                startActivity(intent);
+            }
+        });
+
+
         complain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,8 +198,8 @@ public class SocietyM_HomePage extends AppCompatActivity {
         maintenance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent  = new Intent(smember_homepage.this,help.class);
-//                startActivity(intent);
+                Intent intent  = new Intent(SocietyM_HomePage.this,SocietyM_showMaintenance.class);
+                startActivity(intent);
             }
         });
 
@@ -187,6 +208,14 @@ public class SocietyM_HomePage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SocietyM_HomePage.this,SocietyM_Meetings_ShowPage.class);
                 startActivity(intent);
+            }
+        });
+
+        Addflat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SocietyM_HomePage.this,SocietyM_showAddFlat.class);
+                  startActivity(intent);
             }
         });
 

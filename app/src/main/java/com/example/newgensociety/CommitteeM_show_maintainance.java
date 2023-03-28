@@ -5,14 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -22,10 +17,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class Committee_show_maintainance extends AppCompatActivity {
+public class CommitteeM_show_maintainance extends AppCompatActivity {
 
     FirebaseFirestore db;
-
     ArrayList<Maintenance> maintenanceArrayList;
     myRecycleVA_Maintenance myMRVAdapter;
     RecyclerView recyclerView;
@@ -39,7 +33,7 @@ public class Committee_show_maintainance extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         db = FirebaseFirestore.getInstance();
         maintenanceArrayList = new ArrayList<Maintenance>();
-        myMRVAdapter = new myRecycleVA_Maintenance(Committee_show_maintainance.this,maintenanceArrayList);
+        myMRVAdapter = new myRecycleVA_Maintenance(CommitteeM_show_maintainance.this,maintenanceArrayList);
         recyclerView.setAdapter(myMRVAdapter);
 
         EventChangeListener();

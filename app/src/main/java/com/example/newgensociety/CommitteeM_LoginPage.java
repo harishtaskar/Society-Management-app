@@ -1,6 +1,7 @@
 package com.example.newgensociety;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -18,27 +19,28 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
-public class Committee_LoginPage extends AppCompatActivity {
+import java.util.Objects;
+
+public class CommitteeM_LoginPage extends AppCompatActivity {
 
     EditText emailogin;
     EditText passwordlogin;
     Button loginButton;
     FirebaseAuth mAuth;
+    FirebaseFirestore db;
+    String Userid, status;
     ProgressBar progressBar;
+    String SocietyM_Status;
     TextView signup;
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent intent = new Intent(getApplicationContext(),CommitteeM_HomePage.class);
-            startActivity(intent);
-            finish();
-        }
-    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,23 @@ public class Committee_LoginPage extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
         progressBar = findViewById(R.id.Progressbar);
         signup = findViewById(R.id.signupText);
+        db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+
+        Intent intent = getIntent();
+        status = intent.getStringExtra("statusKey");
+
+        Userid = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+
+        DocumentReference documentReference = db.collection("Society_Member").document(Userid);
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                assert value != null;
+                SocietyM_Status = value.getString("Status");
+            }
+        });
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,11 +78,11 @@ public class Committee_LoginPage extends AppCompatActivity {
                 password = String.valueOf(passwordlogin.getText());
 
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(Committee_LoginPage.this, "Enter Email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CommitteeM_LoginPage.this, "Enter Email", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(Committee_LoginPage.this, "Enter Password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CommitteeM_LoginPage.this, "Enter Password", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -79,7 +98,7 @@ public class Committee_LoginPage extends AppCompatActivity {
                                     finish();
                                 } else {
 
-                                    Toast.makeText(Committee_LoginPage.this, "Authentication failed.",
+                                    Toast.makeText(CommitteeM_LoginPage.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -90,10 +109,29 @@ public class Committee_LoginPage extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Committee_LoginPage.this,committee_registration_page.class);
+                Intent intent = new Intent(CommitteeM_LoginPage.this, committeeM_registration_page.class);
                 startActivity(intent);
                 finish();
             }
         });
+
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            if(status.equals("true")){
+                Intent intent = new Intent(getApplicationContext(), CommitteeM_show_Meetings.class);
+                startActivity(intent);
+            }else {
+                Intent intent = new Intent(getApplicationContext(), CommitteeM_HomePage.class);
+                startActivity(intent);
+                finish();
+            }
+        }
+    }
+
 }

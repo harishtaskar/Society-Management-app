@@ -180,7 +180,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_12sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_15sdp"
                             android:layout_gravity="left"
                             android:layout_marginLeft="@dimen/_15sdp"
                             android:text="Edit your profile"
@@ -195,7 +195,7 @@
                             android:paddingLeft="@dimen/_10sdp"
                             android:textSize="@dimen/_8sdp"
                             android:layout_marginRight="@dimen/_10sdp"
-                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginLeft="@dimen/_75sdp"
                             android:layout_gravity="right"
                             android:background="@drawable/custom_button"
                             android:text="Edit profile"/>
@@ -237,7 +237,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/Society_profile_visitor_notification"
+                android:id="@+id/Society_profile_help"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginLeft="@dimen/_10sdp"
                 app:cardCornerRadius="@dimen/_5sdp"

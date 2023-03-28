@@ -1,15 +1,11 @@
 package com.example.newgensociety;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.location.Address;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,19 +20,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AdditionalUserInfo;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class committee_registration_page extends AppCompatActivity {
+public class committeeM_registration_page extends AppCompatActivity {
 
     EditText Email, Password, ConPassword, SocietyName, Area, Location, PinCode, Country, CMemberName, Contact;
     Button btnRegister;
@@ -255,56 +249,56 @@ public class committee_registration_page extends AppCompatActivity {
                 conpassword = String.valueOf(ConPassword.getText());
 
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(committee_registration_page.this, "Enter Email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(committeeM_registration_page.this, "Enter Email", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(committee_registration_page.this, "Enter Password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(committeeM_registration_page.this, "Enter Password", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (!conpassword.equals(password)) {
-                    Toast.makeText(committee_registration_page.this, "Password Doesn't Matched", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(committeeM_registration_page.this, "Password Doesn't Matched", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (CMemberName.getText().toString().length()==0){
                     CMemberName.setError("Member name can't be Blank");
-                    Toast.makeText(committee_registration_page.this, "Member name can't be Blank", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(committeeM_registration_page.this, "Member name can't be Blank", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (SocietyName.getText().toString().length()==0){
                     SocietyName.setError("Society name can't be Blank");
-                    Toast.makeText(committee_registration_page.this, "Society name can't be Blank", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(committeeM_registration_page.this, "Society name can't be Blank", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (Area.getText().toString().length()==0){
                     Area.setError("Area name can't be Blank");
-                    Toast.makeText(committee_registration_page.this, "Area name can't be Blank", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(committeeM_registration_page.this, "Area name can't be Blank", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (Location.getText().toString().length()==0){
                     Location.setError("Location name can't be Blank");
-                    Toast.makeText(committee_registration_page.this, "Location name can't be Blank", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(committeeM_registration_page.this, "Location name can't be Blank", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(PinCode.getText().toString().length()<6 || PinCode.getText().toString().length()>6){
                     PinCode.setError("Pin-Code Must be 6 Digit");
-                    Toast.makeText(committee_registration_page.this, "Pin-Code Must be 6 Digit", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(committeeM_registration_page.this, "Pin-Code Must be 6 Digit", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(Contact.getText().toString().length()<10 || Contact.getText().toString().length()>10){
                     Contact.setError("Contact is not Valid");
-                    Toast.makeText(committee_registration_page.this, "Contact is not Valid", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(committeeM_registration_page.this, "Contact is not Valid", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(selectedState.equals("Select Your State")){
                     tvState.setError("Select State");
-                    Toast.makeText(committee_registration_page.this, "Select State", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(committeeM_registration_page.this, "Select State", Toast.LENGTH_SHORT).show();
                     stateSpinner.requestFocus();
                     return;
                 }
                 if(selectedCity.equals("Select Your District")){
                     tvCity.setError("Select District");
-                    Toast.makeText(committee_registration_page.this, "Contact is not Valid", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(committeeM_registration_page.this, "Contact is not Valid", Toast.LENGTH_SHORT).show();
                     citySpinner.requestFocus();
                     return;
                 }
@@ -319,7 +313,6 @@ public class committee_registration_page extends AppCompatActivity {
                 String cMemberName = CMemberName.getText().toString();
                 String contact = Contact.getText().toString();
                 Integer cm_id = Integer.parseInt(String.valueOf(Cm_id));
-
 
                 Map<String,Object> cm_member = new HashMap<>();
                 cm_member.put("Society_name", societyName);
@@ -339,7 +332,7 @@ public class committee_registration_page extends AppCompatActivity {
                                                 String cMemberName = CMemberName.getText().toString();
                                                 String email = Email.getText().toString();
 
-                                                Intent intent = new Intent(committee_registration_page.this,CommitteeM_HomePage.class);
+                                                Intent intent = new Intent(committeeM_registration_page.this,CommitteeM_HomePage.class);
                                                 intent.putExtra("key_cm_email", email);
                                                 intent.putExtra("key_cm_name", cMemberName);
                                                 Cm_id++;
@@ -361,12 +354,12 @@ public class committee_registration_page extends AppCompatActivity {
                                 progressbar.setVisibility(view.GONE);
                                 if (task.isSuccessful()) {
 
-                                    Toast.makeText(committee_registration_page.this, "Account Created",
+                                    Toast.makeText(committeeM_registration_page.this, "Account Created",
                                             Toast.LENGTH_SHORT).show();
 
                                 } else {
                                     // If sign in fails, display a message to the user.
-                                    Toast.makeText(committee_registration_page.this, "Authentication failed.",
+                                    Toast.makeText(committeeM_registration_page.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
 
                                 }
@@ -378,7 +371,7 @@ public class committee_registration_page extends AppCompatActivity {
         logintext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(committee_registration_page.this,Committee_LoginPage.class);
+                Intent intent = new Intent(committeeM_registration_page.this, CommitteeM_LoginPage.class);
                 startActivity(intent);
                 finish();
             }

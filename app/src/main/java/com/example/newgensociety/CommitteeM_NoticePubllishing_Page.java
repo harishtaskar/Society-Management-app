@@ -5,31 +5,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-
-import org.checkerframework.checker.units.qual.A;
 
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Committee_NoticePubllishing_Page extends AppCompatActivity {
+public class CommitteeM_NoticePubllishing_Page extends AppCompatActivity {
 
     EditText CM_name, Notice_Subject, Notice;
     ImageView Back;
@@ -51,7 +45,7 @@ public class Committee_NoticePubllishing_Page extends AppCompatActivity {
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Committee_NoticePubllishing_Page.this,CommitteeM_HomePage.class);
+                Intent intent = new Intent(CommitteeM_NoticePubllishing_Page.this,CommitteeM_HomePage.class);
                 startActivity(intent);
                 finish();
             }

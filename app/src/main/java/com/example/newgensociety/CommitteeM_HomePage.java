@@ -9,10 +9,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -47,7 +45,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
     ImageView commitee_img, NoticeBack, ProfileBack;
     CardView cardmain1,cardmain2,Society_meetings,Complains,Helps;
     TextView cm_name;
-
+    Button EditProfile;
     RecyclerView recyclerView;
     ArrayList<Notice> noticeArrayList;
     myRecycleViewAdapter myAdapter;
@@ -204,6 +202,14 @@ public class CommitteeM_HomePage extends AppCompatActivity {
             }
         });
 
+        cpeditbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CommitteeM_HomePage.this,CommitteeM_EditProfile.class);
+                startActivity(intent);
+            }
+        });
+
         bottomNavigation.setOnShowListener(new Function1<MeowBottomNavigation.Model, Unit>() {
             @Override
             public Unit invoke(MeowBottomNavigation.Model model) {
@@ -269,7 +275,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
         cardmain2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i  = new Intent(CommitteeM_HomePage.this,Committee_NoticePubllishing_Page.class);
+                Intent i  = new Intent(CommitteeM_HomePage.this, CommitteeM_NoticePubllishing_Page.class);
                 startActivity(i);
             }
         });
