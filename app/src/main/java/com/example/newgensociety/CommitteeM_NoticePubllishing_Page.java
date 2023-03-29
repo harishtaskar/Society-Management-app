@@ -11,8 +11,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -102,20 +104,19 @@ public class CommitteeM_NoticePubllishing_Page extends AppCompatActivity {
                             }
                         });
 
-                //Firebase Realtime database
-//                Notice notice1 = new Notice(cm_name, subject, notice);
-//
-//                db = FirebaseDatabase.getInstance("https://new-generation-society-default-rtdb.asia-southeast1.firebasedatabase.app/");
-//                rootDatabaseRef = db.getReference("Notice");
-//                rootDatabaseRef.child(subject).setValue(notice1).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        CM_name.setText("");
-//                        Notice_Subject.setText("");
-//                        Notice.setText("");
-//                        Toast.makeText(getApplicationContext(),"Successfully Published", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
+                Notice notice1 = new Notice(cm_name, subject, notice, date);
+
+                db = FirebaseDatabase.getInstance("https://new-generation-society-default-rtdb.asia-southeast1.firebasedatabase.app/");
+                rootDatabaseRef = db.getReference("Notice");
+                rootDatabaseRef.child(subject).setValue(notice1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        CM_name.setText("");
+                        Notice_Subject.setText("");
+                        Notice.setText("");
+                        Toast.makeText(getApplicationContext(),"Successfully Published", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             }
         });

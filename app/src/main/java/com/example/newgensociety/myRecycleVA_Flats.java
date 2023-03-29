@@ -32,11 +32,13 @@ public class myRecycleVA_Flats extends RecyclerView.Adapter<myRecycleVA_Flats.My
     public void onBindViewHolder(@NonNull myRecycleVA_Flats.MyViewHolder2 holder, int position) {
         Flats flats = flatsArrayList.get(position);
 
-        holder.Name.setText("Name : "+flats.getName());
-        holder.Flat_no.setText("Flat Number : "+String.valueOf(flats.getFlat_No()));
-        holder.Mobile.setText("Mobile : "+flats.getMobile());
-        holder.Status.setText(flats.getStatus());
-        holder.Date.setText(flats.getDate());
+
+        holder.flat_no.setText("Flat Number : "+String.valueOf(flats.getFlat_no()));
+        holder.name.setText("Name : "+flats.getName());
+        holder.mobile.setText("Mobile : "+flats.getMobile());
+        holder.date.setText(flats.getDate());
+        holder.status.setText(flats.getStatus());
+
 
     }
 
@@ -46,16 +48,16 @@ public class myRecycleVA_Flats extends RecyclerView.Adapter<myRecycleVA_Flats.My
     }
     public static class MyViewHolder2 extends RecyclerView.ViewHolder{
 
-        TextView Name, Flat_no, Date, Mobile, Status;
+        TextView name, flat_no, date, mobile, status;
 
 
         public MyViewHolder2(@NonNull View itemView) {
             super(itemView);
-            Name = itemView.findViewById(R.id.Society_Flats_RecycleView_Name);
-            Flat_no = itemView.findViewById(R.id.Society_Flats_RecycleView_FlatNumber);
-            Date = itemView.findViewById(R.id.Society_Flats_RecycleView_date);
-            Mobile = itemView.findViewById(R.id.Society_Flats_RecycleView_Mobile);
-            Status = itemView.findViewById(R.id.Society_Flats_RecycleView_Status);
+            name = itemView.findViewById(R.id.Society_Flats_RecycleView_Name);
+            flat_no = itemView.findViewById(R.id.Society_Flats_RecycleView_FlatNumber);
+            date = itemView.findViewById(R.id.Society_Flats_RecycleView_date);
+            mobile = itemView.findViewById(R.id.Society_Flats_RecycleView_Mobile);
+            status = itemView.findViewById(R.id.Society_Flats_RecycleView_Status);
 
         }
     }

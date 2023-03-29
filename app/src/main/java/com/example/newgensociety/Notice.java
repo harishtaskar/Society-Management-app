@@ -13,8 +13,6 @@ public class Notice {
                 this.date = date;
         }
 
-
-
         public String getCm_name() {
                 return cm_name;
         }

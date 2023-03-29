@@ -17,6 +17,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -28,6 +30,8 @@ public class SocietyM_RegistrationPage extends AppCompatActivity {
     Button signup;
     FirebaseAuth mAuth;
     FirebaseFirestore db;
+    FirebaseDatabase dbf;
+    DatabaseReference rootDatabaseRef;
     EditText scode,sname,semail,smobile,spassword,scpasword;
     boolean isAllFieldsChecked = false;
 
@@ -75,6 +79,7 @@ public class SocietyM_RegistrationPage extends AppCompatActivity {
                 isAllFieldsChecked = CheckAllFields();
                 if (isAllFieldsChecked) {
 
+                    //Firebase FireStore
                     db.collection("Society_Members")
                             .add(s_member)
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -98,6 +103,22 @@ public class SocietyM_RegistrationPage extends AppCompatActivity {
                                 }
                             });
 
+
+                    //Realtime Database
+                    boolean SM_status = true;
+
+                    S_Member sMember = new S_Member(Name, Mobile, Email, Password, SM_status);
+
+                    dbf = FirebaseDatabase.getInstance("https://new-generation-society-default-rtdb.asia-southeast1.firebasedatabase.app/");
+                    rootDatabaseRef = dbf.getReference("S_member");
+                    rootDatabaseRef.child(Mobile).setValue(sMember).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+
+                    //Authentication
                     mAuth.createUserWithEmailAndPassword(Email, Password)
                             .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
                                 @Override

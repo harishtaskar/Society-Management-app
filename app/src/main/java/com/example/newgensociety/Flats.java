@@ -3,59 +3,56 @@ package com.example.newgensociety;
 import android.content.Intent;
 
 public class Flats {
-
     public Flats() {
     }
-    int Flat_No;
-    String Name, Mobile, Date, Status;
-
-
+    int flat_no;
+    String name, mobile, date, status;
 
     public Flats(int flat_No, String name, String mobile, String date, String status) {
-        Flat_No = flat_No;
-        Name = name;
-        Mobile = mobile;
-        Date = date;
-        Status = status;
+        flat_no = flat_No;
+        name = name;
+        mobile = mobile;
+        date = date;
+        status = status;
     }
 
-    public int getFlat_No() {
-        return Flat_No;
+    public int getFlat_no() {
+        return flat_no;
     }
 
-    public void setFlat_No(int flat_No) {
-        Flat_No = flat_No;
+    public void setFlat_no(int flat_no) {
+        this.flat_no = flat_no;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getMobile() {
-        return Mobile;
+        return mobile;
     }
 
     public void setMobile(String mobile) {
-        Mobile = mobile;
+        this.mobile = mobile;
     }
 
     public String getDate() {
-        return Date;
+        return date;
     }
 
     public void setDate(String date) {
-        Date = date;
+        this.date = date;
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.status = status;
     }
 }

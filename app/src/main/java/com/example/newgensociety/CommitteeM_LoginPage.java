@@ -36,7 +36,7 @@ public class CommitteeM_LoginPage extends AppCompatActivity {
     FirebaseFirestore db;
     String Userid, status;
     ProgressBar progressBar;
-    String SocietyM_Status;
+    boolean SocietyM_Status = false;
     TextView signup;
 
 
@@ -55,19 +55,10 @@ public class CommitteeM_LoginPage extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
-        Intent intent = getIntent();
-        status = intent.getStringExtra("statusKey");
+//        Intent intent = getIntent();
+//        status = intent.getStringExtra("statusKey");
 
-        Userid = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
-        DocumentReference documentReference = db.collection("Society_Member").document(Userid);
-        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                assert value != null;
-                SocietyM_Status = value.getString("Status");
-            }
-        });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,14 +114,26 @@ public class CommitteeM_LoginPage extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            if(status.equals("true")){
-                Intent intent = new Intent(getApplicationContext(), CommitteeM_show_Meetings.class);
+            Userid = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+
+            DocumentReference documentReference = db.collection("S_Member").document(Userid);
+            documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                    assert value != null;
+                    SocietyM_Status = Boolean.TRUE.equals(value.getBoolean("sm_Status"));
+                }
+            });
+
+            if(!SocietyM_Status){
+                Intent intent = new Intent(getApplicationContext(),Exaption.class);
                 startActivity(intent);
             }else {
                 Intent intent = new Intent(getApplicationContext(), CommitteeM_HomePage.class);
                 startActivity(intent);
                 finish();
             }
+
         }
     }
 

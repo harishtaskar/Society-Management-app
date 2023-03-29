@@ -31,7 +31,7 @@
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold"
-                android:text="Flat No : "
+                android:text=""
                 android:textColor="#151515"
                 >
             </TextView>

@@ -15,8 +15,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -33,10 +37,13 @@ public class SocietyM_AddFlat extends AppCompatActivity {
     int year, month, day;
     String DueDateString;
     FirebaseFirestore db;
+    FirebaseDatabase dbf;
 
     RadioButton Flat_Owner, RentedFlat, Rented_Others;
     Button AddFlat;
     ImageView Back;
+    DatabaseReference rootDatabaseRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +100,7 @@ public class SocietyM_AddFlat extends AppCompatActivity {
                 }
 
 
-                String flatno = Flat_No.getText().toString();
+                Integer flatno = Integer.parseInt(Flat_No.getText().toString());
                 String mobile = MobileN.getText().toString();
                 String duedate = DueDateString;
                 String name = Name.getText().toString();
@@ -123,6 +130,19 @@ public class SocietyM_AddFlat extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(),"Failed", Toast.LENGTH_SHORT).show();
                             }
                         });
+
+                //Realtime Database
+                Flats flats = new Flats(flatno, name, mobile, duedate, status);
+
+                dbf = FirebaseDatabase.getInstance("https://new-generation-society-default-rtdb.asia-southeast1.firebasedatabase.app/");
+                rootDatabaseRef = dbf.getReference("Flats");
+                rootDatabaseRef.child(String.valueOf(flatno)).setValue(flats).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                    }
+                });
+
             }
         });
 
