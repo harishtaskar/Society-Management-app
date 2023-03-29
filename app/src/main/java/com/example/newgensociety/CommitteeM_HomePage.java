@@ -42,10 +42,9 @@ public class CommitteeM_HomePage extends AppCompatActivity {
     RelativeLayout profile,home,notice;
 
 //    home page
-    ImageView commitee_img, NoticeBack, ProfileBack;
+    ImageView commitee_img;
     CardView cardmain1,cardmain2,Society_meetings,Complains,Helps;
     TextView cm_name;
-    Button EditProfile;
     RecyclerView recyclerView;
     ArrayList<Notice> noticeArrayList;
     myRecycleViewAdapter myAdapter;
@@ -57,7 +56,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
     Button cpeditbtn;
     CardView addfalt,visitor;
     ImageView cpmemberimage;
-    String S_name;
+    String S_name, Address, CM_Name, C_Email;
 
 
 
@@ -68,8 +67,6 @@ public class CommitteeM_HomePage extends AppCompatActivity {
         setContentView(R.layout.activity_committee_mhome_page);
 //        getSupportActionBar().hide();
         commitee_img = findViewById(R.id.commitee_dua_maintainance_img);
-        NoticeBack = findViewById(R.id.Notices_btnback);
-        ProfileBack = findViewById(R.id.profile_btnback);
         cardmain1 = findViewById(R.id.add1);
         cardmain2 = findViewById(R.id.add2);
         Society_meetings = findViewById(R.id.Society_Meetings);
@@ -118,21 +115,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
         cm_name.setText("Hi, "+CM_name);
         cpmemberemail.setText(CM_Email);
 
-        NoticeBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CommitteeM_HomePage.this,MainActivity.class);
-                startActivity(intent);
-            }
-        });
 
-        ProfileBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CommitteeM_HomePage.this,MainActivity.class);
-                startActivity(intent);
-            }
-        });
 
 
         db = FirebaseFirestore.getInstance();
@@ -153,6 +136,14 @@ public class CommitteeM_HomePage extends AppCompatActivity {
                                                     for ( QueryDocumentSnapshot document : task.getResult()){
                                                         Log.d(TAG, document.getId()+ "=>"+ document.getData());
                                                         S_name = Objects.requireNonNull(document.get("Society_name")).toString();
+                                                        cpsocietyname.setText(S_name);
+                                                        Address = Objects.requireNonNull(document.get("Address")).toString();
+                                                        cpsocietyaddress.setText(Address);
+                                                        CM_Name = Objects.requireNonNull(document.get("Cm_name")).toString();
+                                                        cpmembername.setText(CM_Name);
+                                                        cm_name.setText("Hi, "+CM_Name);
+                                                        C_Email = Objects.requireNonNull(document.get("Cm_email")).toString();
+                                                        cpmemberemail.setText(C_Email);
                                                     }
 
 
@@ -163,6 +154,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
 
                                             }
                                         });
+
 
         bottomNavigation.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {
             @Override

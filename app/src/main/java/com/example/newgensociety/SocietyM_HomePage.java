@@ -2,18 +2,25 @@ package com.example.newgensociety;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextClock;
+import android.widget.TextView;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -34,8 +41,13 @@ public class SocietyM_HomePage extends AppCompatActivity {
     myRecycleVA_Society_Notice myAdapter;
     FirebaseFirestore db;
     Button EditProfile;
-    CardView complain,maintenance,help,meeting,noticeboard,profileHelp,Addflat;
+    CardView complain,maintenance,help,meeting,noticeboard,profileHelp,Addflat,Addflatp;
+    TextView logout;
     RelativeLayout profile,home,notice;
+    FirebaseAuth mAuth;
+
+    private DatabaseReference mDatabase;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +62,9 @@ public class SocietyM_HomePage extends AppCompatActivity {
         EditProfile = findViewById(R.id.Society_profile_edit_button);
         profileHelp = findViewById(R.id.Society_profile_help);
         Addflat = findViewById(R.id.Society_AddFlat);
+        Addflatp = findViewById(R.id.SocietyM_profile_add_flat);
+        logout = findViewById(R.id.SocietyM_profile_logout);
+        mAuth = FirebaseAuth.getInstance();
 
         bottomNavigation = findViewById(R.id.bottomNavigation);
         profile = findViewById(R.id.profile);
@@ -65,11 +80,14 @@ public class SocietyM_HomePage extends AppCompatActivity {
         bottomNavigation.add(new MeowBottomNavigation.Model(3,R.drawable.notice));
 
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         db = FirebaseFirestore.getInstance();
         NoticeArrayList = new ArrayList<Notice>();
         myAdapter = new myRecycleVA_Society_Notice(SocietyM_HomePage.this,NoticeArrayList);
         recyclerView.setAdapter(myAdapter);
         EventChangeListener();
+
+
 
         bottomNavigation.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {
             @Override
@@ -175,6 +193,23 @@ public class SocietyM_HomePage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Addflatp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SocietyM_HomePage.this,SocietyM_AddFlat.class);
+                startActivity(intent);
+            }
+        });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+                Intent intent = new Intent(SocietyM_HomePage.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 
         complain.setOnClickListener(new View.OnClickListener() {

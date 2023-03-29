@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -16,10 +19,14 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class SocietyM_showMaintenance extends AppCompatActivity {
 
     FirebaseFirestore db;
+    String Userid;
+    long flat_no;
+    FirebaseAuth mAuth;
     ArrayList<Maintenance> maintenanceArrayList;
     myRecycleVA_SM_Maintenance myMRVAdapter;
     RecyclerView recyclerView;
@@ -31,6 +38,7 @@ public class SocietyM_showMaintenance extends AppCompatActivity {
         recyclerView = findViewById(R.id.Society_Maintenance_RecycleView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         maintenanceArrayList = new ArrayList<Maintenance>();
         myMRVAdapter = new myRecycleVA_SM_Maintenance(SocietyM_showMaintenance.this,maintenanceArrayList);
@@ -38,6 +46,19 @@ public class SocietyM_showMaintenance extends AppCompatActivity {
         EventChangeListener();
     }
     private void EventChangeListener() {
+
+        Userid = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+
+        DocumentReference documentReference = db.collection("Flats").document(Userid);
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                assert value != null;
+//                flat_no = value.getLong("flat_no");
+            }
+        });
+
+
         db.collection("Maintenance").whereEqualTo("flat_no","101")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override

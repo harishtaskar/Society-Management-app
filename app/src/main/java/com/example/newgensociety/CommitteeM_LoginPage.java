@@ -36,7 +36,7 @@ public class CommitteeM_LoginPage extends AppCompatActivity {
     FirebaseFirestore db;
     String Userid, status;
     ProgressBar progressBar;
-    boolean SocietyM_Status = false;
+    boolean SocietyM_Status;
     TextView signup;
 
 
@@ -114,6 +114,7 @@ public class CommitteeM_LoginPage extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
+
             Userid = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
             DocumentReference documentReference = db.collection("S_Member").document(Userid);
@@ -125,7 +126,7 @@ public class CommitteeM_LoginPage extends AppCompatActivity {
                 }
             });
 
-            if(!SocietyM_Status){
+            if(SocietyM_Status){
                 Intent intent = new Intent(getApplicationContext(),Exaption.class);
                 startActivity(intent);
             }else {

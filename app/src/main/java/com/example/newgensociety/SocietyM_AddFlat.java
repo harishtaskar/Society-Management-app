@@ -142,7 +142,6 @@ public class SocietyM_AddFlat extends AppCompatActivity {
 
                     }
                 });
-
             }
         });
 

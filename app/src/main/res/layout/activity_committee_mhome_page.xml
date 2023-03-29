@@ -35,14 +35,6 @@
                 android:layout_gravity="center"
                 android:textColor="@color/black"/>
 
-            <ImageView
-                android:id="@+id/profile_btnback"
-                android:layout_width="50dp"
-                android:background="#BEDFFA"
-                android:layout_height="56dp"
-                android:padding="@dimen/_8sdp"
-                android:layout_gravity="left"
-                android:src="@drawable/baseline_arrow_back_24"/>
         </Toolbar>
 
 
@@ -60,7 +52,7 @@
                 android:layout_marginRight="@dimen/_10sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_220sdp"
+                android:layout_height="wrap_content"
                 app:cardElevation="@dimen/_5sdp"
                 >
 
@@ -196,6 +188,7 @@
                             android:textSize="@dimen/_8sdp"
                             android:layout_marginRight="@dimen/_10sdp"
                             android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
                             android:layout_gravity="right"
                             android:background="@drawable/custom_button"
                             android:text="Edit profile"/>
@@ -384,7 +377,6 @@
                 android:id="@+id/Committee_Home_Cm_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hi, "
                 android:textSize="@dimen/_13sdp"
                 android:textStyle="bold"
                 android:layout_marginLeft="@dimen/_20sdp"
@@ -706,14 +698,7 @@
             android:layout_gravity="center"
             android:textColor="@color/black"/>
 
-            <ImageView
-                android:id="@+id/Notices_btnback"
-                android:layout_width="50dp"
-                android:background="#BEDFFA"
-                android:layout_height="56dp"
-                android:padding="@dimen/_8sdp"
-                android:layout_gravity="left"
-                android:src="@drawable/baseline_arrow_back_24"/>
+
         </Toolbar>
 
 
