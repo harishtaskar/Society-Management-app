@@ -46,19 +46,22 @@ public class SocityM_LoginPage extends AppCompatActivity {
         loginButton = findViewById(R.id.Society_loginButton);
         SignupText = findViewById(R.id.signupText);
 
-        String String_email = Email.getText().toString();
-        String String_password = password.getText().toString();
+
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                String String_email = String.valueOf(Email.getText());
+                String String_password = String.valueOf(password.getText());
+
                     mAuth.signInWithEmailAndPassword(String_email, String_password)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(getApplicationContext(),"Login Successfully", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(getApplicationContext(),SocityM_LoginPage.class);
+                                        Intent intent = new Intent(getApplicationContext(),SocietyM_HomePage.class);
                                         startActivity(intent);
                                         finish();
                                     } else {

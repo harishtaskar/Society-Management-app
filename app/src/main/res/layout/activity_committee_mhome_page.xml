@@ -230,7 +230,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/committee_profile_visiror_notification"
+                android:id="@+id/committee_profile_help"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginLeft="@dimen/_10sdp"
                 app:cardCornerRadius="@dimen/_5sdp"

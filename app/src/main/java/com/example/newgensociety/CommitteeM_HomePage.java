@@ -21,8 +21,12 @@ import android.widget.Toast;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -30,7 +34,10 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import kotlin.Unit;
@@ -43,12 +50,13 @@ public class CommitteeM_HomePage extends AppCompatActivity {
 
 //    home page
     ImageView commitee_img;
-    CardView cardmain1,cardmain2,Society_meetings,Complains,Helps;
+    CardView cardmain1,cardmain2,Society_meetings,Complains,Helps,Helps2;
     TextView cm_name;
     RecyclerView recyclerView;
     ArrayList<Notice> noticeArrayList;
     myRecycleViewAdapter myAdapter;
     FirebaseFirestore db;
+    FirebaseAuth mAuth;
 //    ProgressDialog progressDialog;
 
     //profile page
@@ -77,7 +85,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
         //profile page
         cpmemberimage = findViewById(R.id.committee_profile_img);
         addfalt = findViewById(R.id.committee_profile_add_flat);
-        visitor = findViewById(R.id.committee_profile_visiror_notification);
+        Helps2 = findViewById(R.id.committee_profile_help);
         addfalt = findViewById(R.id.committee_profile_add_flat);
         cpsocietyname = findViewById(R.id.committee_profile_society_name);
         cpsocietyaddress = findViewById(R.id.committee_profile_society_address);
@@ -90,12 +98,28 @@ public class CommitteeM_HomePage extends AppCompatActivity {
         cptermsorcondition = findViewById(R.id.committee_profile_terms_condition);
         cpversion = findViewById(R.id.committee_profile_version);
         cpeditbtn = findViewById(R.id.committee_profile_edit_button);
+        mAuth = FirebaseAuth.getInstance();
+        cplogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+                Intent intent = new Intent(CommitteeM_HomePage.this,MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        Helps2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CommitteeM_HomePage.this,CommitteeM_show_Meetings.class);
+                startActivity(intent);
+            }
+        });
 
 //        progressDialog = new ProgressDialog(this);
 //        progressDialog.setCancelable(false);
 //        progressDialog.setMessage("Fetching Data");
 //        progressDialog.show();
-
 
         recyclerView = findViewById(R.id.Committee_Notice_RecycleView);
         recyclerView.setHasFixedSize(true);
@@ -118,13 +142,24 @@ public class CommitteeM_HomePage extends AppCompatActivity {
 
 
 
-        db = FirebaseFirestore.getInstance();
+
         noticeArrayList = new ArrayList<Notice>();
         myAdapter = new myRecycleViewAdapter(CommitteeM_HomePage.this,noticeArrayList);
         recyclerView.setAdapter(myAdapter);
+        myAdapter.setOnItemClickListener(new myRecycleViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Notice notice = noticeArrayList.get(position);
+                noticeArrayList.remove(position);
+                myAdapter.notifyItemRemoved(position);
+                boolean removed = true;
+                String Code = notice.getNotice_code();
+                UpdateStatus(Code,removed);
+            }
+        });
         EventChangeListener();
 
-
+        db = FirebaseFirestore.getInstance();
         db.collection("C_Members")
                                 .get()
                                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -154,7 +189,6 @@ public class CommitteeM_HomePage extends AppCompatActivity {
 
                                             }
                                         });
-
 
         bottomNavigation.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {
             @Override
@@ -298,14 +332,48 @@ public class CommitteeM_HomePage extends AppCompatActivity {
 
     }
 
-    private void EventChangeListener() {
+    private void UpdateStatus(String Code, boolean removed) {
+        db = FirebaseFirestore.getInstance();
 
-        db.collection("Notice").orderBy("date", Query.Direction.DESCENDING)
+        Map<String,Object> notice_code = new HashMap<>();
+        notice_code.put("removed",removed);
+
+        db.collection("Notice")
+                .whereEqualTo("notice_code",Code)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful() && !task.getResult().isEmpty()){
+
+                            DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
+                            String documentID = documentSnapshot.getId();
+                            db.collection("Notice")
+                                    .document(documentID)
+                                    .update(notice_code)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                        }
+                                    });
+                        }
+                    }
+                });
+    }
+
+    private void EventChangeListener() {
+        db = FirebaseFirestore.getInstance();
+
+        db.collection("Notice").orderBy("date", Query.Direction.DESCENDING).whereEqualTo("removed",false)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (error != null){
-                    Log.e("Firestore Error",error.getMessage());
+                    Log.e("FireStore Error",error.getMessage());
                     return;
                 }
                 assert value != null;
@@ -313,9 +381,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
                     if(dc.getType() == DocumentChange.Type.ADDED){
                         noticeArrayList.add(dc.getDocument().toObject(Notice.class));
                     }
-
                     myAdapter.notifyDataSetChanged();
-
                 }
 
             }

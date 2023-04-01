@@ -24,6 +24,7 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class CommitteeM_NoticePubllishing_Page extends AppCompatActivity {
 
@@ -78,18 +79,33 @@ public class CommitteeM_NoticePubllishing_Page extends AppCompatActivity {
                 String date;
                 date = currentDate.toString();
 
+                int leftLimit = 97; // letter 'a'
+                int rightLimit = 122; // letter 'z'
+                int targetStringLength = 6;
+                Random random = new Random();
+                StringBuilder buffer = new StringBuilder(targetStringLength);
+                for (int i = 0; i < targetStringLength; i++) {
+                    int randomLimitedInt = leftLimit + (int)
+                            (random.nextFloat() * (rightLimit - leftLimit + 1));
+                    buffer.append((char) randomLimitedInt);
+                }
+                String generatedString = buffer.toString();
+
 
                 String dash = "~";
                 String cm_name = dash+CM_name.getText().toString();
                 String subject = Notice_Subject.getText().toString();
                 String notice = Notice.getText().toString();
-
+                boolean removed = false;
                 //Firebase FireStore
                 Map<String,Object> notices = new HashMap<>();
                 notices.put("cm_name",cm_name);
                 notices.put("subject",subject);
                 notices.put("notice",notice);
                 notices.put("date",date);
+                notices.put("removed",removed);
+                notices.put("notice_code",generatedString);
+
                 dbf.collection("Notice")
                         .add(notices)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -104,7 +120,7 @@ public class CommitteeM_NoticePubllishing_Page extends AppCompatActivity {
                             }
                         });
 
-                Notice notice1 = new Notice(cm_name, subject, notice, date);
+                Notice notice1 = new Notice(cm_name, subject, notice, date, generatedString, removed);
 
                 db = FirebaseDatabase.getInstance("https://new-generation-society-default-rtdb.asia-southeast1.firebasedatabase.app/");
                 rootDatabaseRef = db.getReference("Notice");

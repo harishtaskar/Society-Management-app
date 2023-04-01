@@ -1,16 +1,35 @@
 package com.example.newgensociety;
 
 public class Notice {
-        String cm_name, subject, notice, date;
+        String cm_name, subject, notice, date, notice_code;
+        boolean removed;
 
         public Notice() {
         }
 
-        public Notice(String cm_name, String subject, String notice, String date) {
+        public Notice(String cm_name, String subject, String notice, String date, String code, boolean removed) {
                 this.cm_name = cm_name;
                 this.subject = subject;
                 this.notice = notice;
                 this.date = date;
+                this.notice_code = code;
+                this.removed = removed;
+        }
+
+        public boolean isRemoved() {
+                return removed;
+        }
+
+        public void setRemoved(boolean removed) {
+                this.removed = removed;
+        }
+
+        public String getNotice_code() {
+                return notice_code;
+        }
+
+        public void setNotice_code(String notice_code) {
+                this.notice_code = notice_code;
         }
 
         public String getCm_name() {

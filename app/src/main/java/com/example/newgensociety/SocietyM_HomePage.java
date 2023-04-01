@@ -1,5 +1,8 @@
 package com.example.newgensociety;
 
+import static android.content.ContentValues.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
@@ -16,8 +19,11 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextClock;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -26,9 +32,11 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
@@ -42,7 +50,7 @@ public class SocietyM_HomePage extends AppCompatActivity {
     FirebaseFirestore db;
     Button EditProfile;
     CardView complain,maintenance,help,meeting,noticeboard,profileHelp,Addflat,Addflatp;
-    TextView logout;
+    TextView logout,SocietyM_name,SocietyM_email;
     RelativeLayout profile,home,notice;
     FirebaseAuth mAuth;
 
@@ -64,6 +72,8 @@ public class SocietyM_HomePage extends AppCompatActivity {
         Addflat = findViewById(R.id.Society_AddFlat);
         Addflatp = findViewById(R.id.SocietyM_profile_add_flat);
         logout = findViewById(R.id.SocietyM_profile_logout);
+        SocietyM_name = findViewById(R.id.SocietyM_profile_member_name);
+        SocietyM_email = findViewById(R.id.SocietyM_profile_member_email);
         mAuth = FirebaseAuth.getInstance();
 
         bottomNavigation = findViewById(R.id.bottomNavigation);
@@ -86,6 +96,32 @@ public class SocietyM_HomePage extends AppCompatActivity {
         myAdapter = new myRecycleVA_Society_Notice(SocietyM_HomePage.this,NoticeArrayList);
         recyclerView.setAdapter(myAdapter);
         EventChangeListener();
+
+
+        db.collection("Society_Members")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            Toast.makeText(SocietyM_HomePage.this, "Successful",
+                                    Toast.LENGTH_SHORT).show();
+                            for ( QueryDocumentSnapshot document : task.getResult()){
+                                Log.d(TAG, document.getId()+ "=>"+ document.getData());
+                                String SM_name = Objects.requireNonNull(document.get("Member_Name")).toString();
+                                SocietyM_name.setText(SM_name);
+                                String SM_Email = Objects.requireNonNull(document.get("Email")).toString();
+                                SocietyM_email.setText(SM_Email);
+                            }
+
+
+                        }else{
+                            Toast.makeText(SocietyM_HomePage.this, "Failed",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
 
 
 
@@ -260,7 +296,7 @@ public class SocietyM_HomePage extends AppCompatActivity {
 
     private void EventChangeListener() {
 
-        db.collection("Notice").orderBy("date", Query.Direction.DESCENDING)
+        db.collection("Notice").orderBy("date", Query.Direction.DESCENDING).whereEqualTo("removed",false)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
