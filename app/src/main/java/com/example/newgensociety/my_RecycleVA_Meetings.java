@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 
 public class my_RecycleVA_Meetings extends RecyclerView.Adapter<my_RecycleVA_Meetings.MyViewHolder2> {
@@ -18,6 +20,14 @@ public class my_RecycleVA_Meetings extends RecyclerView.Adapter<my_RecycleVA_Mee
 
     Context context;
     ArrayList<Meetings> meetingsArrayList;
+    private my_RecycleVA_Meetings.OnItemClickListener listener;
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(my_RecycleVA_Meetings.OnItemClickListener clickListener){
+        listener = clickListener;
+    }
 
     public my_RecycleVA_Meetings(Context context, ArrayList<Meetings> maintenanceArrayList) {
         this.context = context;
@@ -28,7 +38,7 @@ public class my_RecycleVA_Meetings extends RecyclerView.Adapter<my_RecycleVA_Mee
     @Override
     public my_RecycleVA_Meetings.MyViewHolder2 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.cm_meetings_recyle_layout,parent,false);
-        return new my_RecycleVA_Meetings.MyViewHolder2(v);
+        return new my_RecycleVA_Meetings.MyViewHolder2(v,listener);
     }
 
     @Override
@@ -40,6 +50,8 @@ public class my_RecycleVA_Meetings extends RecyclerView.Adapter<my_RecycleVA_Mee
         holder.date.setText("Date : "+meetings.getDate());
         holder.time.setText(meetings.getTime());
         holder.description.setText(meetings.getDescription());
+        holder.code.setText("Notice Code : "+meetings.getMeetingCode());
+        holder.removed = meetings.getRemoved();
 
     }
 
@@ -49,19 +61,28 @@ public class my_RecycleVA_Meetings extends RecyclerView.Adapter<my_RecycleVA_Mee
     }
     public static class MyViewHolder2 extends RecyclerView.ViewHolder{
 
-        TextView subject, no_of_members, date, time, description;
-        ImageView Back;
+        TextView subject, no_of_members, date, time, description, code;
+        ImageView delete;
+        boolean removed = true;
 
-        public MyViewHolder2(@NonNull View itemView) {
+        public MyViewHolder2(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             subject = itemView.findViewById(R.id.Committee_Meetings_Subject);
             no_of_members = itemView.findViewById(R.id.Committee_Meetings_No_of_Members);
             date = itemView.findViewById(R.id.Committee_Meetings_date);
             time = itemView.findViewById(R.id.Committee_Meetings_time);
             description = itemView.findViewById(R.id.Committee_Meetings_Description);
+            delete = itemView.findViewById(R.id.btn_delete);
+            code = itemView.findViewById(R.id.Committee_Meeting_RecycleView_code);
+            String Code = code.toString();
 
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(getAdapterPosition());
 
-
+                }
+            });
         }
     }
 

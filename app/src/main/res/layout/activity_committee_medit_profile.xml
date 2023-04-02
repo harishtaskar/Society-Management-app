@@ -53,7 +53,7 @@
             android:hint="Societyname">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/societyname"
+                android:id="@+id/Society_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text" />
@@ -70,7 +70,7 @@
             android:hint="Name">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/sname"
+                android:id="@+id/Cm_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text" />
@@ -88,7 +88,7 @@
             android:hint="Mobile">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/smobile"
+                android:id="@+id/Cm_mobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text" />
@@ -106,7 +106,7 @@
             android:hint="Email">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/semail"
+                android:id="@+id/Cm_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text" />
@@ -126,34 +126,16 @@
             android:hint="Password">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/spassword"
+                android:id="@+id/Cm_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:hint="confirm password">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/sconfirmpassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <Button
-            android:id="@+id/ssignup"
+            android:id="@+id/Cm_update"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             android:layout_gravity="center"
@@ -161,7 +143,7 @@
             android:layout_marginLeft="@dimen/_26sdp"
 
             android:layout_marginTop="@dimen/_20sdp"
-            android:text="Send">
+            android:text="Update">
 
         </Button>
 

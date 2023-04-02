@@ -36,7 +36,7 @@ public class CommitteeM_LoginPage extends AppCompatActivity {
     FirebaseFirestore db;
     String Userid, status;
     ProgressBar progressBar;
-    boolean SocietyM_Status;
+    boolean SocietyM_Status = false;
     TextView signup;
 
 
@@ -63,7 +63,7 @@ public class CommitteeM_LoginPage extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressBar.setVisibility(view.VISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
                 String email, password ;
                 email = String.valueOf(emailogin.getText());
                 password = String.valueOf(passwordlogin.getText());
@@ -116,25 +116,21 @@ public class CommitteeM_LoginPage extends AppCompatActivity {
         if (currentUser != null) {
 
             Userid = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
-
-            DocumentReference documentReference = db.collection("S_Member").document(Userid);
+            DocumentReference documentReference = db.collection("Users").document(Userid);
             documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
                 @Override
                 public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                     assert value != null;
-                    SocietyM_Status = Boolean.TRUE.equals(value.getBoolean("sm_Status"));
+                    SocietyM_Status = Boolean.TRUE.equals(value.getBoolean("isSociety"));
+                    Intent intent;
+                    if(SocietyM_Status){
+                        intent = new Intent(getApplicationContext(), Exaption.class);
+                    }else {
+                        intent = new Intent(getApplicationContext(), CommitteeM_HomePage.class);
+                    }
+                    startActivity(intent);
                 }
             });
-
-            if(SocietyM_Status){
-                Intent intent = new Intent(getApplicationContext(),Exaption.class);
-                startActivity(intent);
-            }else {
-                Intent intent = new Intent(getApplicationContext(), CommitteeM_HomePage.class);
-                startActivity(intent);
-                finish();
-            }
-
         }
     }
 

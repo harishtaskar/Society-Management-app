@@ -29,6 +29,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class committeeM_registration_page extends AppCompatActivity {
 
@@ -302,57 +303,104 @@ public class committeeM_registration_page extends AppCompatActivity {
                     citySpinner.requestFocus();
                     return;
                 }
-                String area = Area.getText().toString();
-                String location = Location.getText().toString();
-                String state = selectedState;
-                String city = selectedCity;
-                String pincode = PinCode.getText().toString();
-                String country = Country.getText().toString();
-                String Address = area+", "+location+", "+city+"-"+pincode+", "+state+", "+country;
-                String societyName = SocietyName.getText().toString();
-                String cMemberName = CMemberName.getText().toString();
-                String contact = Contact.getText().toString();
-                Integer cm_id = Integer.parseInt(String.valueOf(Cm_id));
-
-                Map<String,Object> cm_member = new HashMap<>();
-                cm_member.put("Society_name", societyName);
-                cm_member.put("Address", Address);
-                cm_member.put("Cm_name", cMemberName);
-                cm_member.put("Cm_email",email);
-                cm_member.put("Cm_password",password);
-                cm_member.put("cm_contact",contact);
-                cm_member.put("Cm_id", cm_id);
-
-                db.collection("C_Members")
-                                .add(cm_member)
-                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                            @Override
-                                            public void onSuccess(DocumentReference documentReference) {
-                                                Toast.makeText(getApplicationContext(),"Successful", Toast.LENGTH_SHORT).show();
-                                                String cMemberName = CMemberName.getText().toString();
-                                                String email = Email.getText().toString();
-
-                                                Intent intent = new Intent(committeeM_registration_page.this,CommitteeM_HomePage.class);
-                                                intent.putExtra("key_cm_email", email);
-                                                intent.putExtra("key_cm_name", cMemberName);
-                                                Cm_id++;
-                                            }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getApplicationContext(),"Failed", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-//                rootDatabaseRef = FirebaseDatabase.getInstance().getReference().child("CM_name");
-//                String CM_name = CMemberName.getText().toString();
-//                rootDatabaseRef.setValue(CM_name);
 
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
+
                                 progressbar.setVisibility(view.GONE);
                                 if (task.isSuccessful()) {
+                                    String userId = Objects.requireNonNull(task.getResult().getUser()).getUid();
+                                    boolean is_Society_M = false;
+                                    Map<String, Object> user = new HashMap<>();
+                                    user.put("userId", userId);
+                                    user.put("email", email);
+                                    user.put("isSociety", is_Society_M);
+
+                                    db.collection("Users").document(userId).set(user)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+
+                                                }
+                                            })
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    });
+
+
+//                                    db.collection("Users")
+//                                            .add(user)
+//                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                                                @Override
+//                                                public void onSuccess(DocumentReference documentReference) {
+//                                                    Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
+//                                                }
+//                                            }).addOnFailureListener(new OnFailureListener() {
+//                                                @Override
+//                                                public void onFailure(@NonNull Exception e) {
+//                                                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+//                                                }
+//                                            });
+                                    String area = Area.getText().toString();
+                                    String location = Location.getText().toString();
+                                    String state = selectedState;
+                                    String city = selectedCity;
+                                    String pincode = PinCode.getText().toString();
+                                    String country = Country.getText().toString();
+                                    String Address = area+", "+location+", "+city+"-"+pincode+", "+state+", "+country;
+                                    String societyName = SocietyName.getText().toString();
+                                    String cMemberName = CMemberName.getText().toString();
+                                    String contact = Contact.getText().toString();
+                                    Integer cm_id = Integer.parseInt(String.valueOf(Cm_id));
+
+                                    Map<String,Object> cm_member = new HashMap<>();
+                                    cm_member.put("Society_name", societyName);
+                                    cm_member.put("Address", Address);
+                                    cm_member.put("Cm_name", cMemberName);
+                                    cm_member.put("Cm_email",email);
+                                    cm_member.put("Cm_password",password);
+                                    cm_member.put("cm_contact",contact);
+                                    cm_member.put("Cm_id", cm_id);
+                                    cm_member.put("userId",userId);
+
+                                    db.collection("C_Members").document(userId)
+                                            .set(cm_member)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+
+                                                }
+                                            })
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    Toast.makeText(getApplicationContext(),"Successful", Toast.LENGTH_SHORT).show();
+                                                    String cMemberName = CMemberName.getText().toString();
+                                                    String email = Email.getText().toString();
+
+                                                    Intent intent = new Intent(committeeM_registration_page.this,CommitteeM_HomePage.class);
+                                                    intent.putExtra("key_cm_email", email);
+                                                    intent.putExtra("key_cm_name", cMemberName);
+                                                    Cm_id++;
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(getApplicationContext(),"Failed", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
 
                                     Toast.makeText(committeeM_registration_page.this, "Account Created",
                                             Toast.LENGTH_SHORT).show();
@@ -365,6 +413,15 @@ public class committeeM_registration_page extends AppCompatActivity {
                                 }
                             }
                         });
+
+
+
+
+//                rootDatabaseRef = FirebaseDatabase.getInstance().getReference().child("CM_name");
+//                String CM_name = CMemberName.getText().toString();
+//                rootDatabaseRef.setValue(CM_name);
+
+
             }
         });
 

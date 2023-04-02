@@ -333,7 +333,6 @@
                             android:paddingStart="10dp"
                             android:padding="10dp"
                             android:drawableLeft="@drawable/ic_baseline_person_24"
-                            android:inputType="text"
                             android:textColor="@color/black"
                             android:textColorHighlight="@color/cardview_dark_background"
                             android:layout_marginTop="40dp"

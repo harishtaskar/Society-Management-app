@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class CommitteeM_MeetingsPage extends AppCompatActivity {
 
@@ -127,12 +128,25 @@ public class CommitteeM_MeetingsPage extends AppCompatActivity {
                      status = "PM";
                 }
 
+                int leftLimit = 97; // letter 'a'
+                int rightLimit = 122; // letter 'z'
+                int targetStringLength = 6;
+                Random random = new Random();
+                StringBuilder buffer = new StringBuilder(targetStringLength);
+                for (int i = 0; i < targetStringLength; i++) {
+                    int randomLimitedInt = leftLimit + (int)
+                            (random.nextFloat() * (rightLimit - leftLimit + 1));
+                    buffer.append((char) randomLimitedInt);
+                }
+                String generatedString = buffer.toString();
+
 
                 String subject = Subject.getText().toString();
                 Integer no_of_Members = Integer.parseInt(No_of_Members.getText().toString());
                 String date = Date.getText().toString();
                 String time = Time.getText().toString();
                 String description = Description.getText().toString();
+                boolean removed = false;
 
                 Map<String,Object> meetings = new HashMap<>();
                 meetings.put("subject",subject);
@@ -140,6 +154,8 @@ public class CommitteeM_MeetingsPage extends AppCompatActivity {
                 meetings.put("date",date);
                 meetings.put("time",time+" "+status);
                 meetings.put("description",description);
+                meetings.put("meetingCode",generatedString);
+                meetings.put("removed",removed);
                 db = FirebaseFirestore.getInstance();
                 db.collection("Meetings")
                         .add(meetings)

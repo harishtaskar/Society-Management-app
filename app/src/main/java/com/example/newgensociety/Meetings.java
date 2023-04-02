@@ -3,19 +3,38 @@ package com.example.newgensociety;
 public class Meetings{
 
 
-    String Subject, date, time, description;
+    String Subject, date, time, description, meetingCode;
+    boolean removed;
     int no_of_members;
 
     public Meetings(){
 
     }
 
-    public Meetings(String subject, int no_of_members, String date, String time, String description) {
+    public Meetings(String subject, int no_of_members, String date, String time, String description, String meetingCode, boolean removed) {
         Subject = subject;
         this.date = date;
         this.time = time;
         this.description = description;
         this.no_of_members = no_of_members;
+        this.meetingCode = meetingCode;
+        this.removed = removed;
+    }
+
+    public String getMeetingCode() {
+        return meetingCode;
+    }
+
+    public void setMeetingCode(String meetingCode) {
+        this.meetingCode = meetingCode;
+    }
+
+    public boolean getRemoved() {
+        return removed;
+    }
+
+    public void setRemoved(boolean removed) {
+        this.removed = removed;
     }
 
     public String getSubject() {

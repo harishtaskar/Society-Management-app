@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -158,9 +159,10 @@ public class CommitteeM_HomePage extends AppCompatActivity {
             }
         });
         EventChangeListener();
-
+        mAuth = FirebaseAuth.getInstance();
+        String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
         db = FirebaseFirestore.getInstance();
-        db.collection("C_Members")
+        db.collection("C_Members").whereEqualTo("userId",UserId)
                                 .get()
                                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                             @Override
@@ -180,7 +182,6 @@ public class CommitteeM_HomePage extends AppCompatActivity {
                                                         C_Email = Objects.requireNonNull(document.get("Cm_email")).toString();
                                                         cpmemberemail.setText(C_Email);
                                                     }
-
 
                                                 }else{
                                                     Toast.makeText(CommitteeM_HomePage.this, "Failed",
@@ -332,7 +333,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
 
     }
 
-    private void UpdateStatus(String Code, boolean removed) {
+     private void UpdateStatus(String Code, boolean removed) {
         db = FirebaseFirestore.getInstance();
 
         Map<String,Object> notice_code = new HashMap<>();
