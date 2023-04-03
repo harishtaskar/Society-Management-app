@@ -22,9 +22,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +41,7 @@ public class CommitteeM_EditProfile extends AppCompatActivity {
     Button select_img_btn, Update;
     FirebaseFirestore db;
     FirebaseAuth mAuth;
+    StorageReference storageReference;
     Uri imageUri;
     TextInputEditText SocietyName, CM_name, Mobile, Email, Password;
     String S_name, CM_Contact, CM_Name, C_Email, FirebasePassword, Address, Cm_Id, userId;
@@ -131,6 +136,48 @@ public class CommitteeM_EditProfile extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                                 }
                             });
+
+                    boolean Status = false;
+
+                    Map<String, Object> new_user = new HashMap<>();
+                    new_user.put("Email", newCM_Email);
+                    new_user.put("isSociety",Status);
+                    new_user.put("userId",UserId);
+
+                    db.collection("Users").document(UserId)
+                            .set(new_user)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Password.setText("");
+                                }
+                            })
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                    storageReference = FirebaseStorage.getInstance().getReference("image/"+UserId);
+                    storageReference.putFile(imageUri)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
                 }else {
                     Password.setError("Password Doesn't Matched");
                     Toast.makeText(getApplicationContext(), "Password Doesn't Matched", Toast.LENGTH_SHORT).show();
@@ -150,15 +197,17 @@ public class CommitteeM_EditProfile extends AppCompatActivity {
 
     }
     private void openGallery() {
-        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(gallery, PICK_IMAGE);
+        Intent intent = new Intent();
+        intent.setType("image/");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,100);
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+        if (requestCode == 100 && data != null && data.getData() != null){
             imageUri = data.getData();
             member_img.setImageURI(imageUri);
         }

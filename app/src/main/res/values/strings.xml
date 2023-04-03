@@ -22,6 +22,8 @@
     <string name="flat_no">Flat No</string>
     <string name="you_are_not_committee_member">You are Not Committee Member</string>
     <string name="sorry">Sorry!!</string>
+    <string name="contact">Contact</string>
+    <string name="committee_member_name">Committee Member name</string>
     <string-array name="array_indian_states">
         <item>Select Your State</item>
         <item>Andaman and Nicobar Islands</item>

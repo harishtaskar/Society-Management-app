@@ -60,7 +60,7 @@
                 android:layout_marginRight="@dimen/_10sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_220sdp"
+                android:layout_height="wrap_content"
                 app:cardElevation="@dimen/_5sdp"
                 >
 

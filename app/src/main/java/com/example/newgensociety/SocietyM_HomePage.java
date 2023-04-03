@@ -35,6 +35,8 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.checkerframework.checker.units.qual.A;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -50,9 +52,10 @@ public class SocietyM_HomePage extends AppCompatActivity {
     FirebaseFirestore db;
     Button EditProfile;
     CardView complain,maintenance,help,meeting,noticeboard,profileHelp,Addflat,Addflatp;
-    TextView logout,SocietyM_name,SocietyM_email;
+    TextView logout,SocietyM_name,SocietyM_email,SocietyName,SocietyAddress;
     RelativeLayout profile,home,notice;
     FirebaseAuth mAuth;
+    String S_name,Address;
 
     private DatabaseReference mDatabase;
 
@@ -74,6 +77,8 @@ public class SocietyM_HomePage extends AppCompatActivity {
         logout = findViewById(R.id.SocietyM_profile_logout);
         SocietyM_name = findViewById(R.id.SocietyM_profile_member_name);
         SocietyM_email = findViewById(R.id.SocietyM_profile_member_email);
+        SocietyName = findViewById(R.id.SocietyM_profile_society_name);
+        SocietyAddress = findViewById(R.id.SocietyM_profile_society_address);
         mAuth = FirebaseAuth.getInstance();
 
         bottomNavigation = findViewById(R.id.bottomNavigation);
@@ -96,9 +101,9 @@ public class SocietyM_HomePage extends AppCompatActivity {
         myAdapter = new myRecycleVA_Society_Notice(SocietyM_HomePage.this,NoticeArrayList);
         recyclerView.setAdapter(myAdapter);
         EventChangeListener();
+        String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
-
-        db.collection("Society_Members")
+        db.collection("Society_Members").whereEqualTo("userId",UserId)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -114,6 +119,30 @@ public class SocietyM_HomePage extends AppCompatActivity {
                                 SocietyM_email.setText(SM_Email);
                             }
 
+
+                        }else{
+                            Toast.makeText(SocietyM_HomePage.this, "Failed",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+
+        db.collection("C_Members")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            Toast.makeText(SocietyM_HomePage.this, "Successful",
+                                    Toast.LENGTH_SHORT).show();
+                            for ( QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + "=>" + document.getData());
+                                S_name = Objects.requireNonNull(document.get("Society_name")).toString();
+                                SocietyName.setText(S_name);
+                                Address = Objects.requireNonNull(document.get("Address")).toString();
+                                SocietyAddress.setText(Address);
+                            }
 
                         }else{
                             Toast.makeText(SocietyM_HomePage.this, "Failed",

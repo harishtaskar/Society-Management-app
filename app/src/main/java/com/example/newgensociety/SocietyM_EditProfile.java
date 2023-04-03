@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,6 +30,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.auth.User;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,8 +43,10 @@ public class SocietyM_EditProfile extends AppCompatActivity {
     TextView email, name, mobile, password;
     Button select_img_btn, update;
     Uri imageUri;
+    String SM_Contact, SM_Name, SM_Email, FirebasePassword, userId;
+    FirebaseAuth mAuth;
     FirebaseFirestore db;
-    private DatabaseReference mDatabase;
+    boolean Status = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,24 +63,129 @@ public class SocietyM_EditProfile extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         String Mobile = "8238795994";
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("S_member").child(Mobile).child("s_name");
+        mAuth = FirebaseAuth.getInstance();
+        String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+        db = FirebaseFirestore.getInstance();
+        db.collection("Society_Members").whereEqualTo("userId", UserId)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(SocietyM_EditProfile.this, "Successful",
+                                    Toast.LENGTH_SHORT).show();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + "=>" + document.getData());
+                                SM_Contact = Objects.requireNonNull(document.get("Mobile")).toString();
+                                mobile.setText(SM_Contact);
+                                SM_Name = Objects.requireNonNull(document.get("Member_Name")).toString();
+                                name.setText(SM_Name);
+                                SM_Email = Objects.requireNonNull(document.get("Email")).toString();
+                                email.setText(SM_Email);
+                                FirebasePassword = Objects.requireNonNull(document.get("Password")).toString();
+                                userId = Objects.requireNonNull(document.get("userId")).toString();
+                            }
 
-        String AAA = mDatabase.getRef().toString();
-        email.setText(AAA);
+                        } else {
+                            Toast.makeText(SocietyM_EditProfile.this, "Failed",
+                                    Toast.LENGTH_SHORT).show();
+                        }
 
-        mDatabase.addValueEventListener(new ValueEventListener() {
+                    }
+                });
+
+
+
+        update.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                DataSnapshot snapshot = (DataSnapshot) dataSnapshot.getChildren();
-                    String Society_Name = Objects.requireNonNull(snapshot.getValue()).toString();
+            public void onClick(View v) {
 
-            }
+                String SM_Password = password.getText().toString();
+                String sm_Email = email.getText().toString();
+                String sm_Name = name.getText().toString();
+                String sm_Mobile = mobile.getText().toString();
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+
+                Map<String, Object> new_s_member = new HashMap<>();
+                new_s_member.put("Email", sm_Email);
+                new_s_member.put("Member_Name", sm_Name);
+                new_s_member.put("Mobile", sm_Mobile);
+                new_s_member.put("userId", UserId);
+                new_s_member.put("Password", FirebasePassword);
+                new_s_member.put("Status", Status);
+
+                if (SM_Password.equals(FirebasePassword)) {
+                    db.collection("Society_Members").document(UserId)
+                            .set(new_s_member)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    password.setText("");
+                                }
+                            })
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(SocietyM_EditProfile.this,SocietyM_HomePage.class);
+                                    startActivity(intent);
+
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                    Map<String, Object> new_user = new HashMap<>();
+                    new_user.put("Email", sm_Email);
+                    new_user.put("isSociety",Status);
+                    new_user.put("userId",UserId);
+
+                    db.collection("Users").document(UserId)
+                            .set(new_user)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    password.setText("");
+                                }
+                            })
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                } else {
+                    password.setError("Password Doesn't Matched");
+                    Toast.makeText(getApplicationContext(), "Password Doesn't Matched", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
+
+    }
+
+    private void openGallery() {
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
+            imageUri = data.getData();
+            member_img.setImageURI(imageUri);
+        }
 
 
         select_img_btn.setOnClickListener(new View.OnClickListener() {
@@ -85,51 +194,5 @@ public class SocietyM_EditProfile extends AppCompatActivity {
                 openGallery();
             }
         });
-
-        mDatabase.child("S_member").child(Mobile).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Log.e("firebase", "Error getting data", task.getException());
-                }
-                else {
-                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
-
-                }
-            }
-        });
-
-
-
-        String S_Email = email.getText().toString();
-        String S_Name = name.getText().toString();
-        String S_Mobile = mobile.getText().toString();
-        String S_Password = password.getText().toString();
-
-        Map<String,Object> s_member = new HashMap<>();
-        s_member.put("Email", S_Email);
-        s_member.put("Member_Name",S_Name);
-        s_member.put("Mobile",S_Mobile);
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
     }
-    private void openGallery() {
-        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(gallery, PICK_IMAGE);
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
-            imageUri = data.getData();
-            member_img.setImageURI(imageUri);
-        }
-    }
-    }
+}

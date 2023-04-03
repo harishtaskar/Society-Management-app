@@ -107,6 +107,7 @@ public class SocietyM_RegistrationPage extends AppCompatActivity {
                                     s_member.put("Member_Name", Name);
                                     s_member.put("Mobile", Mobile);
                                     s_member.put("Status", Status);
+                                    s_member.put("userId",userId);
 
                                     isAllFieldsChecked = CheckAllFields();
                                     if (isAllFieldsChecked) {
