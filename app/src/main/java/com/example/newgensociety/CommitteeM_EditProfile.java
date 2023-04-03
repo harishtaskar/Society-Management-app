@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -16,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,10 +29,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.auth.User;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -41,7 +49,7 @@ public class CommitteeM_EditProfile extends AppCompatActivity {
     Button select_img_btn, Update;
     FirebaseFirestore db;
     FirebaseAuth mAuth;
-    StorageReference storageReference;
+    StorageReference storageReference,storageRef;
     Uri imageUri;
     TextInputEditText SocietyName, CM_name, Mobile, Email, Password;
     String S_name, CM_Contact, CM_Name, C_Email, FirebasePassword, Address, Cm_Id, userId;
@@ -59,6 +67,8 @@ public class CommitteeM_EditProfile extends AppCompatActivity {
         Email = findViewById(R.id.Cm_email);
         Password = findViewById(R.id.Cm_password);
         Update = findViewById(R.id.Cm_update);
+
+
 
         mAuth = FirebaseAuth.getInstance();
         String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
@@ -178,6 +188,8 @@ public class CommitteeM_EditProfile extends AppCompatActivity {
                                 }
                             });
 
+
+
                 }else {
                     Password.setError("Password Doesn't Matched");
                     Toast.makeText(getApplicationContext(), "Password Doesn't Matched", Toast.LENGTH_SHORT).show();
@@ -186,6 +198,27 @@ public class CommitteeM_EditProfile extends AppCompatActivity {
             }
         });
 
+        storageRef = FirebaseStorage.getInstance().getReference("image/"+UserId);
+        try {
+            File localFile = File.createTempFile("tempfile",".jpeg");
+            storageRef.getFile(localFile)
+                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+
+                            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                            member_img.setImageBitmap(bitmap);
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         select_img_btn.setOnClickListener(new View.OnClickListener() {
             @Override

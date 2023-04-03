@@ -25,13 +25,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class CommitteeM_MaintenancePage extends AppCompatActivity {
 
     TextView Duedate;
     ImageView Back;
     String DueDateString;
-    EditText FlatNo, Discription, Amount;
+    EditText FlatNo, Discription, Amount, upiId;
     Button Send, Maintainance_Status;
     RadioGroup RG_Discount;
     RadioButton _5per, _10per, _15per;
@@ -52,6 +53,7 @@ public class CommitteeM_MaintenancePage extends AppCompatActivity {
         _5per = findViewById(R.id._5percent);
         _10per = findViewById(R.id._10percent);
         Back = findViewById(R.id.Maintenance_btn_back);
+        upiId = findViewById(R.id.Committee_Maintenance_Upi);
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,6 +82,18 @@ public class CommitteeM_MaintenancePage extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+
+        int leftLimit = 97; // letter 'a'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 6;
+        Random random = new Random();
+        StringBuilder buffer = new StringBuilder(targetStringLength);
+        for (int i = 0; i < targetStringLength; i++) {
+            int randomLimitedInt = leftLimit + (int)
+                    (random.nextFloat() * (rightLimit - leftLimit + 1));
+            buffer.append((char) randomLimitedInt);
+        }
+        String generatedString = buffer.toString();
         Send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,18 +128,25 @@ public class CommitteeM_MaintenancePage extends AppCompatActivity {
                     discount = 15;
                 }
 
-                String flatno = FlatNo.getText().toString();
-                String discription = Discription.getText().toString();
-                String duedate = DueDateString;
+                boolean removed = false;
+                boolean isPaid = false;
+                String UpiId = upiId.getText().toString();
+                String flatNo = FlatNo.getText().toString();
+                String description = Discription.getText().toString();
+                String dueDate = DueDateString;
                 Integer amount = Integer.parseInt(Amount.getText().toString());
                 Integer Discount = discount;
 
                 Map<String,Object> maintenance = new HashMap<>();
-                maintenance.put("flat_no", flatno);
-                maintenance.put("discription", discription);
-                maintenance.put("due_date", duedate);
+                maintenance.put("flat_no", flatNo);
+                maintenance.put("discription", description);
+                maintenance.put("due_date", dueDate);
                 maintenance.put("amount",amount);
                 maintenance.put("discount",Discount);
+                maintenance.put("MaintenanceCode",generatedString);
+                maintenance.put("isPaid",isPaid);
+                maintenance.put("isRemoved",removed);
+                maintenance.put("upiId", UpiId);
 
                 db.collection("Maintenance")
                         .add(maintenance)
@@ -138,7 +159,7 @@ public class CommitteeM_MaintenancePage extends AppCompatActivity {
                                 Duedate.setText("");
                                 Amount.setText("");
                                 RG_Discount.clearCheck();
-
+                                upiId.setText("");
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override

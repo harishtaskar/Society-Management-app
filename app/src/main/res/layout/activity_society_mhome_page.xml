@@ -114,10 +114,8 @@
                             android:id="@+id/SocietyM_profile_img"
                             android:layout_width="@dimen/_50sdp"
                             android:layout_height="@dimen/_50sdp"
-                            android:padding="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_10sdp"
-                            android:src="@drawable/user"
-                            >
+                            android:background="@drawable/circle_image_view">
 
                         </ImageView>
 
@@ -135,6 +133,7 @@
                                 android:layout_marginRight="@dimen/_10sdp"
                                 android:layout_marginTop="@dimen/_10sdp"
                                 android:textSize="@dimen/_14sdp"
+                                android:textStyle="bold"
                                 android:layout_height="wrap_content"
                                 android:text="committee Member Name">
 
@@ -148,7 +147,6 @@
                                 android:textSize="@dimen/_10sdp"
                                 android:layout_marginRight="@dimen/_10sdp"
                                 android:layout_height="wrap_content">
-
 
                             </TextView>
 

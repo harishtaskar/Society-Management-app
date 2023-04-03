@@ -11,11 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextClock;
 import android.widget.TextView;
@@ -23,6 +26,8 @@ import android.widget.Toast;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -34,9 +39,14 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import org.checkerframework.checker.units.qual.A;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -56,6 +66,7 @@ public class SocietyM_HomePage extends AppCompatActivity {
     RelativeLayout profile,home,notice;
     FirebaseAuth mAuth;
     String S_name,Address;
+    ImageView imageView;
 
     private DatabaseReference mDatabase;
 
@@ -79,6 +90,7 @@ public class SocietyM_HomePage extends AppCompatActivity {
         SocietyM_email = findViewById(R.id.SocietyM_profile_member_email);
         SocietyName = findViewById(R.id.SocietyM_profile_society_name);
         SocietyAddress = findViewById(R.id.SocietyM_profile_society_address);
+        imageView = findViewById(R.id.SocietyM_profile_img);
         mAuth = FirebaseAuth.getInstance();
 
         bottomNavigation = findViewById(R.id.bottomNavigation);
@@ -243,6 +255,29 @@ public class SocietyM_HomePage extends AppCompatActivity {
                 return null;
             }
         });
+
+        imageView.setClipToOutline(true);
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference("image/" + UserId);
+        try {
+            File localFile = File.createTempFile("tempfile",".jpeg");
+            storageRef.getFile(localFile)
+                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+
+                            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                            imageView.setImageBitmap(bitmap);
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         EditProfile.setOnClickListener(new View.OnClickListener() {
             @Override

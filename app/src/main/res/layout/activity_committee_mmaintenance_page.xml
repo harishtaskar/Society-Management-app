@@ -67,7 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Amount"
-        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         >
         <com.google.android.material.textfield.TextInputEditText
@@ -82,7 +82,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:padding="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_18sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:id="@+id/Committee_Maintenance_dueDate"
         android:hint="Due Date"
         android:textSize="@dimen/_12sdp"
@@ -114,6 +114,19 @@
         android:inputType="textMultiLine"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/upi_id"
+            android:layout_marginTop="@dimen/_10sdp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Committee_Maintenance_Upi" />
+
+        </com.google.android.material.textfield.TextInputLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -127,7 +140,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="@dimen/_10sdp">
+        android:layout_marginTop="@dimen/_8sdp">
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -166,7 +179,7 @@
             android:layout_width="70dp"
             android:layout_height="40dp"
             android:gravity="center"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="#2196F3"
             android:textColor="@color/black"
             android:shadowRadius="@integer/material_motion_duration_long_1"
             android:layout_marginTop="@dimen/_10sdp"
@@ -197,7 +210,7 @@
     <Button
         android:id="@+id/maintainance_Status"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:paddingStart="@dimen/_20sdp"
         android:paddingEnd="@dimen/_20sdp"
         android:textSize="@dimen/_10sdp"

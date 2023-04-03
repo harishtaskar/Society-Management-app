@@ -104,11 +104,11 @@
 
                         <ImageView
                             android:id="@+id/committee_profile_img"
-                            android:layout_width="@dimen/_50sdp"
-                            android:layout_height="@dimen/_50sdp"
-                            android:padding="@dimen/_5sdp"
+                            android:layout_width="@dimen/_60sdp"
+                            android:layout_height="@dimen/_60sdp"
+                            android:background="@drawable/circle_image_view"
                             android:layout_marginTop="@dimen/_10sdp"
-                            android:src="@drawable/user"
+                            android:fitsSystemWindows="true"
                             >
 
                         </ImageView>

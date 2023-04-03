@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,7 +36,12 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,6 +65,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
     myRecycleViewAdapter myAdapter;
     FirebaseFirestore db;
     FirebaseAuth mAuth;
+    StorageReference storageRef;
 //    ProgressDialog progressDialog;
 
     //profile page
@@ -291,6 +299,28 @@ public class CommitteeM_HomePage extends AppCompatActivity {
                 return null;
             }
         });
+        cpmemberimage.setClipToOutline(true);
+        storageRef = FirebaseStorage.getInstance().getReference("image/"+UserId);
+        try {
+            File localFile = File.createTempFile("tempfile",".jpeg");
+            storageRef.getFile(localFile)
+                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+
+                            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                            cpmemberimage.setImageBitmap(bitmap);
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         cardmain1.setOnClickListener(new View.OnClickListener() {
             @Override

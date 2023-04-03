@@ -24,6 +24,9 @@
     <string name="sorry">Sorry!!</string>
     <string name="contact">Contact</string>
     <string name="committee_member_name">Committee Member name</string>
+    <string name="pay_now">Pay Now</string>
+    <string name="paid_on_31_feb_2025">paid on 31-feb-2025</string>
+    <string name="upi_id">Upi ID</string>
     <string-array name="array_indian_states">
         <item>Select Your State</item>
         <item>Andaman and Nicobar Islands</item>

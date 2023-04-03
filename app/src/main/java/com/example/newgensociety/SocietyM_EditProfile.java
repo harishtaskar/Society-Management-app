@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -31,7 +33,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.auth.User;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -60,8 +68,6 @@ public class SocietyM_EditProfile extends AppCompatActivity {
         name = findViewById(R.id.sname);
         mobile = findViewById(R.id.smobile);
         password = findViewById(R.id.spassword);
-        db = FirebaseFirestore.getInstance();
-        String Mobile = "8238795994";
 
         mAuth = FirebaseAuth.getInstance();
         String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
@@ -95,7 +101,6 @@ public class SocietyM_EditProfile extends AppCompatActivity {
                 });
 
 
-
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,7 +132,7 @@ public class SocietyM_EditProfile extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(SocietyM_EditProfile.this,SocietyM_HomePage.class);
+                                    Intent intent = new Intent(SocietyM_EditProfile.this, SocietyM_HomePage.class);
                                     startActivity(intent);
 
                                 }
@@ -140,8 +145,8 @@ public class SocietyM_EditProfile extends AppCompatActivity {
 
                     Map<String, Object> new_user = new HashMap<>();
                     new_user.put("Email", sm_Email);
-                    new_user.put("isSociety",Status);
-                    new_user.put("userId",UserId);
+                    new_user.put("isSociety", Status);
+                    new_user.put("userId", UserId);
 
                     db.collection("Users").document(UserId)
                             .set(new_user)
@@ -163,6 +168,21 @@ public class SocietyM_EditProfile extends AppCompatActivity {
                                 }
                             });
 
+                    StorageReference storageReference = FirebaseStorage.getInstance().getReference("image/" + UserId);
+                    storageReference.putFile(imageUri)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+
                 } else {
                     password.setError("Password Doesn't Matched");
                     Toast.makeText(getApplicationContext(), "Password Doesn't Matched", Toast.LENGTH_SHORT).show();
@@ -171,20 +191,26 @@ public class SocietyM_EditProfile extends AppCompatActivity {
             }
         });
 
-    }
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference("image/" + UserId);
+        try {
+            File localFile = File.createTempFile("tempfile",".jpeg");
+            storageRef.getFile(localFile)
+                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
 
-    private void openGallery() {
-        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(gallery, PICK_IMAGE);
+                            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                            member_img.setImageBitmap(bitmap);
 
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
-            imageUri = data.getData();
-            member_img.setImageURI(imageUri);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
 
@@ -194,5 +220,23 @@ public class SocietyM_EditProfile extends AppCompatActivity {
                 openGallery();
             }
         });
+
+    }
+
+    private void openGallery() {
+        Intent intent = new Intent();
+        intent.setType("image/");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,100);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && data != null && data.getData() != null){
+            imageUri = data.getData();
+            member_img.setImageURI(imageUri);
+        }
     }
 }
