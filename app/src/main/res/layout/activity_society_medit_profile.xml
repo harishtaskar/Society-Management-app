@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit Profile"
+            android:text="@string/edit_profile"
             android:textSize="@dimen/_20sdp"
             android:textColor="@color/black"
             android:textStyle="bold">

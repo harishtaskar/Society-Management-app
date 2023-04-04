@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -43,6 +44,13 @@ public class SocietyM_showMaintenance extends AppCompatActivity {
         maintenanceArrayList = new ArrayList<Maintenance>();
         myMRVAdapter = new myRecycleVA_SM_Maintenance(SocietyM_showMaintenance.this,maintenanceArrayList);
         recyclerView.setAdapter(myMRVAdapter);
+        myMRVAdapter.setOnItemClickListener(new myRecycleVA_SM_Maintenance.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(SocietyM_showMaintenance.this,Maintenance_Payment.class);
+                startActivity(intent);
+            }
+        });
         EventChangeListener();
     }
     private void EventChangeListener() {

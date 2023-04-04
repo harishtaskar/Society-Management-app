@@ -15,6 +15,9 @@
         android:theme="@style/Theme.NewGenSociety"
         tools:targetApi="31">
         <activity
+            android:name=".Maintenance_Payment"
+            android:exported="false" />
+        <activity
             android:name=".Exaption"
             android:exported="false" />
         <activity

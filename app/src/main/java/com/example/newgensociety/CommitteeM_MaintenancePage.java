@@ -75,13 +75,16 @@ public class CommitteeM_MaintenancePage extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(CommitteeM_MaintenancePage.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        Duedate.setText(SimpleDateFormat.getDateInstance().format(calendar.getTime()));
-                        DueDateString = Duedate.getText().toString();
+                        calendar.set(day,month,year);
                     }
                 },year, month, year);
                 datePickerDialog.show();
             }
         });
+        DueDateString = day + "/" + (month + 1) + "/" + year;
+        Duedate.setText(DueDateString);
+
+
 
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'

@@ -27,6 +27,11 @@
     <string name="pay_now">Pay Now</string>
     <string name="paid_on_31_feb_2025">paid on 31-feb-2025</string>
     <string name="upi_id">Upi ID</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="select_image">select image</string>
+    <string name="maintenance_payment">Maintenance Payment</string>
+    <string name="flat_no_101">Flat No : 101</string>
+    <string name="make_sure_to_share_you_payment_details_with_your_society_secretory_for_varification">make sure to share your payment details with your society secretary for varification</string>
     <string-array name="array_indian_states">
         <item>Select Your State</item>
         <item>Andaman and Nicobar Islands</item>
