@@ -129,6 +129,7 @@ public class CommitteeM_LoginPage extends AppCompatActivity {
                         intent = new Intent(getApplicationContext(), CommitteeM_HomePage.class);
                     }
                     startActivity(intent);
+                    finish();
                 }
             });
         }

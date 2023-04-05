@@ -57,7 +57,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
     RelativeLayout profile,home,notice;
 
 //    home page
-    ImageView commitee_img;
+    ImageView commitee_img, Profile;
     CardView cardmain1,cardmain2,Society_meetings,Complains,Helps,Helps2;
     TextView cm_name;
     RecyclerView recyclerView;
@@ -107,6 +107,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
         cptermsorcondition = findViewById(R.id.committee_profile_terms_condition);
         cpversion = findViewById(R.id.committee_profile_version);
         cpeditbtn = findViewById(R.id.committee_profile_edit_button);
+        Profile = findViewById(R.id.home_btnprofile);
         mAuth = FirebaseAuth.getInstance();
         cplogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +122,14 @@ public class CommitteeM_HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CommitteeM_HomePage.this,CommitteeM_show_Meetings.class);
+                startActivity(intent);
+            }
+        });
+
+        Profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CommitteeM_HomePage.this,CommitteeM_EditProfile.class);
                 startActivity(intent);
             }
         });

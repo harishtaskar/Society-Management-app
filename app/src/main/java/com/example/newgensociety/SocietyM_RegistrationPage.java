@@ -142,18 +142,18 @@ public class SocietyM_RegistrationPage extends AppCompatActivity {
 
 
                                         //Realtime Database
-                                        boolean SM_status = true;
-
-                                        S_Member sMember = new S_Member(Name, Mobile, Email, Password, SM_status);
-
-                                        dbf = FirebaseDatabase.getInstance("https://new-generation-society-default-rtdb.asia-southeast1.firebasedatabase.app/");
-                                        rootDatabaseRef = dbf.getReference("S_member");
-                                        rootDatabaseRef.child(Mobile).setValue(sMember).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-
-                                            }
-                                        });
+//                                        boolean SM_status = true;
+//
+//                                        S_Member sMember = new S_Member(Name, Mobile, Email, Password, SM_status);
+//
+//                                        dbf = FirebaseDatabase.getInstance("https://new-generation-society-default-rtdb.asia-southeast1.firebasedatabase.app/");
+//                                        rootDatabaseRef = dbf.getReference("S_member");
+//                                        rootDatabaseRef.child(Mobile).setValue(sMember).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                            @Override
+//                                            public void onComplete(@NonNull Task<Void> task) {
+//
+//                                            }
+//                                        });
 
 
                                         Toast.makeText(SocietyM_RegistrationPage.this, "Account Created",

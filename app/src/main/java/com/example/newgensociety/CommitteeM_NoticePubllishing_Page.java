@@ -89,8 +89,8 @@ public class CommitteeM_NoticePubllishing_Page extends AppCompatActivity {
                             (random.nextFloat() * (rightLimit - leftLimit + 1));
                     buffer.append((char) randomLimitedInt);
                 }
-                String generatedString = buffer.toString();
 
+                String generatedString = buffer.toString();
 
                 String dash = "~";
                 String cm_name = dash+CM_name.getText().toString();

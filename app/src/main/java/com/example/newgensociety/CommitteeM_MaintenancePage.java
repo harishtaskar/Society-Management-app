@@ -65,7 +65,7 @@ public class CommitteeM_MaintenancePage extends AppCompatActivity {
         _15per = findViewById(R.id._15percent);
         db = FirebaseFirestore.getInstance();
         Maintainance_Status = findViewById(R.id.maintainance_Status);
-        Calendar calendar = Calendar.getInstance();
+        final Calendar calendar = Calendar.getInstance();
         Duedate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,14 +75,13 @@ public class CommitteeM_MaintenancePage extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(CommitteeM_MaintenancePage.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        calendar.set(day,month,year);
+                        Duedate.setText(i2+"/"+(i1+1)+"/"+i);
                     }
                 },year, month, year);
                 datePickerDialog.show();
             }
         });
-        DueDateString = day + "/" + (month + 1) + "/" + year;
-        Duedate.setText(DueDateString);
+
 
 
 

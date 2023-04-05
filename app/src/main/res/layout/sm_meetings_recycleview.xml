@@ -45,7 +45,7 @@
                     </TextView>
 
                     <TextView
-                        android:id="@+id/Committee_Meetings_Subject"
+                        android:id="@+id/Society_Meetings_Subject"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
@@ -64,7 +64,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/Committee_Meetings_date"
+                        android:id="@+id/Society_Meetings_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="@dimen/_5sdp"
@@ -75,7 +75,7 @@
 
                     </TextView>
                     <TextView
-                        android:id="@+id/Committee_Meetings_time"
+                        android:id="@+id/Society_Meetings_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="@dimen/_10sdp"
@@ -96,7 +96,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/Committee_Meetings_Description"
+                        android:id="@+id/Society_Meetings_Description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_3sdp"
@@ -108,7 +108,7 @@
                     </TextView>
 
                     <TextView
-                        android:id="@+id/Committee_Meetings_No_of_Members"
+                        android:id="@+id/Society_Meetings_No_of_Members"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_3sdp"

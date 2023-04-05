@@ -48,7 +48,7 @@ public class SocietyM_EditProfile extends AppCompatActivity {
 
     private static final int PICK_IMAGE = 100;
     ImageView member_img;
-    TextView email, name, mobile, password;
+    TextView email, name, mobile, password, ChangePass;
     Button select_img_btn, update;
     Uri imageUri;
     String SM_Contact, SM_Name, SM_Email, FirebasePassword, userId;
@@ -68,6 +68,15 @@ public class SocietyM_EditProfile extends AppCompatActivity {
         name = findViewById(R.id.sname);
         mobile = findViewById(R.id.smobile);
         password = findViewById(R.id.spassword);
+        ChangePass = findViewById(R.id.Change_Password);
+
+        ChangePass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SocietyM_EditProfile.this,SocietyM_ChangePass.class);
+                startActivity(intent);
+            }
+        });
 
         mAuth = FirebaseAuth.getInstance();
         String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
@@ -134,7 +143,7 @@ public class SocietyM_EditProfile extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(SocietyM_EditProfile.this, SocietyM_HomePage.class);
                                     startActivity(intent);
-
+                                    finish();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override

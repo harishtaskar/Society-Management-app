@@ -62,11 +62,11 @@ public class SocietyM_HomePage extends AppCompatActivity {
     FirebaseFirestore db;
     Button EditProfile;
     CardView complain,maintenance,help,meeting,noticeboard,profileHelp,Addflat,Addflatp;
-    TextView logout,SocietyM_name,SocietyM_email,SocietyName,SocietyAddress;
+    TextView logout,SocietyM_name,SocietyM_email,SocietyName,SocietyAddress,SM_Name;
     RelativeLayout profile,home,notice;
     FirebaseAuth mAuth;
     String S_name,Address;
-    ImageView imageView;
+    ImageView imageView, Profile;
 
     private DatabaseReference mDatabase;
 
@@ -91,6 +91,8 @@ public class SocietyM_HomePage extends AppCompatActivity {
         SocietyName = findViewById(R.id.SocietyM_profile_society_name);
         SocietyAddress = findViewById(R.id.SocietyM_profile_society_address);
         imageView = findViewById(R.id.SocietyM_profile_img);
+        SM_Name = findViewById(R.id.Society_Home_sm_name);
+        Profile = findViewById(R.id.home_btnprofile);
         mAuth = FirebaseAuth.getInstance();
 
         bottomNavigation = findViewById(R.id.bottomNavigation);
@@ -112,7 +114,15 @@ public class SocietyM_HomePage extends AppCompatActivity {
         NoticeArrayList = new ArrayList<Notice>();
         myAdapter = new myRecycleVA_Society_Notice(SocietyM_HomePage.this,NoticeArrayList);
         recyclerView.setAdapter(myAdapter);
-        EventChangeListener();
+
+        Profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SocietyM_HomePage.this,SocietyM_EditProfile.class);
+                startActivity(intent);
+            }
+        });
+
         String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
         db.collection("Society_Members").whereEqualTo("userId",UserId)
@@ -127,6 +137,7 @@ public class SocietyM_HomePage extends AppCompatActivity {
                                 Log.d(TAG, document.getId()+ "=>"+ document.getData());
                                 String SM_name = Objects.requireNonNull(document.get("Member_Name")).toString();
                                 SocietyM_name.setText(SM_name);
+                                SM_Name.setText("Hi , "+ SM_name);
                                 String SM_Email = Objects.requireNonNull(document.get("Email")).toString();
                                 SocietyM_email.setText(SM_Email);
                             }
@@ -164,7 +175,7 @@ public class SocietyM_HomePage extends AppCompatActivity {
                     }
                 });
 
-
+        EventChangeListener();
 
         bottomNavigation.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {
             @Override
@@ -357,15 +368,15 @@ public class SocietyM_HomePage extends AppCompatActivity {
 
 
     }
-
     private void EventChangeListener() {
+        db = FirebaseFirestore.getInstance();
 
-        db.collection("Notice").orderBy("date", Query.Direction.DESCENDING).whereEqualTo("removed",false)
+                db.collection("Notice").orderBy("date", Query.Direction.DESCENDING).whereEqualTo("removed",false)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         if (error != null){
-                            Log.e("Firestore Error",error.getMessage());
+                            Log.e("FireStore Error",error.getMessage());
                             return;
                         }
                         assert value != null;

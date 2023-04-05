@@ -48,7 +48,7 @@ public class SocietyM_showAddFlat extends AppCompatActivity {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         if (error != null){
-                            Log.e("Firestore Error",error.getMessage());
+                            Log.e("FireStore Error",error.getMessage());
                             return;
                         }
                         assert value != null;

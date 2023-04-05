@@ -22,7 +22,7 @@ public class SocietyM_Meetings_ShowPage extends AppCompatActivity {
     FirebaseFirestore db;
     ImageView Back;
     ArrayList<Meetings> meetingsArrayList;
-    my_RecycleVA_Meetings myMRVAdapter;
+    myRecycleVA_SM_Meetings myMRVAdapter;
     RecyclerView recyclerView;
 
     @Override
@@ -34,13 +34,13 @@ public class SocietyM_Meetings_ShowPage extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         db = FirebaseFirestore.getInstance();
         meetingsArrayList = new ArrayList<Meetings>();
-        myMRVAdapter = new my_RecycleVA_Meetings(SocietyM_Meetings_ShowPage.this,meetingsArrayList);
+        myMRVAdapter = new myRecycleVA_SM_Meetings(SocietyM_Meetings_ShowPage.this,meetingsArrayList);
         recyclerView.setAdapter(myMRVAdapter);
         EventChangeListener();
 
     }
     private void EventChangeListener() {
-        db.collection("Meetings")
+        db.collection("Meetings").whereEqualTo("removed",false)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {

@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -28,12 +29,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class SocietyM_AddFlat extends AppCompatActivity {
 
     EditText Flat_No, MobileN, Name;
     RadioGroup RG;
-    String Status;
+    String Status, UserId;
+    FirebaseAuth mAuth;
     int year, month, day;
     String DueDateString;
     FirebaseFirestore db;
@@ -59,6 +62,7 @@ public class SocietyM_AddFlat extends AppCompatActivity {
         Rented_Others = findViewById(R.id.Rented_with_Others);
         Back = findViewById(R.id.Btn_Flat_Back);
         AddFlat = findViewById(R.id.Btn_Add_Flat);
+        mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         Calendar calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
@@ -99,7 +103,7 @@ public class SocietyM_AddFlat extends AppCompatActivity {
                     Status = "Rented with Other Flatmates";
                 }
 
-
+                String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
                 Integer flatno = Integer.parseInt(Flat_No.getText().toString());
                 String mobile = MobileN.getText().toString();
                 String duedate = DueDateString;
@@ -112,12 +116,16 @@ public class SocietyM_AddFlat extends AppCompatActivity {
                 flat.put("mobile", mobile);
                 flat.put("date",duedate);
                 flat.put("status",status);
-
-                db.collection("Flats")
-                        .add(flat)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                flat.put("userId",UserId);
+                db.collection("Flats").document()
+                        .set(flat)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onSuccess(DocumentReference documentReference) {
+                            public void onSuccess(Void unused) {
+                            }
+                        }).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
                                 Toast.makeText(getApplicationContext(),"Successful", Toast.LENGTH_SHORT).show();
                                 Flat_No.setText("");
                                 Name.setText("");
@@ -130,18 +138,17 @@ public class SocietyM_AddFlat extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(),"Failed", Toast.LENGTH_SHORT).show();
                             }
                         });
-
                 //Realtime Database
-                Flats flats = new Flats(flatno, name, mobile, duedate, status);
-
-                dbf = FirebaseDatabase.getInstance("https://new-generation-society-default-rtdb.asia-southeast1.firebasedatabase.app/");
-                rootDatabaseRef = dbf.getReference("Flats");
-                rootDatabaseRef.child(String.valueOf(flatno)).setValue(flats).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-
-                    }
-                });
+//                Flats flats = new Flats(flatno, name, mobile, duedate, status, UserId);
+//
+//                dbf = FirebaseDatabase.getInstance("https://new-generation-society-default-rtdb.asia-southeast1.firebasedatabase.app/");
+//                rootDatabaseRef = dbf.getReference("Flats");
+//                rootDatabaseRef.child(String.valueOf(flatno)).setValue(flats).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//
+//                    }
+//                });
             }
         });
 

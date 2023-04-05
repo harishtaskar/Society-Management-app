@@ -35,16 +35,6 @@
                 android:layout_gravity="center"
                 android:textColor="@color/black"/>
 
-
-            <ImageView
-                android:id="@+id/Society_Profile_btnBack"
-                android:layout_width="50dp"
-                android:background="#BEDFFA"
-                android:layout_height="56dp"
-                android:paddingRight="20dp"
-                android:layout_gravity="left"
-                android:src="@drawable/baseline_arrow_back_24"/>
-
         </Toolbar>
 
         <LinearLayout
@@ -369,41 +359,34 @@
         android:visibility="visible">
         <Toolbar
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/Stoolbar2"
-            android:gravity="center"
+            android:layout_height="56dp"
+            android:id="@+id/toolbar2"
             android:elevation="4dp"
-            android:paddingLeft="20dp"
+            android:paddingEnd="@dimen/_5sdp"
             android:background="#BEDFFA"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:titleTextColor="@color/black"
             >
+
             <TextView
+                android:id="@+id/Society_Home_sm_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Home"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_13sdp"
                 android:textStyle="bold"
-                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_gravity="left"
                 android:textColor="@color/black"/>
 
             <ImageView
-                android:id="@+id/Society_Home_btn_Profile"
+                android:id="@+id/home_btnprofile"
                 android:layout_width="50dp"
                 android:background="#BEDFFA"
                 android:layout_height="56dp"
-                android:paddingRight="20dp"
+                android:padding="@dimen/_8sdp"
                 android:layout_gravity="right"
                 android:src="@drawable/baseline_perm_identity_24"/>
-
-            <ImageView
-                android:id="@+id/Society_Home_btnBack"
-                android:layout_width="50dp"
-                android:background="#BEDFFA"
-                android:layout_height="56dp"
-                android:paddingRight="20dp"
-                android:layout_gravity="left"
-                android:src="@drawable/baseline_arrow_back_24"/>
 
         </Toolbar>
 
@@ -707,15 +690,6 @@
                 android:textStyle="bold"
                 android:layout_gravity="center"
                 android:textColor="@color/black"/>
-
-            <ImageView
-                android:id="@+id/Society_Notice_btnBack"
-                android:layout_width="50dp"
-                android:background="#BEDFFA"
-                android:layout_height="56dp"
-                android:paddingRight="20dp"
-                android:layout_gravity="left"
-                android:src="@drawable/baseline_arrow_back_24"/>
 
         </Toolbar>
 

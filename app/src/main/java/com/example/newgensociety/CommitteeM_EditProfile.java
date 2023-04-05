@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -51,6 +52,7 @@ public class CommitteeM_EditProfile extends AppCompatActivity {
     FirebaseAuth mAuth;
     StorageReference storageReference,storageRef;
     Uri imageUri;
+    TextView ChangePass;
     TextInputEditText SocietyName, CM_name, Mobile, Email, Password;
     String S_name, CM_Contact, CM_Name, C_Email, FirebasePassword, Address, Cm_Id, userId;
 
@@ -67,7 +69,14 @@ public class CommitteeM_EditProfile extends AppCompatActivity {
         Email = findViewById(R.id.Cm_email);
         Password = findViewById(R.id.Cm_password);
         Update = findViewById(R.id.Cm_update);
-
+        ChangePass = findViewById(R.id.Change_Password);
+        ChangePass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CommitteeM_EditProfile.this,CommitteeM_ChangePass.class);
+                startActivity(intent);
+            }
+        });
 
 
         mAuth = FirebaseAuth.getInstance();

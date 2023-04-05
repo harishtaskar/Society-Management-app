@@ -32,6 +32,13 @@
     <string name="maintenance_payment">Maintenance Payment</string>
     <string name="flat_no_101">Flat No : 101</string>
     <string name="make_sure_to_share_you_payment_details_with_your_society_secretory_for_varification">make sure to share your payment details with your society secretary for varification</string>
+    <string name="meetings">Meetings</string>
+    <string name="maintennce">Maintennce</string>
+    <string name="maintenance">maintenance</string>
+    <string name="help_requests">Help Requests</string>
+    <string name="complains">Complains</string>
+    <string name="change_password">Change Password</string>
+    <string name="forgot_password">Forgot Password</string>
     <string-array name="array_indian_states">
         <item>Select Your State</item>
         <item>Andaman and Nicobar Islands</item>

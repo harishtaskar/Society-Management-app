@@ -6,14 +6,23 @@ public class Flats {
     public Flats() {
     }
     int flat_no;
-    String name, mobile, date, status;
+    String name, mobile, date, status, userId;
 
-    public Flats(int flat_No, String name, String mobile, String date, String status) {
+    public Flats(int flat_No, String name, String mobile, String date, String status, String userId) {
         flat_no = flat_No;
         name = name;
         mobile = mobile;
         date = date;
         status = status;
+        userId = userId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public int getFlat_no() {

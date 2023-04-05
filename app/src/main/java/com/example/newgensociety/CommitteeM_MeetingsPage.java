@@ -67,7 +67,7 @@ public class CommitteeM_MeetingsPage extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(CommitteeM_MeetingsPage.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        Date.setText(SimpleDateFormat.getDateInstance().format(calendar.getTime()));
+                        Date.setText(i2+"/"+(i1+1)+"/"+i);
                         DateString = Date.getText().toString();
                     }
                 },year, month, year);
