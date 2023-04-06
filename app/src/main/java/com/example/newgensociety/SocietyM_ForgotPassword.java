@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,11 +31,10 @@ import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class CommitteeM_ForgotPassword extends AppCompatActivity {
+public class SocietyM_ForgotPassword extends AppCompatActivity {
 
     EditText Email;
     Button ForgotPass;
@@ -47,9 +45,9 @@ public class CommitteeM_ForgotPassword extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_committee_mforgot_password);
-        Email = findViewById(R.id.Committee_ForgotPass_Email);
-        ForgotPass = findViewById(R.id.Cm_ForgotPass);
+        setContentView(R.layout.activity_society_mforgot_password);
+        Email = findViewById(R.id.Society_ForgotPass_Email);
+        ForgotPass = findViewById(R.id.Sm_ForgotPass);
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
@@ -74,7 +72,7 @@ public class CommitteeM_ForgotPassword extends AppCompatActivity {
                 mAuth = FirebaseAuth.getInstance();
                 String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
                 db = FirebaseFirestore.getInstance();
-                db.collection("C_Members").whereEqualTo("userId",UserId)
+                db.collection("Society_Members").whereEqualTo("userId",UserId)
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
@@ -82,7 +80,7 @@ public class CommitteeM_ForgotPassword extends AppCompatActivity {
                                 if (task.isSuccessful()){
                                     for ( QueryDocumentSnapshot document : task.getResult()){
                                         Log.d(TAG, document.getId()+ "=>"+ document.getData());
-                                        FirebaseEmail = Objects.requireNonNull(document.get("Cm_email")).toString();
+                                        FirebaseEmail = Objects.requireNonNull(document.get("Email")).toString();
 
                                         if (FirebaseEmail.equals(Email.getText().toString())) {
                                             try {
@@ -128,7 +126,7 @@ public class CommitteeM_ForgotPassword extends AppCompatActivity {
 
                                                 thread.start();
                                                 setChangePass();
-                                                Toast.makeText(CommitteeM_ForgotPassword.this, "New Password has been send to your registered mail", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(SocietyM_ForgotPassword.this, "New Password has been send to your registered mail", Toast.LENGTH_SHORT).show();
                                                 Email.setText("");
 
 
@@ -139,12 +137,12 @@ public class CommitteeM_ForgotPassword extends AppCompatActivity {
                                         }
                                         else{
                                             Email.setError("Invalid Email Address");
-                                            Toast.makeText(CommitteeM_ForgotPassword.this, "Invalid Email Address",
+                                            Toast.makeText(SocietyM_ForgotPassword.this, "Invalid Email Address",
                                                     Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }else{
-                                    Toast.makeText(CommitteeM_ForgotPassword.this, "Failed",
+                                    Toast.makeText(SocietyM_ForgotPassword.this, "Failed",
                                             Toast.LENGTH_SHORT).show();
                                 }
 
@@ -154,14 +152,15 @@ public class CommitteeM_ForgotPassword extends AppCompatActivity {
             }
         });
 
+
     }
 
     private void setChangePass() {
         String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
 
-        db.collection("C_Members").document(UserId)
-                .update("Cm_password",generatedPassword)
+        db.collection("Society_Members").document(UserId)
+                .update("Password",generatedPassword)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -179,4 +178,5 @@ public class CommitteeM_ForgotPassword extends AppCompatActivity {
                 });
 
     }
+
 }

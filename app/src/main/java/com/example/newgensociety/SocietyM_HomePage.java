@@ -318,6 +318,7 @@ public class SocietyM_HomePage extends AppCompatActivity {
                 mAuth.signOut();
                 Intent intent = new Intent(SocietyM_HomePage.this,MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

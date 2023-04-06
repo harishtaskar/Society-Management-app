@@ -28,16 +28,13 @@ import java.util.Map;
 import java.util.Objects;
 
 public class SocietyM_RegistrationPage extends AppCompatActivity {
-
     Button signup;
     FirebaseAuth mAuth;
     FirebaseFirestore db;
-    FirebaseDatabase dbf;
-    DatabaseReference rootDatabaseRef;
+//    FirebaseDatabase dbf;
+//    DatabaseReference rootDatabaseRef;
     EditText scode, sname, semail, smobile, spassword, scpasword;
     boolean isAllFieldsChecked = false;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,20 +115,21 @@ public class SocietyM_RegistrationPage extends AppCompatActivity {
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void unused) {
-
                                                     }
                                                 })
                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
                                                         Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
-                                                        Intent intent = new Intent(SocietyM_RegistrationPage.this, CommitteeM_LoginPage.class);
+                                                        Intent intent = new Intent(SocietyM_RegistrationPage.this, SocietyM_HomePage .class);
                                                         scode.setText("");
                                                         sname.setText("");
                                                         semail.setText("");
                                                         spassword.setText("");
                                                         scpasword.setText("");
                                                         smobile.setText("");
+                                                        startActivity(intent);
+                                                        finish();
                                                     }
                                                 }).addOnFailureListener(new OnFailureListener() {
                                                     @Override
@@ -161,12 +159,12 @@ public class SocietyM_RegistrationPage extends AppCompatActivity {
 //                                        Intent i = new Intent(SocietyM_RegistrationPage.this,SocietyM_HomePage.class);
 //                                        startActivity(i);
 
-                                    } else {
-                                        // If sign in fails, display a message to the user.
-                                        Toast.makeText(SocietyM_RegistrationPage.this, "Authentication failed.",
-                                                Toast.LENGTH_SHORT).show();
-
                                     }
+                                }
+                                else {
+                                    // If sign in fails, display a message to the user.
+                                    Toast.makeText(SocietyM_RegistrationPage.this, "Email is already in use",
+                                            Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

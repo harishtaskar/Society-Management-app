@@ -87,7 +87,7 @@
         android:hint="Due Date"
         android:textSize="@dimen/_12sdp"
         android:textColor="@color/black"
-        android:background="@drawable/custom_edittext2">
+        android:background="@drawable/custom_edittext3">
 
 
     </TextView>

@@ -31,6 +31,8 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.checkerframework.checker.units.qual.A;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -43,6 +45,7 @@ public class SocietyM_showMaintenance extends AppCompatActivity implements Adapt
     ArrayList<FlatsSpinner> flatsArrayList;
     myRecycleVA_SM_Maintenance myMRVAdapter;
     myRecycleVA_FlatSpinner myRVFSAdapter;
+
     RecyclerView recyclerView;
     Spinner Flat_Spinner;
 
@@ -67,6 +70,7 @@ public class SocietyM_showMaintenance extends AppCompatActivity implements Adapt
                 startActivity(intent);
             }
         });
+
         EventChangeListener();
 //        EventChangeListener2();
         myRVFSAdapter = new myRecycleVA_FlatSpinner(getApplicationContext(),flatsArrayList);
@@ -74,9 +78,6 @@ public class SocietyM_showMaintenance extends AppCompatActivity implements Adapt
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Flat_Spinner.setAdapter(adapter);
         Flat_Spinner.setOnItemSelectedListener(this);
-
-
-
 
     }
 

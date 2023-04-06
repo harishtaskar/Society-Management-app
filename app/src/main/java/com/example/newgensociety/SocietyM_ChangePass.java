@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -45,6 +46,14 @@ public class SocietyM_ChangePass extends AppCompatActivity {
         ChangePass = findViewById(R.id.Sm_ChangePass);
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
+
+        ForgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SocietyM_ChangePass.this,SocietyM_ForgotPassword.class);
+                startActivity(intent);
+            }
+        });
 
         ChangePass.setOnClickListener(new View.OnClickListener() {
             @Override

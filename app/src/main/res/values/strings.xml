@@ -40,6 +40,10 @@
     <string name="change_password">Change Password</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="forgot_password1">Forgot Password</string>
+    <string name="flats">Flats</string>
+    <string name="All">All Flats</string>
+    <string name="all_flat">All Flat</string>
+    <string name="maintenance1">Maintenance</string>
     <string-array name="array_indian_states">
         <item>Select Your State</item>
         <item>Andaman and Nicobar Islands</item>
