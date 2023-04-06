@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,14 +51,18 @@ public class CommitteeM_ChangePass extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
+        ForgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CommitteeM_ChangePass.this,CommitteeM_ForgotPassword.class);
+                startActivity(intent);
+            }
+        });
+
         ChangePass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (OldPass.getText().toString().length() == 0){
-                    OldPass.setError("Please Enter this field");
-                    return;
-                }
-                else if (NewPass.getText().toString().length() < 8){
+                if (NewPass.getText().toString().length() < 8){
                     NewPass.setText("Invalid Password");
                     Toast.makeText(CommitteeM_ChangePass.this, "Password Should be minimum 8 digits", Toast.LENGTH_SHORT).show();
                     return;
@@ -86,10 +91,9 @@ public class CommitteeM_ChangePass extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()){
-                            Toast.makeText(CommitteeM_ChangePass.this, "Successful",
-                                    Toast.LENGTH_SHORT).show();
                             for ( QueryDocumentSnapshot document : task.getResult()){
                                 Log.d(TAG, document.getId()+ "=>"+ document.getData());
+
                                 FirebaseOldPass = Objects.requireNonNull(document.get("Cm_password")).toString();
 
                                 if(FirebaseOldPass.equals(OldPass.getText().toString())){
@@ -103,6 +107,8 @@ public class CommitteeM_ChangePass extends AppCompatActivity {
                                 }
                                 else {
                                     Toast.makeText(CommitteeM_ChangePass.this, "Old Password Not Matched", Toast.LENGTH_SHORT).show();
+                                    OldPass.setError("Old Password is wrong");
+                                    return;
                                 }
                             }
 
@@ -131,7 +137,7 @@ public class CommitteeM_ChangePass extends AppCompatActivity {
                 }).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(getApplicationContext(),"Successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Password Changed Successfully", Toast.LENGTH_SHORT).show();
                         OldPass.setText("");
                         NewPass.setText("");
                         ConNewPass.setText("");

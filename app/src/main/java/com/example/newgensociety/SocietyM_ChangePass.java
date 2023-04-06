@@ -49,11 +49,8 @@ public class SocietyM_ChangePass extends AppCompatActivity {
         ChangePass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (OldPass.getText().toString().length() == 0){
-                    OldPass.setError("Please Enter this field");
-                    return;
-                }
-                else if (NewPass.getText().toString().length() < 8){
+
+                if (NewPass.getText().toString().length() < 8){
                     NewPass.setText("Invalid Password");
                     Toast.makeText(SocietyM_ChangePass.this, "Password Should be minimum 8 digits", Toast.LENGTH_SHORT).show();
                     return;
@@ -81,13 +78,12 @@ public class SocietyM_ChangePass extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()){
-                            Toast.makeText(SocietyM_ChangePass.this, "Successful",
-                                    Toast.LENGTH_SHORT).show();
                             for ( QueryDocumentSnapshot document : task.getResult()){
                                 Log.d(TAG, document.getId()+ "=>"+ document.getData());
                                 FirebaseOldPass = Objects.requireNonNull(document.get("Password")).toString();
 
                                 if(FirebaseOldPass.equals(OldPass.getText().toString())){
+
                                     if (!NewPass.getText().toString().equals(ConNewPass.getText().toString())) {
                                         ConNewPass.setError("Password Doesn't Matched");
                                         return;
@@ -126,7 +122,7 @@ public class SocietyM_ChangePass extends AppCompatActivity {
                 }).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(getApplicationContext(),"Successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Password Changed Successfully", Toast.LENGTH_SHORT).show();
                         OldPass.setText("");
                         NewPass.setText("");
                         ConNewPass.setText("");

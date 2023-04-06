@@ -39,6 +39,7 @@
     <string name="complains">Complains</string>
     <string name="change_password">Change Password</string>
     <string name="forgot_password">Forgot Password</string>
+    <string name="forgot_password1">Forgot Password</string>
     <string-array name="array_indian_states">
         <item>Select Your State</item>
         <item>Andaman and Nicobar Islands</item>
