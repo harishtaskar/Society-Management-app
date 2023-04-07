@@ -1,6 +1,7 @@
 package com.example.newgensociety;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,6 +85,18 @@ public class myRecycleVA_SM_Maintenance extends RecyclerView.Adapter<myRecycleVA
         holder.due_date.setText("Due On : "+maintenance.getDue_date());
         holder.discription.setText(maintenance.getDiscription());
         holder.discount.setText("Pay Before Due and Get "+String.valueOf(maintenance.getDiscount())+"% Discount");
+
+        holder.PayNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context,Maintenance_Payment.class);
+                i.putExtra("falt_no",maintenanceArrayList.get(position).getFlat_no());
+                i.putExtra("amount",String.valueOf(maintenanceArrayList.get(position).getAmount()));
+                i.putExtra("dueDate",maintenanceArrayList.get(position).getDue_date());
+                i.putExtra("discount",String.valueOf(maintenanceArrayList.get(position).getDiscount()));
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -103,16 +116,14 @@ public class myRecycleVA_SM_Maintenance extends RecyclerView.Adapter<myRecycleVA
             discount = itemView.findViewById(R.id.Society_MaintenanceR_DiscountText);
             PayNow = itemView.findViewById(R.id.Society_MaintenanceR_PayText);
 
-            String FlatNumber = flat_no.getText().toString();
-            String Amount = amount.getText().toString();
-            String DueDate = due_date.getText().toString();
-            Integer Discount = Integer.parseInt(discount.getText().toString());
-
-
+//            String FlatNumber = flat_no.getText().toString();
+//            String Amount = amount.getText().toString();
+//            String DueDate = due_date.getText().toString();
+//            Integer Discount = Integer.parseInt(discount.getText().toString());
             PayNow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemClick(getAdapterPosition());
+//                    listener.onItemClick(getAdapterPosition());
                 }
             });
         }

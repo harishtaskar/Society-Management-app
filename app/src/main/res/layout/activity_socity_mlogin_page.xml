@@ -15,8 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        app:cardCornerRadius="30dp"
-        app:cardElevation="20dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
         android:background="@drawable/custom_edittext">
 
         <LinearLayout
@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:id="@+id/Society_Login_editT_Scode"
-                android:background="@drawable/custom_edittext2"
+                android:background="@drawable/custom_edittext3"
                 android:drawablePadding="8dp"
                 android:textColorHint="#808080"
                 android:hint="Society code"
@@ -59,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:id="@+id/Society_Login_editT_Email"
-                android:background="@drawable/custom_edittext2"
+                android:background="@drawable/custom_edittext3"
                 android:drawablePadding="8dp"
                 android:textColorHint="#808080"
                 android:hint="Email"
@@ -73,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:id="@+id/Society_Login_editT_Pass"
-                android:background="@drawable/custom_edittext2"
+                android:background="@drawable/custom_edittext3"
                 android:drawablePadding="8dp"
                 android:hint="Password"
                 android:paddingStart="20dp"

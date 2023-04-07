@@ -159,7 +159,6 @@ public class CommitteeM_ForgotPassword extends AppCompatActivity {
     private void setChangePass() {
         String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
-
         db.collection("C_Members").document(UserId)
                 .update("Cm_password",generatedPassword)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

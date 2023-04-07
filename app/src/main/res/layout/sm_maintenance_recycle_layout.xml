@@ -109,6 +109,7 @@
                     android:background="@drawable/custom_edittext2"
                     android:textStyle="bold"
                     android:text="@string/pay_now"
+                    android:layout_marginLeft="@dimen/_10sdp"
                     android:shadowRadius="@integer/material_motion_duration_long_1"
                     android:textColor="#C10D00">
 

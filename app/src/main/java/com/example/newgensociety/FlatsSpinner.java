@@ -7,6 +7,10 @@ public class FlatsSpinner {
     public FlatsSpinner(){
     }
 
+    public FlatsSpinner(Integer flat_no) {
+        this.flat_no = flat_no;
+    }
+
     public Integer getFlat_no() {
         return flat_no;
     }

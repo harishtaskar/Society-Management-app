@@ -135,7 +135,7 @@ public class CommitteeM_MaintenancePage extends AppCompatActivity {
                 String UpiId = upiId.getText().toString();
                 String flatNo = FlatNo.getText().toString();
                 String description = Discription.getText().toString();
-                String dueDate = DueDateString;
+                String dueDate = Duedate.getText().toString();
                 Integer amount = Integer.parseInt(Amount.getText().toString());
                 Integer Discount = discount;
 

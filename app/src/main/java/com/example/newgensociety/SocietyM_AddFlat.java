@@ -40,12 +40,9 @@ public class SocietyM_AddFlat extends AppCompatActivity {
     int year, month, day;
     String DueDateString;
     FirebaseFirestore db;
-    FirebaseDatabase dbf;
-
     RadioButton Flat_Owner, RentedFlat, Rented_Others;
     Button AddFlat;
     ImageView Back;
-    DatabaseReference rootDatabaseRef;
 
 
     @Override
@@ -138,17 +135,6 @@ public class SocietyM_AddFlat extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(),"Failed", Toast.LENGTH_SHORT).show();
                             }
                         });
-                //Realtime Database
-//                Flats flats = new Flats(flatno, name, mobile, duedate, status, UserId);
-//
-//                dbf = FirebaseDatabase.getInstance("https://new-generation-society-default-rtdb.asia-southeast1.firebasedatabase.app/");
-//                rootDatabaseRef = dbf.getReference("Flats");
-//                rootDatabaseRef.child(String.valueOf(flatno)).setValue(flats).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//
-//                    }
-//                });
             }
         });
 

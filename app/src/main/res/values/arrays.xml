@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="flatsArrayList" />
+<!--    <string-array name="flatsArrayList" />-->
+    <string-array name="flatsArrayList">
+        <item>0</item>
+        <item>5</item>
+        <item>10</item>
+        <item>100</item>
+        <item>1000</item>
+        <item>10000</item>
+    </string-array>
 </resources>
