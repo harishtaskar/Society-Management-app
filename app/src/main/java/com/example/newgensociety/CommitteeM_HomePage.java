@@ -58,7 +58,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
 
 //    home page
     ImageView commitee_img, Profile;
-    CardView cardmain1,cardmain2,Society_meetings,Complains,Helps,Helps2,allFlats;
+    CardView cardmain1,cardmain2,Society_meetings,Complains,Helps,Helps2,allFlats,requests;
     TextView cm_name;
     RecyclerView recyclerView;
     ArrayList<Notice> noticeArrayList;
@@ -67,7 +67,6 @@ public class CommitteeM_HomePage extends AppCompatActivity {
     FirebaseAuth mAuth;
     StorageReference storageRef;
 //    ProgressDialog progressDialog;
-
     //profile page
     TextView cpsocietyname,cpsocietyaddress,cpmembername,cpmemberemail,cpabout,cpfeedback,cplogout,cptermsorcondition,cpversion;
     Button cpeditbtn;
@@ -91,6 +90,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
         Helps = findViewById(R.id.Committee_home_Helps);
         cm_name = findViewById(R.id.Committee_Home_Cm_name);
         allFlats = findViewById(R.id.Committee_AddFlat);
+        requests = findViewById(R.id.Committee_Requests);
 
         //profile page
         cpmemberimage = findViewById(R.id.committee_profile_img);
@@ -376,6 +376,13 @@ public class CommitteeM_HomePage extends AppCompatActivity {
             }
         });
 
+        requests.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CommitteeM_HomePage.this,CommitteeM_showHall.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
