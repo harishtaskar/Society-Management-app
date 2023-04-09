@@ -37,7 +37,7 @@ public class CommitteeM_LoginPage extends AppCompatActivity {
     String Userid, status;
     ProgressBar progressBar;
     boolean SocietyM_Status = false;
-    TextView signup;
+    TextView signup, ForgotPassword;
 
 
 
@@ -54,6 +54,7 @@ public class CommitteeM_LoginPage extends AppCompatActivity {
         signup = findViewById(R.id.signupText);
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
+        ForgotPassword = findViewById(R.id.Committee_Login_forgot);
 
 //        Intent intent = getIntent();
 //        status = intent.getStringExtra("statusKey");
@@ -83,7 +84,7 @@ public class CommitteeM_LoginPage extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility(view.VISIBLE);
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(),"Login Succsefully", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),"Login Successfully", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(),CommitteeM_HomePage.class);
                                     startActivity(intent);
                                     finish();
@@ -95,6 +96,14 @@ public class CommitteeM_LoginPage extends AppCompatActivity {
                             }
                         });
 
+            }
+        });
+
+        ForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CommitteeM_LoginPage.this,SocietyM_Login_ForgotPassword.class);
+                startActivity(intent);
             }
         });
         signup.setOnClickListener(new View.OnClickListener() {

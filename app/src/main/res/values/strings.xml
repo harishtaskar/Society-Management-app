@@ -23,6 +23,7 @@
     <string name="you_are_not_committee_member">You are Not Committee Member</string>
     <string name="sorry">Sorry!!</string>
     <string name="contact">Contact</string>
+    <string name="app_url">https://play.google.com/store/apps/details?id=com.example.myapp</string>
     <string name="committee_member_name">Committee Member name</string>
     <string name="pay_now">Pay Now</string>
     <string name="paid_on_31_feb_2025">paid on 31-feb-2025</string>

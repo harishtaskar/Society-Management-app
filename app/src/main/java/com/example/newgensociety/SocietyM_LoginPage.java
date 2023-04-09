@@ -17,10 +17,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class SocityM_LoginPage extends AppCompatActivity {
+public class SocietyM_LoginPage extends AppCompatActivity {
 
     EditText Email;
-    TextView SignupText;
+    TextView SignupText, ForgotPassword;
     FirebaseAuth mAuth;
     EditText password;
     Button loginButton;
@@ -45,7 +45,7 @@ public class SocityM_LoginPage extends AppCompatActivity {
         password = findViewById(R.id.Society_Login_editT_Pass);
         loginButton = findViewById(R.id.Society_loginButton);
         SignupText = findViewById(R.id.signupText);
-
+        ForgotPassword = findViewById(R.id.Society_Login_forgot);
 
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +66,7 @@ public class SocityM_LoginPage extends AppCompatActivity {
                                         finish();
                                     } else {
 
-                                        Toast.makeText(SocityM_LoginPage.this, "Authentication failed.",
+                                        Toast.makeText(SocietyM_LoginPage.this, "Authentication failed.",
                                                 Toast.LENGTH_SHORT).show();
                                     }
                                 }
@@ -74,10 +74,17 @@ public class SocityM_LoginPage extends AppCompatActivity {
 
             }
         });
+        ForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SocietyM_LoginPage.this,SocietyM_Login_ForgotPassword.class);
+                startActivity(intent);
+            }
+        });
         SignupText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SocityM_LoginPage.this,SocietyM_RegistrationPage.class);
+                Intent intent = new Intent(SocietyM_LoginPage.this,SocietyM_RegistrationPage.class);
                 startActivity(intent);
             }
         });

@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         SocietyM_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,SocityM_LoginPage.class);
+                Intent intent = new Intent(MainActivity.this, SocietyM_LoginPage.class);
                 startActivity(intent);
                 finish();
             }

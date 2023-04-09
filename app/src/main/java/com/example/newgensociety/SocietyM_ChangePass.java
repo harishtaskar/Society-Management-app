@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -78,6 +79,7 @@ public class SocietyM_ChangePass extends AppCompatActivity {
     }
     private void getFirebasePass() {
 
+
         mAuth = FirebaseAuth.getInstance();
         String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
         db = FirebaseFirestore.getInstance();
@@ -116,31 +118,26 @@ public class SocietyM_ChangePass extends AppCompatActivity {
 
     }
     private void getChangePass() {
+
         String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
         String NewPassword = NewPass.getText().toString();
-
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            user.updatePassword(NewPassword)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Log.d(TAG, "Password updated");
+                            } else {
+                                Log.d(TAG, "error occurred when Password updated");
+                            }
+                        }
+                    });
+        }else{
+            Toast.makeText(this, "User Not Found", Toast.LENGTH_SHORT).show();
+        }
 //        Map<String,Object> password = new HashMap<>();
 //        password.put("Cm_password", NewPassword);
-
-        db.collection("Society_Members").document(UserId)
-                .update("Password",NewPassword)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(getApplicationContext(),"Password Changed Successfully", Toast.LENGTH_SHORT).show();
-                        OldPass.setText("");
-                        NewPass.setText("");
-                        ConNewPass.setText("");
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(),"Failed", Toast.LENGTH_SHORT).show();
-                    }
-                });
     }
 }

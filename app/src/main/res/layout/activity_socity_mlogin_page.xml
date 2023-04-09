@@ -84,6 +84,16 @@
                 android:textColorHighlight="@color/cardview_dark_background"
                 android:layout_marginTop="20dp"/>
 
+            <TextView
+                android:id="@+id/Society_Login_forgot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Forgot Password"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:textColor="@color/blue"
+                />
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -92,7 +102,7 @@
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:background="@drawable/custom_button"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 app:cornerRadius = "20dp"/>
 
         </LinearLayout>

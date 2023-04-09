@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -72,6 +73,24 @@ public class CommitteeM_ForgotPassword extends AppCompatActivity {
                 generatedPassword = buffer.toString();
 
                 mAuth = FirebaseAuth.getInstance();
+                String email = Email.getText().toString();
+                mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(CommitteeM_ForgotPassword.this, "Done Sent", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(CommitteeM_ForgotPassword.this, "Error Occurred", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(CommitteeM_ForgotPassword.this, "Error Failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
                 db = FirebaseFirestore.getInstance();
                 db.collection("C_Members").whereEqualTo("userId",UserId)
@@ -127,6 +146,7 @@ public class CommitteeM_ForgotPassword extends AppCompatActivity {
                                                 });
 
                                                 thread.start();
+
                                                 setChangePass();
                                                 Toast.makeText(CommitteeM_ForgotPassword.this, "New Password has been send to your registered mail", Toast.LENGTH_SHORT).show();
                                                 Email.setText("");
@@ -159,23 +179,22 @@ public class CommitteeM_ForgotPassword extends AppCompatActivity {
     private void setChangePass() {
         String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
-        db.collection("C_Members").document(UserId)
-                .update("Cm_password",generatedPassword)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(),"Failed", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            user.updatePassword(generatedPassword)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Log.i("intent_", "Password updated");
+                            } else {
+                                Log.d(TAG, "error occurred when Password updated");
+                            }
+                        }
+                    });
+        }else{
+            Toast.makeText(this, "User Not Found", Toast.LENGTH_SHORT).show();
+        }
 
     }
 }

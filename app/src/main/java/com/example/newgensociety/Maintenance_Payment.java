@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,7 +22,12 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.shreyaspatil.EasyUpiPayment.EasyUpiPayment;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
+import java.util.TimeZone;
 
 public class Maintenance_Payment extends AppCompatActivity {
 
@@ -30,6 +36,7 @@ public class Maintenance_Payment extends AppCompatActivity {
     FirebaseFirestore db;
     String PayerName;
     FirebaseAuth mAuth;
+
     int payableAmount, discount;
 
     @Override
@@ -69,11 +76,26 @@ public class Maintenance_Payment extends AppCompatActivity {
         if (intent != null){
             String Flat_Number = intent.getStringExtra("falt_no");
             String Due_Date = intent.getStringExtra("dueDate");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date date1 = null;
+            try{
+                date1 = simpleDateFormat.parse(Due_Date);
+                Log.i("intent_","==date==-"+date1);
+            }catch (ParseException e){
+                e.printStackTrace();
+            }
+            String duedate = simpleDateFormat.format(date1);
+
+            Date currentDate = new Date();
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            dateFormat.setTimeZone(TimeZone.getTimeZone("GMT-5"));
             int AmountA = Integer.parseInt(intent.getStringExtra("amount"));
             int DiscountP = Integer.parseInt(intent.getStringExtra("discount"));
-
-            int DiscountA = (AmountA*DiscountP)/100;
-            int Payableamount = AmountA-DiscountA;
+            if(currentDate.after(date1)){
+                DiscountP = 0;
+            }
+                int DiscountA = (AmountA*DiscountP)/100;
+                int Payableamount = AmountA-DiscountA;
 
                     Pay.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -90,18 +112,14 @@ public class Maintenance_Payment extends AppCompatActivity {
                 }
             });
 
-
-
             Log.i("intent_","==a=="+AmountA);
             Log.i("intent_","==f=="+Flat_Number);
             FlatNumber.setText("Flat Number: "+Flat_Number);
-            DueDate.setText(Due_Date);
+            DueDate.setText(duedate);
             Amount.setText(String.valueOf(AmountA));
             Discount.setText(String.valueOf(DiscountA));
             PayableAmount.setText(String.valueOf(Payableamount));
-
         }
-
     }
 
     private void PaymentGatewayStart() {

@@ -370,7 +370,6 @@ public class committeeM_registration_page extends AppCompatActivity {
                                     cm_member.put("Address", Address);
                                     cm_member.put("Cm_name", cMemberName);
                                     cm_member.put("Cm_email",email);
-                                    cm_member.put("Cm_password",password);
                                     cm_member.put("cm_contact",contact);
                                     cm_member.put("Cm_id", cm_id);
                                     cm_member.put("userId",userId);

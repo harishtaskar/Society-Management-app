@@ -100,7 +100,6 @@ public class SocietyM_RegistrationPage extends AppCompatActivity {
                                     Map<String, Object> s_member = new HashMap<>();
                                     s_member.put("Society_code", Society_code);
                                     s_member.put("Email", Email);
-                                    s_member.put("Password", Password);
                                     s_member.put("Member_Name", Name);
                                     s_member.put("Mobile", Mobile);
                                     s_member.put("Status", Status);

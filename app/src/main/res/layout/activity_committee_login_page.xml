@@ -135,7 +135,15 @@
                     android:layout_marginTop="20dp"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-
+            <TextView
+                android:id="@+id/Committee_Login_forgot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Forgot Password"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:textColor="@color/blue"
+                />
 
             <ProgressBar
                 android:id="@+id/Progressbar"
@@ -151,7 +159,7 @@
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:background="@drawable/custom_button2"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="@dimen/_15sdp"
                 app:cornerRadius = "15dp"/>
 

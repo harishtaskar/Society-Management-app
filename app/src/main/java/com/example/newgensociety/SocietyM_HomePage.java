@@ -62,7 +62,7 @@ public class SocietyM_HomePage extends AppCompatActivity {
     FirebaseFirestore db;
     Button EditProfile;
     CardView complain,maintenance,help,meeting,noticeboard,profileHelp,Addflat,Addflatp;
-    TextView logout,SocietyM_name,SocietyM_email,SocietyName,SocietyAddress,SM_Name;
+    TextView logout,SocietyM_name,SocietyM_email,SocietyName,SocietyAddress,SM_Name,SM_Share;
     RelativeLayout profile,home,notice;
     FirebaseAuth mAuth;
     String S_name,Address;
@@ -93,6 +93,7 @@ public class SocietyM_HomePage extends AppCompatActivity {
         imageView = findViewById(R.id.SocietyM_profile_img);
         SM_Name = findViewById(R.id.Society_Home_sm_name);
         Profile = findViewById(R.id.home_btnprofile);
+        SM_Share = findViewById(R.id.Society_profile_share);
         mAuth = FirebaseAuth.getInstance();
 
         bottomNavigation = findViewById(R.id.bottomNavigation);
@@ -322,7 +323,16 @@ public class SocietyM_HomePage extends AppCompatActivity {
             }
         });
 
-
+        String appUrl = getString(R.string.app_url);
+        SM_Share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, appUrl);
+                startActivity(Intent.createChooser(shareIntent, "Share via"));
+            }
+        });
 
         complain.setOnClickListener(new View.OnClickListener() {
             @Override
