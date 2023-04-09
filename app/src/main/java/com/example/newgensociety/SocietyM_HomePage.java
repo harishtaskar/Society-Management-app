@@ -305,7 +305,6 @@ public class SocietyM_HomePage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         Addflatp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -333,7 +332,6 @@ public class SocietyM_HomePage extends AppCompatActivity {
                 startActivity(Intent.createChooser(shareIntent, "Share via"));
             }
         });
-
         complain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -341,9 +339,6 @@ public class SocietyM_HomePage extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-
-
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -351,7 +346,6 @@ public class SocietyM_HomePage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         maintenance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

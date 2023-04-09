@@ -47,6 +47,8 @@
     <string name="maintenance1">Maintenance</string>
     <string name="society_hall">Society Hall</string>
     <string name="description">Description</string>
+    <string name="add_new_society">Add New Society</string>
+    <string name="login_as_committee_member">Login as Committee Member</string>
     <string-array name="array_indian_states">
         <item>Select Your State</item>
         <item>Andaman and Nicobar Islands</item>

@@ -112,7 +112,7 @@ public class SocietyM_ForgotPassword extends AppCompatActivity {
                                                 mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(StringRecieverEmail));
 
                                                 mimeMessage.setSubject("New Password");
-                                                mimeMessage.setText("Your New Password For New Generation Society is " + generatedPassword);
+                                                mimeMessage.setText("Your New Password For New Generation Society is --->" + generatedPassword);
 
                                                 Thread thread = new Thread(new Runnable() {
                                                     @Override
@@ -124,8 +124,6 @@ public class SocietyM_ForgotPassword extends AppCompatActivity {
                                                         }
                                                     }
                                                 });
-
-
 
                                                 thread.start();
                                                 setChangePass();

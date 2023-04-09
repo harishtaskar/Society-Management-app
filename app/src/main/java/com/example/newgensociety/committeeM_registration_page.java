@@ -30,6 +30,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 
 public class committeeM_registration_page extends AppCompatActivity {
 
@@ -46,7 +47,6 @@ public class committeeM_registration_page extends AppCompatActivity {
     private ArrayAdapter<CharSequence> stateAdapter, cityAdapter;
 
     FirebaseFirestore db;
-    DatabaseReference rootDatabaseRef;
 
     // to check whether the user is already registered or not
     @Override
@@ -339,20 +339,18 @@ public class committeeM_registration_page extends AppCompatActivity {
                                         }
                                     });
 
+                                    int leftLimit = 65; // letter 'a'
+                                    int rightLimit = 90; // letter 'z'
+                                    int targetStringLength = 6;
+                                    Random random = new Random();
+                                    StringBuilder buffer = new StringBuilder(targetStringLength);
+                                    for (int i = 0; i < targetStringLength; i++) {
+                                        int randomLimitedInt = leftLimit + (int)
+                                                (random.nextFloat() * (rightLimit - leftLimit + 1));
+                                        buffer.append((char) randomLimitedInt);
+                                    }
 
-//                                    db.collection("Users")
-//                                            .add(user)
-//                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                                                @Override
-//                                                public void onSuccess(DocumentReference documentReference) {
-//                                                    Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
-//                                                }
-//                                            }).addOnFailureListener(new OnFailureListener() {
-//                                                @Override
-//                                                public void onFailure(@NonNull Exception e) {
-//                                                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
-//                                                }
-//                                            });
+                                    String generatedString = buffer.toString();
                                     String area = Area.getText().toString();
                                     String location = Location.getText().toString();
                                     String state = selectedState;
@@ -363,19 +361,18 @@ public class committeeM_registration_page extends AppCompatActivity {
                                     String societyName = SocietyName.getText().toString();
                                     String cMemberName = CMemberName.getText().toString();
                                     String contact = Contact.getText().toString();
-                                    Integer cm_id = Integer.parseInt(String.valueOf(Cm_id));
 
-                                    Map<String,Object> cm_member = new HashMap<>();
-                                    cm_member.put("Society_name", societyName);
-                                    cm_member.put("Address", Address);
-                                    cm_member.put("Cm_name", cMemberName);
-                                    cm_member.put("Cm_email",email);
-                                    cm_member.put("cm_contact",contact);
-                                    cm_member.put("Cm_id", cm_id);
-                                    cm_member.put("userId",userId);
+                                    Map<String,Object> society = new HashMap<>();
+                                    society.put("Society_name", societyName);
+                                    society.put("Address", Address);
+                                    society.put("Cm_name", cMemberName);
+                                    society.put("Cm_email",email);
+                                    society.put("Cm_contact",contact);
+                                    society.put("userId",userId);
+                                    society.put("Society_Code",generatedString);
 
-                                    db.collection("C_Members").document(userId)
-                                            .set(cm_member)
+                                    db.collection("Society").document(userId)
+                                            .set(society)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void unused) {
@@ -386,13 +383,8 @@ public class committeeM_registration_page extends AppCompatActivity {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     Toast.makeText(getApplicationContext(),"Successful", Toast.LENGTH_SHORT).show();
-                                                    String cMemberName = CMemberName.getText().toString();
-                                                    String email = Email.getText().toString();
-
                                                     Intent intent = new Intent(committeeM_registration_page.this,CommitteeM_HomePage.class);
-                                                    intent.putExtra("key_cm_email", email);
-                                                    intent.putExtra("key_cm_name", cMemberName);
-                                                    Cm_id++;
+                                                    startActivity(intent);
                                                 }
                                             }).addOnFailureListener(new OnFailureListener() {
                                                 @Override
@@ -412,14 +404,6 @@ public class committeeM_registration_page extends AppCompatActivity {
                                 }
                             }
                         });
-
-
-
-
-//                rootDatabaseRef = FirebaseDatabase.getInstance().getReference().child("CM_name");
-//                String CM_name = CMemberName.getText().toString();
-//                rootDatabaseRef.setValue(CM_name);
-
 
             }
         });

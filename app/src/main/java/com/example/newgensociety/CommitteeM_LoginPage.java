@@ -1,5 +1,7 @@
 package com.example.newgensociety;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,13 +27,15 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Objects;
 
 public class CommitteeM_LoginPage extends AppCompatActivity {
 
     EditText emailogin;
-    EditText passwordlogin;
+    EditText passwordlogin,societycode;
     Button loginButton;
     FirebaseAuth mAuth;
     FirebaseFirestore db;
@@ -55,6 +60,7 @@ public class CommitteeM_LoginPage extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         ForgotPassword = findViewById(R.id.Committee_Login_forgot);
+        societycode = findViewById(R.id.Committee_Login_editT_Scode);
 
 //        Intent intent = getIntent();
 //        status = intent.getStringExtra("statusKey");
@@ -64,38 +70,38 @@ public class CommitteeM_LoginPage extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressBar.setVisibility(View.VISIBLE);
-                String email, password ;
-                email = String.valueOf(emailogin.getText());
-                password = String.valueOf(passwordlogin.getText());
-
-                if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(CommitteeM_LoginPage.this, "Enter Email", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(CommitteeM_LoginPage.this, "Enter Password", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                progressBar.setVisibility(view.VISIBLE);
+                db.collection("Society")
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                progressBar.setVisibility(view.VISIBLE);
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(),"Login Successfully", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(),CommitteeM_HomePage.class);
-                                    startActivity(intent);
-                                    finish();
-                                } else {
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()){
+                                    for ( QueryDocumentSnapshot document : task.getResult()){
+                                        Log.d(TAG, document.getId()+ "=>"+ document.getData());
+                                        String societyCode = Objects.requireNonNull(document.get("Society_Code")).toString();
+                                        String userS_code = societycode.getText().toString();
+                                        String societyEmail = Objects.requireNonNull(document.get("Cm_email")).toString();
+                                        String enteredEmail = emailogin.getText().toString();
+                                        if(!societyEmail.equals(enteredEmail)){
+                                            progressBar.setVisibility(View.INVISIBLE);
+                                            emailogin.setError("Email is invalid");
+                                            return;
+                                        }
+                                        else if(userS_code.equals(societyCode)){
+                                            userAuthentication();
+                                        }
+                                        else{
+                                            progressBar.setVisibility(View.INVISIBLE);
+                                            societycode.setError("invalid society code");
+                                        }
+                                    }
 
-                                    Toast.makeText(CommitteeM_LoginPage.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Toast.makeText(CommitteeM_LoginPage.this, "Error", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
-
             }
         });
 
@@ -111,11 +117,45 @@ public class CommitteeM_LoginPage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(CommitteeM_LoginPage.this, committeeM_registration_page.class);
                 startActivity(intent);
-                finish();
             }
         });
 
     }
+
+    private void userAuthentication() {
+        progressBar.setVisibility(View.VISIBLE);
+        String email, password ;
+        email = String.valueOf(emailogin.getText());
+        password = String.valueOf(passwordlogin.getText());
+
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(CommitteeM_LoginPage.this, "Enter Email", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(CommitteeM_LoginPage.this, "Enter Password", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(),"Login Successfully", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(),CommitteeM_HomePage.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+
+                            Toast.makeText(CommitteeM_LoginPage.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+    }
+
     @Override
     public void onStart() {
         super.onStart();

@@ -72,6 +72,7 @@
                         android:drawableLeft="@drawable/ic_baseline_home_work_24"
                         android:paddingStart="10dp"
                         android:padding="8dp"
+                        android:inputType="text"
                         android:textAllCaps="true"
                         android:textColor="@color/black"
                         android:textColorHighlight="@color/cardview_dark_background"
@@ -201,7 +202,7 @@
                         android:paddingEnd="10dp"
                         android:focusable="true"
                         android:focusableInTouchMode="true"
-                        android:background="@drawable/custom_edittext2"
+                        android:background="@drawable/custom_edittext3"
                         android:id="@+id/Committee_Reg_spinner_state"
                         android:paddingLeft="6dp" />
 
@@ -232,7 +233,7 @@
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:id="@+id/Committee_Reg_spinner_city"
-                    android:background="@drawable/custom_edittext2"
+                    android:background="@drawable/custom_edittext3"
                     android:layout_marginLeft="0dp"
                     android:paddingLeft="10dp"/>
             </LinearLayout>
@@ -278,7 +279,7 @@
                         android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:layout_marginLeft="0dp"
-                        android:background="@drawable/custom_edittext2"
+                        android:background="@drawable/custom_edittext3"
                         android:drawablePadding="8dp"
                         android:hint="Country"
                         android:inputType="text"
@@ -295,6 +296,7 @@
                 </LinearLayout>
                 <TextView
                     android:layout_marginTop="20dp"
+                    android:layout_marginBottom="@dimen/_10sdp"
                     android:layout_width="match_parent"
                     android:text="Persnol Info"
                     android:textSize="18sp"
@@ -483,7 +485,7 @@
                     android:textSize="18sp"
                     android:textAllCaps="false"
                     android:background="@drawable/custom_button2"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="25dp"
                     android:layout_marginBottom="@dimen/_20sdp"
                     app:cornerRadius = "20dp"/>
 
@@ -491,7 +493,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    android:text="Alrady have account? Login Now"
+                    android:text="@string/login_as_committee_member"
                     android:textSize="14sp"
                     android:layout_gravity="center"
                     android:id="@+id/RegloginText"

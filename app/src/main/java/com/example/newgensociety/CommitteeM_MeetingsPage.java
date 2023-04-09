@@ -140,7 +140,6 @@ public class CommitteeM_MeetingsPage extends AppCompatActivity {
                 }
                 String generatedString = buffer.toString();
 
-
                 String subject = Subject.getText().toString();
                 Integer no_of_Members = Integer.parseInt(No_of_Members.getText().toString());
                 String date = Date.getText().toString();

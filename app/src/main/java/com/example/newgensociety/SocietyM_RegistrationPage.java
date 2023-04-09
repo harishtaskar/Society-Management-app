@@ -1,5 +1,7 @@
 package com.example.newgensociety;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,6 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,170 +60,180 @@ public class SocietyM_RegistrationPage extends AppCompatActivity {
 
             public void onClick(View v) {
 
-                String Email = String.valueOf(semail.getText());
-                String Password = String.valueOf(spassword.getText());
-                String Society_code = String.valueOf(scode.getText());
-                String Name = String.valueOf(sname.getText());
-                String Mobile = String.valueOf(smobile.getText());
-                Boolean Status = true;
-                //Authentication
-                mAuth.createUserWithEmailAndPassword(Email, Password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                db.collection("Society")
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    String userId = Objects.requireNonNull(task.getResult().getUser()).getUid();
-                                    boolean is_Society_M = true;
-                                    Map<String, Object> user = new HashMap<>();
-                                    user.put("userId", userId);
-                                    user.put("email", Email);
-                                    user.put("isSociety", is_Society_M);
-
-                                    db.collection("Users").document(userId).set(user)
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void unused) {
-
-                                                }
-                                            })
-                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
-
-                                                }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
-
-                                                }
-                                            });
-
-
-                                    Map<String, Object> s_member = new HashMap<>();
-                                    s_member.put("Society_code", Society_code);
-                                    s_member.put("Email", Email);
-                                    s_member.put("Member_Name", Name);
-                                    s_member.put("Mobile", Mobile);
-                                    s_member.put("Status", Status);
-                                    s_member.put("userId",userId);
-
-                                    isAllFieldsChecked = CheckAllFields();
-                                    if (isAllFieldsChecked) {
-
-                                        //Firebase FireStore
-                                        db.collection("Society_Members").document(userId)
-                                                .set(s_member)
-                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void unused) {
-                                                    }
-                                                })
-                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
-                                                        Intent intent = new Intent(SocietyM_RegistrationPage.this, SocietyM_HomePage .class);
-                                                        scode.setText("");
-                                                        sname.setText("");
-                                                        semail.setText("");
-                                                        spassword.setText("");
-                                                        scpasword.setText("");
-                                                        smobile.setText("");
-                                                        startActivity(intent);
-                                                        finish();
-                                                    }
-                                                }).addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                });
-
-
-                                        //Realtime Database
-//                                        boolean SM_status = true;
-//
-//                                        S_Member sMember = new S_Member(Name, Mobile, Email, Password, SM_status);
-//
-//                                        dbf = FirebaseDatabase.getInstance("https://new-generation-society-default-rtdb.asia-southeast1.firebasedatabase.app/");
-//                                        rootDatabaseRef = dbf.getReference("S_member");
-//                                        rootDatabaseRef.child(Mobile).setValue(sMember).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                            @Override
-//                                            public void onComplete(@NonNull Task<Void> task) {
-//
-//                                            }
-//                                        });
-
-
-                                        Toast.makeText(SocietyM_RegistrationPage.this, "Account Created",
-                                                Toast.LENGTH_SHORT).show();
-//                                        Intent i = new Intent(SocietyM_RegistrationPage.this,SocietyM_HomePage.class);
-//                                        startActivity(i);
-
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()){
+                                    for ( QueryDocumentSnapshot document : task.getResult()){
+                                    Log.d(TAG, document.getId()+ "=>"+ document.getData());
+                                    String societyCode = Objects.requireNonNull(document.get("Society_Code")).toString();
+                                    String userS_code = scode.getText().toString();
+                                    if(userS_code.equals(societyCode)){
+                                        userAuthentication();
                                     }
-                                }
-                                else {
-                                    // If sign in fails, display a message to the user.
-                                    Toast.makeText(SocietyM_RegistrationPage.this, "Email is already in use",
-                                            Toast.LENGTH_SHORT).show();
+                                    else{
+                                        scode.setError("invalid society code");
+                                    }
+                                    }
+
+                                }else{
+                                    Toast.makeText(SocietyM_RegistrationPage.this, "Error", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
 
-
             }
-
-            private boolean CheckAllFields() {
-                if (scode.getText().toString().length() == 0) {
-                    scode.setError("This field is required");
-                    Toast.makeText(SocietyM_RegistrationPage.this, "This field is required", Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-
-                if (sname.length() == 0) {
-                    sname.setError("This field is required");
-                    return false;
-                }
-
-                if (smobile.length() == 0) {
-                    smobile.setError("Email is required");
-                    return false;
-                }
-                if (semail.length() == 0) {
-                    semail.setError("Email is required");
-                    return false;
-                }
-
-                if (spassword.length() == 0) {
-                    spassword.setError("Password is required");
-                    return false;
-                } else if (spassword.length() < 8) {
-                    spassword.setError("Password must be minimum 8 characters");
-                    return false;
-                }
-
-                if (scpasword.length() == 0) {
-                    scpasword.setError("Password is required");
-                    return false;
-                } else if (scpasword.length() < 8) {
-                    scpasword.setError("Password must be minimum 8 characters");
-                    return false;
-                }
-                if (!spassword.getText().toString().equals(scpasword.getText().toString())) {
-                    spassword.setError("Password not matched");
-                    return false;
-                }
-
-                // after all validation return true.
-                return true;
-            }
-
 
         });
 
     }
+
+    private void userAuthentication() {
+        String Email = String.valueOf(semail.getText());
+        String Password = String.valueOf(spassword.getText());
+        mAuth.createUserWithEmailAndPassword(Email, Password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            String userId = Objects.requireNonNull(task.getResult().getUser()).getUid();
+                            boolean is_Society_M = true;
+                            Map<String, Object> user = new HashMap<>();
+                            user.put("userId", userId);
+                            user.put("email", Email);
+                            user.put("isSociety", is_Society_M);
+
+                            db.collection("Users").document(userId).set(user)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+
+                                        }
+                                    })
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    });
+                            String Email = String.valueOf(semail.getText());
+                            String Password = String.valueOf(spassword.getText());
+                            String Society_code = String.valueOf(scode.getText());
+                            String Name = String.valueOf(sname.getText());
+                            String Mobile = String.valueOf(smobile.getText());
+                            Boolean Status = true;
+
+                            Map<String, Object> s_member = new HashMap<>();
+                            s_member.put("Society_code", Society_code);
+                            s_member.put("Email", Email);
+                            s_member.put("Member_Name", Name);
+                            s_member.put("Mobile", Mobile);
+                            s_member.put("Status", Status);
+                            s_member.put("userId",userId);
+
+                            isAllFieldsChecked = CheckAllFields();
+                            if (isAllFieldsChecked) {
+
+                                //Firebase FireStore
+                                db.collection("Society_Members").document(userId)
+                                        .set(s_member)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                            }
+                                        })
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(SocietyM_RegistrationPage.this, SocietyM_HomePage .class);
+                                                scode.setText("");
+                                                sname.setText("");
+                                                semail.setText("");
+                                                spassword.setText("");
+                                                scpasword.setText("");
+                                                smobile.setText("");
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+                                Toast.makeText(SocietyM_RegistrationPage.this, "Account Created",
+                                        Toast.LENGTH_SHORT).show();
+//                                        Intent i = new Intent(SocietyM_RegistrationPage.this,SocietyM_HomePage.class);
+//                                        startActivity(i);
+
+                            }
+                        }
+                        else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(SocietyM_RegistrationPage.this, "Email is already in use",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    private boolean CheckAllFields() {
+        if (scode.getText().toString().length() == 0) {
+            scode.setError("This field is required");
+            Toast.makeText(SocietyM_RegistrationPage.this, "This field is required", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (sname.length() == 0) {
+            sname.setError("This field is required");
+            return false;
+        }
+
+        if (smobile.length() == 0) {
+            smobile.setError("Email is required");
+            return false;
+        }
+        if (semail.length() == 0) {
+            semail.setError("Email is required");
+            return false;
+        }
+
+        if (spassword.length() == 0) {
+            spassword.setError("Password is required");
+            return false;
+        } else if (spassword.length() < 8) {
+            spassword.setError("Password must be minimum 8 characters");
+            return false;
+        }
+
+        if (scpasword.length() == 0) {
+            scpasword.setError("Password is required");
+            return false;
+        } else if (scpasword.length() < 8) {
+            scpasword.setError("Password must be minimum 8 characters");
+            return false;
+        }
+        if (!spassword.getText().toString().equals(scpasword.getText().toString())) {
+            spassword.setError("Password not matched");
+            return false;
+        }
+
+        // after all validation return true.
+        return true;
+    }
+
+
     @Override
     public void onStart() {
         super.onStart();

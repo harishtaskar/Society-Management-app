@@ -30,19 +30,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/Committee_Meetings"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_15sdp"
-                        android:textAlignment="center"
-                        android:text="***Meeting***"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:textStyle="bold"
-                        android:textColor="#102AB8"
-                        >
-                    </TextView>
 
                     <TextView
                         android:id="@+id/Society_Meetings_Subject"

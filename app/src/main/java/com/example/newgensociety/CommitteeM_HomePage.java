@@ -187,7 +187,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
         db = FirebaseFirestore.getInstance();
-        db.collection("C_Members").whereEqualTo("userId",UserId)
+        db.collection("Society").whereEqualTo("userId",UserId)
                                 .get()
                                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                             @Override

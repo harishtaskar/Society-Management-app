@@ -53,8 +53,8 @@ public class CommitteeM_EditProfile extends AppCompatActivity {
     StorageReference storageReference,storageRef;
     Uri imageUri;
     TextView ChangePass;
-    TextInputEditText SocietyName, CM_name, Mobile, Email, Password;
-    String S_name, CM_Contact, CM_Name, C_Email, FirebasePassword, Address, Cm_Id, userId;
+    TextInputEditText SocietyName, CM_name, Mobile, Email;
+    String S_name, CM_Contact, CM_Name, C_Email, Address, userId, SocietyCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +67,6 @@ public class CommitteeM_EditProfile extends AppCompatActivity {
         CM_name = findViewById(R.id.Cm_name);
         Mobile = findViewById(R.id.Cm_mobile);
         Email = findViewById(R.id.Cm_email);
-        Password = findViewById(R.id.Cm_password);
         Update = findViewById(R.id.Cm_update);
         ChangePass = findViewById(R.id.Change_Password);
         ChangePass.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +81,7 @@ public class CommitteeM_EditProfile extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
         db = FirebaseFirestore.getInstance();
-        db.collection("C_Members").whereEqualTo("userId",UserId)
+        db.collection("Society").whereEqualTo("userId",UserId)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -94,16 +93,16 @@ public class CommitteeM_EditProfile extends AppCompatActivity {
                                 Log.d(TAG, document.getId()+ "=>"+ document.getData());
                                 S_name = Objects.requireNonNull(document.get("Society_name")).toString();
                                 SocietyName.setText(S_name);
-                                CM_Contact = Objects.requireNonNull(document.get("cm_contact")).toString();
+                                CM_Contact = Objects.requireNonNull(document.get("Cm_contact")).toString();
                                 Mobile.setText(CM_Contact);
                                 CM_Name = Objects.requireNonNull(document.get("Cm_name")).toString();
                                 CM_name.setText(CM_Name);
                                 C_Email = Objects.requireNonNull(document.get("Cm_email")).toString();
                                 Email.setText(C_Email);
-                                FirebasePassword = Objects.requireNonNull(document.get("Cm_password")).toString();
                                 userId = Objects.requireNonNull(document.get("userId")).toString();
                                 Address = Objects.requireNonNull(document.get("Address")).toString();
-                                Cm_Id = Objects.requireNonNull(document.get("Cm_id")).toString();
+                                SocietyCode = Objects.requireNonNull(document.get("Society_Code")).toString();
+
                             }
 
                         }else{
@@ -114,33 +113,35 @@ public class CommitteeM_EditProfile extends AppCompatActivity {
                     }
                 });
 
+
         Update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String newSociety_Name = Objects.requireNonNull(SocietyName.getText()).toString();
-                String newCM_Name = Objects.requireNonNull(CM_name.getText()).toString();
-                String newCM_Email = Objects.requireNonNull(Email.getText()).toString();
-                String newCM_Mobile = Objects.requireNonNull(Mobile.getText()).toString();
-                String CM_Password = Objects.requireNonNull(Password.getText()).toString();
+                String oldEmail = mAuth.getCurrentUser().getEmail();
+                String newEmail = Email.getText().toString();
 
-                Map<String,Object> new_cm_member = new HashMap<>();
-                new_cm_member.put("Society_name", newSociety_Name);
-                new_cm_member.put("Cm_name", newCM_Name);
-                new_cm_member.put("Cm_email", newCM_Email);
-                new_cm_member.put("cm_contact",newCM_Mobile);
-                new_cm_member.put("userId",UserId);
-                new_cm_member.put("Cm_id",Cm_Id);
-                new_cm_member.put("Address",Address);
-                new_cm_member.put("Cm_password",FirebasePassword);
+                assert oldEmail != null;
+                if(oldEmail.equals(newEmail)) {
+                    String newSociety_Name = Objects.requireNonNull(SocietyName.getText()).toString();
+                    String newCM_Name = Objects.requireNonNull(CM_name.getText()).toString();
+                    String newCM_Email = Objects.requireNonNull(Email.getText()).toString();
+                    String newCM_Mobile = Objects.requireNonNull(Mobile.getText()).toString();
 
+                    Map<String, Object> new_cm_member = new HashMap<>();
+                    new_cm_member.put("Society_name", newSociety_Name);
+                    new_cm_member.put("Cm_name", newCM_Name);
+                    new_cm_member.put("Cm_email", newCM_Email);
+                    new_cm_member.put("Cm_contact", newCM_Mobile);
+                    new_cm_member.put("userId", UserId);
+                    new_cm_member.put("Address", Address);
+                    new_cm_member.put("Society_Code",SocietyCode);
 
-                if(CM_Password.equals(FirebasePassword)) {
-                    db.collection("C_Members").document(UserId)
+                    db.collection("Society").document(UserId)
                             .set(new_cm_member)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
-                                    Password.setText("");
+                                    Toast.makeText(CommitteeM_EditProfile.this, "Profile Updated", Toast.LENGTH_SHORT).show();
                                 }
                             })
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -156,19 +157,19 @@ public class CommitteeM_EditProfile extends AppCompatActivity {
                                 }
                             });
 
+
                     boolean Status = false;
 
                     Map<String, Object> new_user = new HashMap<>();
                     new_user.put("Email", newCM_Email);
-                    new_user.put("isSociety",Status);
-                    new_user.put("userId",UserId);
+                    new_user.put("isSociety", Status);
+                    new_user.put("userId", UserId);
 
                     db.collection("Users").document(UserId)
                             .set(new_user)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
-                                    Password.setText("");
                                 }
                             })
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -182,26 +183,29 @@ public class CommitteeM_EditProfile extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                                 }
                             });
+                    member_img.setImageURI(imageUri);
+                    String UserId = mAuth.getCurrentUser().getUid();
+                    StorageReference storageReference = FirebaseStorage.getInstance().getReference("image/" + UserId);
+                    if(imageUri != null) {
+                        storageReference.putFile(imageUri)
+                                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }else{
+                        Toast.makeText(CommitteeM_EditProfile.this, "imageUri is null", Toast.LENGTH_SHORT).show();
+                    }
 
-                    storageReference = FirebaseStorage.getInstance().getReference("image/"+UserId);
-                    storageReference.putFile(imageUri)
-                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-
-
-
-                }else {
-                    Password.setError("Password Doesn't Matched");
-                    Toast.makeText(getApplicationContext(), "Password Doesn't Matched", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Email.setError("Email Cannot Change");
                 }
 
             }

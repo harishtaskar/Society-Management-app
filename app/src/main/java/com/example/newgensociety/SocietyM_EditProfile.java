@@ -48,10 +48,10 @@ public class SocietyM_EditProfile extends AppCompatActivity {
 
     private static final int PICK_IMAGE = 100;
     ImageView member_img;
-    TextView email, name, mobile, password, ChangePass;
+    TextView email, name, mobile, ChangePass;
     Button select_img_btn, update;
     Uri imageUri;
-    String SM_Contact, SM_Name, SM_Email, FirebasePassword, userId;
+    String SM_Contact, SM_Name, SM_Email, userId;
     FirebaseAuth mAuth;
     FirebaseFirestore db;
     boolean Status = true;
@@ -67,7 +67,6 @@ public class SocietyM_EditProfile extends AppCompatActivity {
         email = findViewById(R.id.semail);
         name = findViewById(R.id.sname);
         mobile = findViewById(R.id.smobile);
-        password = findViewById(R.id.spassword);
         ChangePass = findViewById(R.id.Change_Password);
 
         ChangePass.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +96,6 @@ public class SocietyM_EditProfile extends AppCompatActivity {
                                 name.setText(SM_Name);
                                 SM_Email = Objects.requireNonNull(document.get("Email")).toString();
                                 email.setText(SM_Email);
-                                FirebasePassword = Objects.requireNonNull(document.get("Password")).toString();
                                 userId = Objects.requireNonNull(document.get("userId")).toString();
                             }
 
@@ -114,27 +112,26 @@ public class SocietyM_EditProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String SM_Password = password.getText().toString();
                 String sm_Email = email.getText().toString();
                 String sm_Name = name.getText().toString();
                 String sm_Mobile = mobile.getText().toString();
 
+                String oldEmail = mAuth.getCurrentUser().getEmail();
+                assert oldEmail != null;
+                if(oldEmail.equals(sm_Email)) {
+                    Map<String, Object> new_s_member = new HashMap<>();
+                    new_s_member.put("Email", sm_Email);
+                    new_s_member.put("Member_Name", sm_Name);
+                    new_s_member.put("Mobile", sm_Mobile);
+                    new_s_member.put("userId", UserId);
+                    new_s_member.put("Status", Status);
 
-                Map<String, Object> new_s_member = new HashMap<>();
-                new_s_member.put("Email", sm_Email);
-                new_s_member.put("Member_Name", sm_Name);
-                new_s_member.put("Mobile", sm_Mobile);
-                new_s_member.put("userId", UserId);
-                new_s_member.put("Password", FirebasePassword);
-                new_s_member.put("Status", Status);
-
-                if (SM_Password.equals(FirebasePassword)) {
                     db.collection("Society_Members").document(UserId)
                             .set(new_s_member)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
-                                    password.setText("");
+
                                 }
                             })
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -162,7 +159,7 @@ public class SocietyM_EditProfile extends AppCompatActivity {
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
-                                    password.setText("");
+
                                 }
                             })
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -177,6 +174,7 @@ public class SocietyM_EditProfile extends AppCompatActivity {
                                 }
                             });
 
+                    member_img.setImageURI(imageUri);
                     StorageReference storageReference = FirebaseStorage.getInstance().getReference("image/" + UserId);
                     storageReference.putFile(imageUri)
                             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -190,11 +188,8 @@ public class SocietyM_EditProfile extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                                 }
                             });
-
-
-                } else {
-                    password.setError("Password Doesn't Matched");
-                    Toast.makeText(getApplicationContext(), "Password Doesn't Matched", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(SocietyM_EditProfile.this, "Email Cannot Change", Toast.LENGTH_SHORT).show();
                 }
 
             }
