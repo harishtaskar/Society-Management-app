@@ -56,7 +56,6 @@ public class CommitteeM_AllFlats extends AppCompatActivity {
                             }
                             myMRVAdapter.notifyDataSetChanged();
                         }
-
                     }
                 });
     }

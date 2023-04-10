@@ -32,7 +32,6 @@ public class myRecycleVA_Flats extends RecyclerView.Adapter<myRecycleVA_Flats.My
     public void onBindViewHolder(@NonNull myRecycleVA_Flats.MyViewHolder2 holder, int position) {
         Flats flats = flatsArrayList.get(position);
 
-
         holder.flat_no.setText("Flat Number : "+String.valueOf(flats.getFlat_no()));
         holder.name.setText("Name : "+flats.getName());
         holder.mobile.setText("Mobile : "+flats.getMobile());

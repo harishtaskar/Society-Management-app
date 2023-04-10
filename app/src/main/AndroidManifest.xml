@@ -76,7 +76,7 @@
             android:name=".SocietyM_Meetings_ShowPage"
             android:exported="false" />
         <activity
-            android:name=".SocietyM_NoticeShow"
+            android:name=".SocietyM_HallShow"
             android:exported="false" />
         <activity
             android:name=".SocietyM_HomePage"

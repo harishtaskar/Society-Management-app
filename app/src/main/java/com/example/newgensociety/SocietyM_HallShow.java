@@ -5,13 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
@@ -21,47 +16,27 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class CommitteeM_showHall extends AppCompatActivity {
-
-    ImageView AddHall;
-    TextView Request;
+public class SocietyM_HallShow extends AppCompatActivity {
 
     FirebaseFirestore db;
     ArrayList<Hall> hallArrayList;
     myRecycleVA_Hall myMRVAdapter;
     RecyclerView recyclerView;
 
-    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_committee_mshow_hall);
-         Request = findViewById(R.id.Committee_Hall_Request);
-         AddHall = findViewById(R.id.Committee_Hall_Add);
+        setContentView(R.layout.activity_society_hall_show);
 
-        recyclerView = findViewById(R.id.Committee_Hall_RecycleView);
+        recyclerView = findViewById(R.id.Society_Hall_RecycleView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         db = FirebaseFirestore.getInstance();
         hallArrayList = new ArrayList<Hall>();
-        myMRVAdapter = new myRecycleVA_Hall(CommitteeM_showHall.this,hallArrayList);
+        myMRVAdapter = new myRecycleVA_Hall(SocietyM_HallShow.this,hallArrayList);
         recyclerView.setAdapter(myMRVAdapter);
         EventChangeListener();
 
-         Request.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-
-             }
-         });
-
-         AddHall.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 Intent intent = new Intent(CommitteeM_showHall.this,CommitteeM_AddHall.class);
-                 startActivity(intent);
-             }
-         });
     }
 
     private void EventChangeListener() {
@@ -84,5 +59,4 @@ public class CommitteeM_showHall extends AppCompatActivity {
                     }
                 });
     }
-
 }

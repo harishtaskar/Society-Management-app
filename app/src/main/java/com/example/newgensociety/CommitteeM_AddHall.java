@@ -36,6 +36,9 @@ public class CommitteeM_AddHall extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_committee_madd_hall);
 
+        Title = findViewById(R.id.Committee_Hall_Title);
+        Size = findViewById(R.id.Committee_Hall_Size);
+        Description = findViewById(R.id.Committee_Hall_Description);
         AddHall = findViewById(R.id.Btn_Add_Hall);
         Back = findViewById(R.id.Btn_Hall_Back);
         Back.setOnClickListener(new View.OnClickListener() {
@@ -63,9 +66,7 @@ public class CommitteeM_AddHall extends AppCompatActivity {
                     return;
                 }
 
-                Title = findViewById(R.id.Committee_Hall_Title);
-                Size = findViewById(R.id.Committee_Hall_Size);
-                Description = findViewById(R.id.Committee_Hall_Description);
+
 
                 mAuth = FirebaseAuth.getInstance();
                 db = FirebaseFirestore.getInstance();

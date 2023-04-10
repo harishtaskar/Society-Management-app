@@ -61,7 +61,7 @@ public class SocietyM_HomePage extends AppCompatActivity {
     myRecycleVA_Society_Notice myAdapter;
     FirebaseFirestore db;
     Button EditProfile;
-    CardView complain,maintenance,help,meeting,noticeboard,profileHelp,Addflat,Addflatp;
+    CardView complain,maintenance,help,meeting,amenity,profileHelp,Addflat,Addflatp;
     TextView logout,SocietyM_name,SocietyM_email,SocietyName,SocietyAddress,SM_Name,SM_Share;
     RelativeLayout profile,home,notice;
     FirebaseAuth mAuth;
@@ -80,7 +80,7 @@ public class SocietyM_HomePage extends AppCompatActivity {
         maintenance = findViewById(R.id.Society_Maintenance);
         help = findViewById(R.id.Society_Help);
         meeting = findViewById(R.id.Society_Meeting);
-        noticeboard = findViewById(R.id.Society_Notice);
+        amenity = findViewById(R.id.Society_Amenity);
         EditProfile = findViewById(R.id.Society_profile_edit_button);
         profileHelp = findViewById(R.id.Society_profile_help);
         Addflat = findViewById(R.id.Society_AddFlat);
@@ -343,6 +343,14 @@ public class SocietyM_HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent  = new Intent(SocietyM_HomePage.this,SocietyM_HelpPage.class);
+                startActivity(intent);
+            }
+        });
+
+        amenity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SocietyM_HomePage.this,SocietyM_HallShow.class);
                 startActivity(intent);
             }
         });

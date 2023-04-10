@@ -68,22 +68,29 @@
 
         </LinearLayout>
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_5sdp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="ScrollViewSize">
 
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/Committee_Hall_RecycleView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="700dp"
                 tools:layout_editor_absoluteX="1dp"
                 tools:layout_editor_absoluteY="1dp"
                 tools:ignore="MissingConstraints" />
 
         </LinearLayout>
+
+        </ScrollView>
 
     </LinearLayout>
 
