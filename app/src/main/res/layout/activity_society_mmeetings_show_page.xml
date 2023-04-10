@@ -18,7 +18,7 @@
             android:id="@+id/toolbar"
             android:gravity="center"
             android:elevation="4dp"
-            android:paddingStart="20dp"
+            android:paddingStart="10dp"
             android:background="#BEDFFA"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
@@ -32,7 +32,17 @@
                 android:layout_gravity="center"
                 android:textColor="@color/black"/>
 
+            <ImageView
+                android:id="@+id/Btn_Meetings_Back"
+                android:layout_width="30dp"
+                android:background="#BEDFFA"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:src="@drawable/baseline_arrow_back_24"/>
+
         </Toolbar>
+
+
 
     </LinearLayout>
 

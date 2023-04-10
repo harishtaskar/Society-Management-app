@@ -64,7 +64,7 @@ public class SocietyM_ComplainPage extends AppCompatActivity {
                 String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
                 String date;
                 date = currentDate.toString();
-
+                Boolean isRemoved = false;
                 String Name = name.getText().toString();
                 String About = about.getText().toString();
                 String Description = description.getText().toString();
@@ -74,6 +74,7 @@ public class SocietyM_ComplainPage extends AppCompatActivity {
                 complain.put("about",About);
                 complain.put("description",Description);
                 complain.put("date",date);
+                complain.put("isRemoved",isRemoved);
                 db.collection("Complains")
                         .add(complain)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

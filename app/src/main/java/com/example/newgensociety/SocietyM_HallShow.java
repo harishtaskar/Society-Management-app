@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
@@ -18,6 +21,7 @@ import java.util.ArrayList;
 
 public class SocietyM_HallShow extends AppCompatActivity {
 
+    ImageView Back;
     FirebaseFirestore db;
     ArrayList<Hall> hallArrayList;
     myRecycleVA_Hall myMRVAdapter;
@@ -27,7 +31,7 @@ public class SocietyM_HallShow extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_society_hall_show);
-
+        Back = findViewById(R.id.Btn_Amenities_Back);
         recyclerView = findViewById(R.id.Society_Hall_RecycleView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -36,6 +40,15 @@ public class SocietyM_HallShow extends AppCompatActivity {
         myMRVAdapter = new myRecycleVA_Hall(SocietyM_HallShow.this,hallArrayList);
         recyclerView.setAdapter(myMRVAdapter);
         EventChangeListener();
+
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SocietyM_HallShow.this,SocietyM_HomePage.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 

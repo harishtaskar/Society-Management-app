@@ -62,12 +62,15 @@ public class SocietyM_HelpPage extends AppCompatActivity {
                 String Name = name.getText().toString();
                 Integer Flat = Integer.parseInt(flatno.getText().toString());
                 String Help = helpText.getText().toString();
+                boolean isRemoved = false;
+
 
                 Map<String,Object> help = new HashMap<>();
                 help.put("name",Name);
-                help.put("flat no",Flat);
+                help.put("flat_no",Flat);
                 help.put("help",Help);
                 help.put("date",date);
+                help.put("isRemoved",isRemoved);
                 db.collection("HelpRequests")
                         .add(help)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

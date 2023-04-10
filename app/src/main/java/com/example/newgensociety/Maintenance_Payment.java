@@ -7,10 +7,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +36,7 @@ public class Maintenance_Payment extends AppCompatActivity {
 
     TextView FlatNumber, DueDate, Amount, Discount, PayableAmount,PayeeName;
     Button Pay;
+    ImageView Back;
     FirebaseFirestore db;
     String PayerName;
     FirebaseAuth mAuth;
@@ -50,6 +54,7 @@ public class Maintenance_Payment extends AppCompatActivity {
         PayableAmount = findViewById(R.id.Maintenance_Payment_Payable_Amount);
         PayeeName = findViewById(R.id.Maintenance_Payment_Name);
         Pay = findViewById(R.id.Maintenance_Payment_btn_pay);
+        Back = findViewById(R.id.Back_btn);
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
@@ -93,6 +98,7 @@ public class Maintenance_Payment extends AppCompatActivity {
             int DiscountP = Integer.parseInt(intent.getStringExtra("discount"));
             if(currentDate.after(date1)){
                 DiscountP = 0;
+                DueDate.setTextColor(Color.RED);
             }
                 int DiscountA = (AmountA*DiscountP)/100;
                 int Payableamount = AmountA-DiscountA;
@@ -120,6 +126,15 @@ public class Maintenance_Payment extends AppCompatActivity {
             Discount.setText(String.valueOf(DiscountA));
             PayableAmount.setText(String.valueOf(Payableamount));
         }
+
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(Maintenance_Payment.this,SocietyM_showMaintenance.class);
+                startActivity(intent1);
+            }
+        });
+
     }
 
     private void PaymentGatewayStart() {

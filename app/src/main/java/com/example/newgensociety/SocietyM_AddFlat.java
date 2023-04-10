@@ -78,7 +78,7 @@ public class SocietyM_AddFlat extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
-                db.collection("Flats").whereEqualTo("userId",UserId)
+                db.collection("Flats")
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override

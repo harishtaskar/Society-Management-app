@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
@@ -29,13 +30,15 @@ public class SocietyM_showAddFlat extends AppCompatActivity {
     RecyclerView recyclerView;
     FirebaseAuth mAuth;
     String UserId;
-
+    ImageView Back;
     Button AddFlat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_society_mshow_add_flat);
+
+        Back = findViewById(R.id.Btn_Flats_Back);
         recyclerView = findViewById(R.id.Society_Flats_RecycleView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -43,8 +46,16 @@ public class SocietyM_showAddFlat extends AppCompatActivity {
         flatsArrayList = new ArrayList<Flats>();
         myMRVAdapter = new myRecycleVA_Flats(SocietyM_showAddFlat.this,flatsArrayList);
         recyclerView.setAdapter(myMRVAdapter);
-
         EventChangeListener();
+
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SocietyM_showAddFlat.this,SocietyM_HomePage.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
     private void EventChangeListener() {
         mAuth = FirebaseAuth.getInstance();

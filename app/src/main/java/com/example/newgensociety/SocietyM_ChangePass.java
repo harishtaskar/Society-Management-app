@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -63,12 +65,10 @@ public class SocietyM_ChangePass extends AppCompatActivity {
                 if (NewPass.getText().toString().length() < 8){
                     NewPass.setText("Invalid Password");
                     Toast.makeText(SocietyM_ChangePass.this, "Password Should be minimum 8 digits", Toast.LENGTH_SHORT).show();
-                    return;
                 }
                 else if(ConNewPass.getText().toString().length() < 8){
                     Toast.makeText(SocietyM_ChangePass.this, "Password Should be minimum 8 digits", Toast.LENGTH_SHORT).show();
                     ConNewPass.setError("Invalid Password");
-                    return;
                 } else {
                     getFirebasePass();
                 }
@@ -81,38 +81,23 @@ public class SocietyM_ChangePass extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-        String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
         db = FirebaseFirestore.getInstance();
-        db.collection("Society_Members").whereEqualTo("userId",UserId)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
-                            for ( QueryDocumentSnapshot document : task.getResult()){
-                                Log.d(TAG, document.getId()+ "=>"+ document.getData());
-                                FirebaseOldPass = Objects.requireNonNull(document.get("Password")).toString();
+        FirebaseUser user = mAuth.getCurrentUser();
 
-                                if(FirebaseOldPass.equals(OldPass.getText().toString())){
-
-                                    if (!NewPass.getText().toString().equals(ConNewPass.getText().toString())) {
-                                        ConNewPass.setError("Password Doesn't Matched");
-                                        return;
-                                    }
-                                    else {
-                                        getChangePass();
-                                    }
-                                }
-                                else {
-                                    Toast.makeText(SocietyM_ChangePass.this, "Old Password Not Matched", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-
-                        }else{
-                            Toast.makeText(SocietyM_ChangePass.this, "Failed",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-
+        assert user != null;
+        String currentEmail = user.getEmail();
+        String currentPassword = OldPass.getText().toString();
+        assert currentEmail != null;
+        AuthCredential credential = EmailAuthProvider.getCredential(currentEmail, currentPassword);
+        user.reauthenticate(credential)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        getChangePass();
+                        OldPass.setText("");
+                        NewPass.setText("");
+                        ConNewPass.setText("");
+                    } else {
+                        OldPass.setError("Password is wrong");
                     }
                 });
 
@@ -128,8 +113,11 @@ public class SocietyM_ChangePass extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
+
+                                Toast.makeText(SocietyM_ChangePass.this, "Password Changed Successfully", Toast.LENGTH_SHORT).show();
                                 Log.d(TAG, "Password updated");
                             } else {
+                                Toast.makeText(SocietyM_ChangePass.this, "Error Occurred", Toast.LENGTH_SHORT).show();
                                 Log.d(TAG, "error occurred when Password updated");
                             }
                         }

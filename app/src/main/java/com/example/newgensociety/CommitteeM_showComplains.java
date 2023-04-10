@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.google.firebase.firestore.DocumentChange;
@@ -29,6 +31,7 @@ public class CommitteeM_showComplains extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_committee_mshow_complains);
+        Back = findViewById(R.id.Btn_Complain_Back);
         recyclerView = findViewById(R.id.Committee_ComplainRecycleView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -38,9 +41,17 @@ public class CommitteeM_showComplains extends AppCompatActivity {
         recyclerView.setAdapter(myMRVAdapter);
         EventChangeListener();
 
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CommitteeM_showComplains.this,CommitteeM_HomePage.class);
+                startActivity(intent);
+            }
+        });
+
     }
     private void EventChangeListener() {
-        db.collection("Complains")
+        db.collection("Complains").whereEqualTo("isRemoved",false)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {

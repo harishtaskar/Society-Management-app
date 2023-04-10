@@ -645,7 +645,7 @@
                                 android:layout_height="60dp"
                                 android:layout_marginLeft="@dimen/_10sdp"
                                 android:padding="@dimen/_8sdp"
-                                android:src="@drawable/request" />
+                                android:src="@drawable/meetings" />
 
 
                             <TextView
@@ -655,7 +655,7 @@
                                 android:padding="5dp"
                                 android:layout_gravity="center"
                                 android:textSize="@dimen/_13sdp"
-                                android:text="Request"
+                                android:text="Amenities"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
 

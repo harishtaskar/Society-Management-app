@@ -399,7 +399,6 @@ public class CommitteeM_HomePage extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful() && !task.getResult().isEmpty()){
-
                             DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
                             String documentID = documentSnapshot.getId();
                             db.collection("Notice")

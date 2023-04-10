@@ -247,7 +247,7 @@
                         android:textColor="@color/black"
                         android:padding="@dimen/_10sdp"
                         android:gravity="left"
-                        android:text="helps">
+                        android:text="Helps">
                     </TextView>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

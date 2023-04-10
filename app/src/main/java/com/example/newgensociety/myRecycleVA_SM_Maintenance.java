@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -105,7 +106,8 @@ public class myRecycleVA_SM_Maintenance extends RecyclerView.Adapter<myRecycleVA
     }
     public static class MyViewHolder1 extends RecyclerView.ViewHolder{
 
-        TextView flat_no, amount, due_date, discription, discount, PayNow;
+        TextView flat_no, amount, due_date, discription, discount;
+        Button PayNow;
 
         public MyViewHolder1(@NonNull View itemView,OnItemClickListener listener) {
             super(itemView);

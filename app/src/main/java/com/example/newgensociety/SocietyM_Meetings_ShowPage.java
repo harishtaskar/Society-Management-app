@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.google.firebase.firestore.DocumentChange;
@@ -29,6 +31,8 @@ public class SocietyM_Meetings_ShowPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_society_mmeetings_show_page);
+
+        Back = findViewById(R.id.Btn_Meetings_Back);
         recyclerView = findViewById(R.id.SocietyM_Meetings_Recycle);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -37,6 +41,15 @@ public class SocietyM_Meetings_ShowPage extends AppCompatActivity {
         myMRVAdapter = new myRecycleVA_SM_Meetings(SocietyM_Meetings_ShowPage.this,meetingsArrayList);
         recyclerView.setAdapter(myMRVAdapter);
         EventChangeListener();
+
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SocietyM_Meetings_ShowPage.this,SocietyM_HomePage.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
     private void EventChangeListener() {

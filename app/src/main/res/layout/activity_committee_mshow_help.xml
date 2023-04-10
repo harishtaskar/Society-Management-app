@@ -18,11 +18,21 @@
             android:id="@+id/toolbar"
             android:gravity="center"
             android:elevation="4dp"
-            android:paddingStart="20dp"
+            android:paddingStart="10dp"
             android:background="#BEDFFA"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             >
+
+            <ImageView
+                android:id="@+id/Btn_help_Back"
+                android:layout_width="wrap_content"
+                android:background="#BEDFFA"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_8sdp"
+                android:layout_gravity="left"
+                android:src="@drawable/baseline_arrow_back_24"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -7,6 +7,40 @@
     android:orientation="vertical"
     tools:context=".Maintenance_Payment">
 
+    <Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:id="@+id/toolbar"
+        android:gravity="center"
+        android:elevation="4dp"
+        android:paddingLeft="20dp"
+        android:background="#BEDFFA"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        >
+
+    <ImageView
+        android:id="@+id/Back_btn"
+        android:layout_width="50dp"
+        android:layout_height="45dp"
+        android:paddingRight="20dp"
+        android:layout_gravity="left"
+        android:src="@drawable/baseline_arrow_back_24"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="Payment"
+        android:textSize="@dimen/_15sdp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+    </Toolbar>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

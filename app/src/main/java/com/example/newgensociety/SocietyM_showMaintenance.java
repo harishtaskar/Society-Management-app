@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,7 +46,7 @@ public class SocietyM_showMaintenance extends AppCompatActivity implements Adapt
     String UserId;
     FirebaseAuth mAuth;
     ArrayList<Maintenance> maintenanceArrayList;
-
+    ImageView Back;
     myRecycleVA_SM_Maintenance myMRVAdapter;
     int SM_getFlats;
     RecyclerView recyclerView;
@@ -55,6 +56,7 @@ public class SocietyM_showMaintenance extends AppCompatActivity implements Adapt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_society_mshow_maintenance);
         recyclerView = findViewById(R.id.Society_Maintenance_RecycleView);
+        Back = findViewById(R.id.Back_btn_new);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAuth = FirebaseAuth.getInstance();
@@ -62,8 +64,16 @@ public class SocietyM_showMaintenance extends AppCompatActivity implements Adapt
         maintenanceArrayList = new ArrayList<Maintenance>();
         myMRVAdapter = new myRecycleVA_SM_Maintenance(SocietyM_showMaintenance.this,maintenanceArrayList);
         recyclerView.setAdapter(myMRVAdapter);
-
         EventChangeListener();
+
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SocietyM_showMaintenance.this,SocietyM_HomePage.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 
@@ -118,6 +128,7 @@ public class SocietyM_showMaintenance extends AppCompatActivity implements Adapt
 
                                     }
                                 });
+
 
     }
 

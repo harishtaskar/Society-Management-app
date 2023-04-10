@@ -44,14 +44,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/Committee_Flats_RecycleView"
                 android:layout_width="match_parent"
-                android:layout_height="730dp"
+                android:layout_height="match_parent"
                 tools:layout_editor_absoluteX="1dp"
                 tools:layout_editor_absoluteY="1dp">
 
