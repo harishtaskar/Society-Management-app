@@ -464,7 +464,7 @@
                             android:layout_width="92dp"
                             android:layout_height="96dp"
                             android:padding="@dimen/_10sdp"
-                            android:src="@drawable/notice" />
+                            android:src="@drawable/amenities" />
 
                         <View
                             android:layout_width="match_parent"

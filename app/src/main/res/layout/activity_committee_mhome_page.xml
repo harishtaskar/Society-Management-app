@@ -609,8 +609,8 @@
                                 android:layout_width="60dp"
                                 android:layout_height="60dp"
                                 android:layout_marginLeft="@dimen/_10sdp"
-                                android:padding="@dimen/_8sdp"
-                                android:src="@drawable/addflat" />
+                                android:padding="@dimen/_10sdp"
+                                android:src="@drawable/apartment" />
 
 
                             <TextView
@@ -645,7 +645,7 @@
                                 android:layout_height="60dp"
                                 android:layout_marginLeft="@dimen/_10sdp"
                                 android:padding="@dimen/_8sdp"
-                                android:src="@drawable/meetings" />
+                                android:src="@drawable/amenities" />
 
 
                             <TextView

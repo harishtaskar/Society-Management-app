@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Book_Hall">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:id="@+id/toolbar"
+            android:gravity="center"
+            android:elevation="4dp"
+            android:paddingStart="10dp"
+            android:background="#BEDFFA"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Book Amenities"
+                android:textSize="@dimen/_16sdp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:textColor="@color/black"/>
+
+            <ImageView
+                android:id="@+id/Btn_Book_Amenities_Back"
+                android:layout_width="30dp"
+                android:background="#BEDFFA"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:src="@drawable/baseline_arrow_back_24"
+                tools:ignore="ContentDescription" />
+
+        </Toolbar>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingRight="@dimen/_18sdp"
+            android:paddingLeft="@dimen/_18sdp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/Hall_RecycleView_Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:textSize="@dimen/_20sdp"
+                android:textStyle="bold"
+                android:text="@string/society_hall1"
+                android:textColor="#3F51B5"
+                >
+            </TextView>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:layout_marginTop="@dimen/_12sdp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Book_Hall_Name"
+                android:inputType="text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/flat_no"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Book_Hall_FlatNo"
+                android:inputType="numberDecimal"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right|bottom">
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="55dp"
+            android:padding="@dimen/_10sdp"
+            android:id="@+id/Book_Hall_Date"
+            android:hint="Date"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/black"
+            android:background="@drawable/custom_edittext3">
+
+        </TextView>
+        </LinearLayout>
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Time"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/Book_Hall_Time"
+                android:inputType="time"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Book_Hall_AMPM"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:gravity="right|bottom"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/_AM"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/black"
+                android:shadowRadius="@integer/material_motion_duration_long_1"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_gravity="left"
+                android:textSize="@dimen/_10sdp"
+                android:text="AM" />
+
+            <RadioButton
+                android:id="@+id/_PM"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/black"
+                android:shadowRadius="@integer/material_motion_duration_long_1"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_gravity="left"
+                android:textSize="@dimen/_10sdp"
+                android:text="PM" />
+
+        </RadioGroup>
+
+            </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:lines="3"
+                android:gravity="top"
+                android:hint="Description"
+                android:id="@+id/Book_Hall_Description"
+                android:overScrollMode="always"
+                android:scrollbarStyle="insideInset"
+                android:scrollHorizontally="false"
+                android:scrollbars="vertical"
+                android:inputType="textMultiLine"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/btn_Book_Hall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_gravity="right"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text="Request"
+            android:layout_marginRight="@dimen/_10sdp" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

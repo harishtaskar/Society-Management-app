@@ -1,6 +1,7 @@
 package com.example.newgensociety;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,14 @@ public class myRecycleVA_Hall extends RecyclerView.Adapter<myRecycleVA_Hall.MyVi
         holder.HallTitle.setText(hall.hall_title);
         holder.HallSize.setText("Hall Size : "+ hall.hall_size );
         holder.Description.setText(hall.getDescription());
-
+        holder.btnBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,Book_Hall.class);
+                intent.putExtra("HallTitle",hallArraylist.get(position).getHall_title());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -54,7 +62,7 @@ public class myRecycleVA_Hall extends RecyclerView.Adapter<myRecycleVA_Hall.MyVi
             HallTitle = itemView.findViewById(R.id.Hall_RecycleView_Title);
             HallSize = itemView.findViewById(R.id.Hall_RecycleView_Size);
             Description = itemView.findViewById(R.id.Hall_RecycleView_Description);
-            btnBook = itemView.findViewById(R.id.Btn_Add_Hall);
+            btnBook = itemView.findViewById(R.id.btn_book_hall);
         }
     }
 }

@@ -75,7 +75,7 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/btn_book"
+                    android:id="@+id/btn_book_hall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Book"
