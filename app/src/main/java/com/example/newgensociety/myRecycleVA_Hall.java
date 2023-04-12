@@ -1,5 +1,6 @@
 package com.example.newgensociety;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -32,7 +33,7 @@ public class myRecycleVA_Hall extends RecyclerView.Adapter<myRecycleVA_Hall.MyVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull myRecycleVA_Hall.MyViewHolder2 holder, int position) {
+    public void onBindViewHolder(@NonNull myRecycleVA_Hall.MyViewHolder2 holder, @SuppressLint("RecyclerView") int position) {
         Hall hall = hallArraylist.get(position);
 
         holder.HallTitle.setText(hall.hall_title);

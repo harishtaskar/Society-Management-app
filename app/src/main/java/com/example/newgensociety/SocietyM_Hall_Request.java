@@ -5,13 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -19,52 +20,50 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class SocietyM_HallShow extends AppCompatActivity {
+public class SocietyM_Hall_Request extends AppCompatActivity {
 
     ImageView Back;
-    TextView Request;
+    FirebaseAuth mAuth;
     FirebaseFirestore db;
-    ArrayList<Hall> hallArrayList;
-    myRecycleVA_Hall myMRVAdapter;
+    ArrayList<Hall_Request> hallRequestArrayList;
+    myRecycleVA_Hall_Request myMRVAdapter;
     RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_society_hall_show);
-        Back = findViewById(R.id.Btn_Amenities_Back);
-        Request = findViewById(R.id.Society_Hall_Requests);
-        recyclerView = findViewById(R.id.Society_Hall_RecycleView);
+        setContentView(R.layout.activity_society_mhall_request);
+        Back = findViewById(R.id.Btn_Hall_Request_Back);
+
+        recyclerView = findViewById(R.id.Society_Hall_Request_RecycleView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         db = FirebaseFirestore.getInstance();
-        hallArrayList = new ArrayList<Hall>();
-        myMRVAdapter = new myRecycleVA_Hall(SocietyM_HallShow.this,hallArrayList);
+        hallRequestArrayList = new ArrayList<Hall_Request>();
+        myMRVAdapter = new myRecycleVA_Hall_Request(SocietyM_Hall_Request.this,hallRequestArrayList);
         recyclerView.setAdapter(myMRVAdapter);
         EventChangeListener();
 
-        Request.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SocietyM_HallShow.this,SocietyM_Hall_Request.class);
-                startActivity(intent);
-            }
-        });
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SocietyM_HallShow.this,SocietyM_HomePage.class);
+                Intent intent = new Intent(SocietyM_Hall_Request.this,SocietyM_HallShow.class);
                 startActivity(intent);
                 finish();
             }
         });
-
-    }
+        }
 
     private void EventChangeListener() {
-        db.collection("Hall")
+
+        mAuth = FirebaseAuth.getInstance();
+        String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+
+        db.collection("Booking Requests").whereEqualTo("userId",UserId)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         if (error != null) {
@@ -74,12 +73,13 @@ public class SocietyM_HallShow extends AppCompatActivity {
                         assert value != null;
                         for (DocumentChange dc : value.getDocumentChanges()) {
                             if (dc.getType() == DocumentChange.Type.ADDED) {
-                                hallArrayList.add(dc.getDocument().toObject(Hall.class));
+                                hallRequestArrayList.add(dc.getDocument().toObject(Hall_Request.class));
+
                             }
                             myMRVAdapter.notifyDataSetChanged();
                         }
 
                     }
                 });
+        }
     }
-}

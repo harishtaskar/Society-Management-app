@@ -132,7 +132,7 @@ public class Book_Hall extends AppCompatActivity {
                 Intent intent = getIntent();
                 String HallTitle = intent.getStringExtra("HallTitle");
                 Hall_Title.setText(HallTitle);
-                String subject = Name.getText().toString();
+                String name = Name.getText().toString();
                 String Flat_no = Flat.getText().toString();
                 String date = Date.getText().toString();
                 String time = Time.getText().toString();
@@ -140,7 +140,7 @@ public class Book_Hall extends AppCompatActivity {
                 boolean approved = false;
 
                 Map<String,Object> booking = new HashMap<>();
-                booking.put("subject",subject);
+                booking.put("name",name);
                 booking.put("flat_no",Flat_no);
                 booking.put("hall_title",HallTitle);
                 booking.put("date",date);

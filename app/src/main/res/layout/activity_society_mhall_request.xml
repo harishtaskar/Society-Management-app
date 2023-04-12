@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SocietyM_HallShow">
+    tools:context=".SocietyM_Hall_Request">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,14 +27,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Amenities"
+                android:text="Requests"
                 android:textSize="@dimen/_16sdp"
                 android:textStyle="bold"
                 android:layout_gravity="center"
                 android:textColor="@color/black"/>
 
             <ImageView
-                android:id="@+id/Btn_Amenities_Back"
+                android:id="@+id/Btn_Hall_Request_Back"
                 android:layout_width="30dp"
                 android:background="#BEDFFA"
                 android:layout_height="match_parent"
@@ -48,36 +48,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:orientation="horizontal"
-        tools:ignore="MissingConstraints">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/Society_Hall_Requests"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/Society_Hall_Request_RecycleView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:text="Requests"
-            android:textAlignment="textEnd"
-            android:textSize="@dimen/_15sdp"
-            android:textColor="@color/blue"
-            android:textStyle="bold"
-            android:paddingRight="@dimen/_20sdp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_5sdp">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/Society_Hall_RecycleView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"/>
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="1dp"/>
 
     </LinearLayout>
 
