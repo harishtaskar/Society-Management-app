@@ -6,11 +6,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +38,7 @@ public class CommitteeM_ChangePass extends AppCompatActivity {
     EditText OldPass, NewPass, ConNewPass;
     TextView ForgotPass;
     Button ChangePass;
-    String FirebaseOldPass;
+    ImageView Back;
     FirebaseFirestore db;
     FirebaseAuth mAuth;
 
@@ -46,6 +48,7 @@ public class CommitteeM_ChangePass extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_committee_mchange_pass);
 
+        Back = findViewById(R.id.CommitteeM_ChangePass_Back_Btn);
         OldPass = findViewById(R.id.Committee_ChangePass_OldPass);
         NewPass = findViewById(R.id.Committee_ChangePass_NewPassword);
         ConNewPass = findViewById(R.id.Committee_ChangePass_ConfirmNewPass);
@@ -78,6 +81,15 @@ public class CommitteeM_ChangePass extends AppCompatActivity {
                     getFirebasePass();
                 }
 
+            }
+        });
+
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),CommitteeM_HomePage.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

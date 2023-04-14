@@ -132,6 +132,7 @@ public class Maintenance_Payment extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent1 = new Intent(Maintenance_Payment.this,SocietyM_showMaintenance.class);
                 startActivity(intent1);
+                finish();
             }
         });
 

@@ -46,9 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/_10sdp"
         android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_60sdp"
+        android:layout_marginTop="@dimen/_180sdp"
         app:cardCornerRadius="0dp"
-        app:cardElevation="20dp"
         android:background="@drawable/custom_edittext">
 
         <LinearLayout
@@ -227,6 +226,8 @@
                 android:id="@+id/Maintenance_Payment_btn_pay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:backgroundTint="#FFC107"
                 android:text="Pay">
 
 

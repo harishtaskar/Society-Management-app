@@ -65,7 +65,6 @@ public class SocietyM_showMaintenance extends AppCompatActivity implements Adapt
         myMRVAdapter = new myRecycleVA_SM_Maintenance(SocietyM_showMaintenance.this,maintenanceArrayList);
         recyclerView.setAdapter(myMRVAdapter);
         EventChangeListener();
-
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,12 +128,10 @@ public class SocietyM_showMaintenance extends AppCompatActivity implements Adapt
                                     }
                                 });
 
-
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
     }
 
     @Override

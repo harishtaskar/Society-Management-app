@@ -41,8 +41,8 @@ public class myRecycleVA_Hall_Request extends RecyclerView.Adapter<myRecycleVA_H
         holder.Time.setText(hall_request.getTime());
         holder.Approved = hall_request.isApproved();
 
-        Log.i("intent_","==+=="+holder.Approved);
-
+        Log.i("intent_","==+=="+hall_request.isApproved());
+        Log.i("intent_","==+=="+hall_request.getDate());
         if(holder.Approved){
             holder.Status.setTextColor(Color.GREEN);
             holder.Status.setText("Status : Approved");

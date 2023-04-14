@@ -35,7 +35,7 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:textStyle="bold"
-                    android:textColor="#102AB8"
+                    android:textColor="#292929"
                     >
                 </TextView>
 
@@ -104,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_3sdp"
                     android:textSize="@dimen/_11sdp"
-                    android:textColor="#35B100">
+                    android:textColor="#247800">
                 </TextView>
 
             </LinearLayout>
@@ -117,7 +117,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="bottom"
+                android:gravity="top"
                 android:layout_marginTop="@dimen/_2sdp"
                 android:orientation="horizontal">
                 <TextView
@@ -128,7 +128,7 @@
                     android:textSize="@dimen/_13sdp"
                     android:text="Paid On : 31/2/2023"
                     android:textStyle="bold"
-                    android:textColor="#B30000">
+                    android:textColor="#000000">
                 </TextView>
 
                 <LinearLayout
@@ -141,6 +141,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:padding="@dimen/_3sdp"
+                    android:backgroundTint="#FFC107"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_6sdp"
                     android:text="@string/pay_now"

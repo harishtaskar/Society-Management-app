@@ -4,20 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".SocietyM_ChangePass">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:id="@+id/toolbar"
+            android:elevation="4dp"
+            android:paddingStart="20dp"
+            android:background="#BEDFFA"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            tools:ignore="RtlSymmetry">
+
+            <ImageView
+                android:id="@+id/SocietyM_ChangePass_Back_Btn"
+                android:layout_width="30dp"
+                android:background="#BEDFFA"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:src="@drawable/baseline_arrow_back_24"
+                tools:ignore="ContentDescription" />
+
+        </Toolbar>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:layout_marginTop="@dimen/_180sdp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/change_password"
-            android:textSize="@dimen/_15sdp"
+            android:textSize="@dimen/_22sdp"
             android:textColor="@color/black"/>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -77,32 +109,43 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="right"
+            android:orientation="horizontal"
             android:layout_marginTop="@dimen/_15sdp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_22sdp"
+                android:gravity="left">
+
+                <TextView
+                    android:id="@+id/Forgot_Password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_13sdp"
+                    android:textColor="@color/blue"
+                    android:text="@string/forgot_password"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right">
 
             <Button
                 android:id="@+id/Sm_ChangePass"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginRight="@dimen/_20sdp"
-                android:layout_marginLeft="@dimen/_20sdp"
                 android:text="Change Password"
                 android:textAllCaps="false">
 
             </Button>
 
-            <TextView
-                android:id="@+id/Forgot_Password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/_13sdp"
-                android:textColor="@color/blue"
-                android:layout_marginRight="@dimen/_20sdp"
-                android:layout_marginLeft="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/forgot_password"
-                android:textStyle="bold"/>
+            </LinearLayout>
+
 
 
         </LinearLayout>

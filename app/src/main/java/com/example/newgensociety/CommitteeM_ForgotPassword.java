@@ -5,12 +5,14 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -43,12 +45,14 @@ public class CommitteeM_ForgotPassword extends AppCompatActivity {
     Button ForgotPass;
     FirebaseFirestore db;
     FirebaseAuth mAuth;
-    String generatedPassword, emailSubject, FirebaseEmail, StringSenderEmail, StringSenderEmailPassword;
+    ImageView Back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_committee_mforgot_password);
+
+        Back = findViewById(R.id.CommitteeM_ForgotPass_Back_Btn);
         Email = findViewById(R.id.Committee_ForgotPass_Email);
         ForgotPass = findViewById(R.id.Cm_ForgotPass);
         db = FirebaseFirestore.getInstance();
@@ -59,26 +63,14 @@ public class CommitteeM_ForgotPassword extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-                int leftLimit = 97; // letter 'a'
-                int rightLimit = 122; // letter 'z'
-                int targetStringLength = 8;
-                Random random = new Random();
-                StringBuilder buffer = new StringBuilder(targetStringLength);
-                for (int i = 0; i < targetStringLength; i++) {
-                    int randomLimitedInt = leftLimit + (int)
-                            (random.nextFloat() * (rightLimit - leftLimit + 1));
-                    buffer.append((char) randomLimitedInt);
-                }
-                generatedPassword = buffer.toString();
-
                 mAuth = FirebaseAuth.getInstance();
                 String email = Email.getText().toString();
                 mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(CommitteeM_ForgotPassword.this, "Done Sent", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CommitteeM_ForgotPassword.this, "Password Link is Shared on your email", Toast.LENGTH_SHORT).show();
+                            Email.setText("");
                         }
                         else{
                             Toast.makeText(CommitteeM_ForgotPassword.this, "Error Occurred", Toast.LENGTH_SHORT).show();
@@ -87,114 +79,21 @@ public class CommitteeM_ForgotPassword extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(CommitteeM_ForgotPassword.this, "Error Failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CommitteeM_ForgotPassword.this, "Error Occurred", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-                String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
-                db = FirebaseFirestore.getInstance();
-                db.collection("C_Members").whereEqualTo("userId",UserId)
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()){
-                                    for ( QueryDocumentSnapshot document : task.getResult()){
-                                        Log.d(TAG, document.getId()+ "=>"+ document.getData());
-                                        FirebaseEmail = Objects.requireNonNull(document.get("Cm_email")).toString();
-
-                                        if (FirebaseEmail.equals(Email.getText().toString())) {
-                                            try {
-                                                StringSenderEmail = "harishtaskar002@gmail.com";
-                                                StringSenderEmailPassword = "rhuodrekoqwuipuk";
-                                                emailSubject = "New Password from new generation Society";
-
-                                                String StringRecieverEmail = Email.getText().toString();
-
-                                                String stringHost = "smtp.gmail.com";
-
-                                                Properties properties = System.getProperties();
-
-                                                properties.put("mail.smtp.host", stringHost);
-                                                properties.put("mail.smtp.port", "465");
-                                                properties.put("mail.smtp.ssl.enable", "true");
-                                                properties.put("mail.smtp.auth", "true");
-
-                                                Session session = Session.getInstance(properties, new Authenticator() {
-                                                    @Override
-                                                    protected PasswordAuthentication getPasswordAuthentication() {
-                                                        return new PasswordAuthentication(StringSenderEmail, StringSenderEmailPassword);
-                                                    }
-                                                });
-
-                                                MimeMessage mimeMessage = new MimeMessage(session);
-
-                                                mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(StringRecieverEmail));
-
-                                                mimeMessage.setSubject("New Password");
-                                                mimeMessage.setText("Your New Password For New Generation Society is " + generatedPassword);
-
-                                                Thread thread = new Thread(new Runnable() {
-                                                    @Override
-                                                    public void run() {
-                                                        try {
-                                                            Transport.send(mimeMessage);
-                                                        } catch (MessagingException e) {
-                                                            throw new RuntimeException(e);
-                                                        }
-                                                    }
-                                                });
-
-                                                thread.start();
-
-                                                setChangePass();
-                                                Toast.makeText(CommitteeM_ForgotPassword.this, "New Password has been send to your registered mail", Toast.LENGTH_SHORT).show();
-                                                Email.setText("");
-
-
-                                            } catch (MessagingException e) {
-                                                throw new RuntimeException(e);
-                                            }
-
-                                        }
-                                        else{
-                                            Email.setError("Invalid Email Address");
-                                            Toast.makeText(CommitteeM_ForgotPassword.this, "Invalid Email Address",
-                                                    Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                }else{
-                                    Toast.makeText(CommitteeM_ForgotPassword.this, "Failed",
-                                            Toast.LENGTH_SHORT).show();
-                                }
-
-                            }
-                        });
 
             }
         });
 
-    }
-
-    private void setChangePass() {
-        String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            user.updatePassword(generatedPassword)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Log.i("intent_", "Password updated");
-                            } else {
-                                Log.d(TAG, "error occurred when Password updated");
-                            }
-                        }
-                    });
-        }else{
-            Toast.makeText(this, "User Not Found", Toast.LENGTH_SHORT).show();
-        }
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),CommitteeM_ChangePass.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 }

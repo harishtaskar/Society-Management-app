@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +34,7 @@ public class SocietyM_ChangePass extends AppCompatActivity {
     EditText OldPass, NewPass, ConNewPass;
     TextView ForgotPass;
     Button ChangePass;
-    String FirebaseOldPass;
+    ImageView Back;
     FirebaseFirestore db;
     FirebaseAuth mAuth;
 
@@ -42,6 +43,7 @@ public class SocietyM_ChangePass extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_society_mchange_pass);
 
+        Back = findViewById(R.id.SocietyM_ChangePass_Back_Btn);
         OldPass = findViewById(R.id.Society_ChangePass_OldPass);
         NewPass = findViewById(R.id.Society_ChangePass_NewPassword);
         ConNewPass = findViewById(R.id.Society_ChangePass_ConfirmNewPass);
@@ -73,6 +75,15 @@ public class SocietyM_ChangePass extends AppCompatActivity {
                     getFirebasePass();
                 }
 
+            }
+        });
+
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),SocietyM_HomePage.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -125,7 +136,6 @@ public class SocietyM_ChangePass extends AppCompatActivity {
         }else{
             Toast.makeText(this, "User Not Found", Toast.LENGTH_SHORT).show();
         }
-//        Map<String,Object> password = new HashMap<>();
-//        password.put("Cm_password", NewPassword);
+
     }
 }
