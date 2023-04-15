@@ -49,7 +49,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
+        android:layout_gravity="center"
         android:orientation="horizontal"
         tools:ignore="MissingConstraints">
 
@@ -57,13 +57,15 @@
             android:id="@+id/Society_Hall_Requests"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:text="Requests"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="Your Requests"
             android:textAlignment="textEnd"
-            android:textSize="@dimen/_15sdp"
+            android:textSize="@dimen/_19sdp"
             android:textColor="@color/blue"
             android:textStyle="bold"
-            android:paddingRight="@dimen/_20sdp"/>
+            android:paddingRight="@dimen/_2sdp"
+            app:drawableRightCompat="@drawable/baseline_chevron_right_24"
+            />
 
     </LinearLayout>
 

@@ -87,6 +87,7 @@ public class SocietyM_ForgotPassword extends AppCompatActivity {
                     });
 
                 }else{
+                    Email.setError("Invalid Email");
                     Toast.makeText(SocietyM_ForgotPassword.this, "Invalid Email", Toast.LENGTH_SHORT).show();
                 }
 

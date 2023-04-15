@@ -59,7 +59,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
 //    home page
     ImageView commitee_img, Profile;
     CardView cardmain1,cardmain2,Society_meetings,Complains,Helps,Helps2,allFlats,requests;
-    TextView cm_name;
+    TextView cm_name,SocietyCode;
     RecyclerView recyclerView;
     ArrayList<Notice> noticeArrayList;
     myRecycleViewAdapter myAdapter;
@@ -72,7 +72,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
     Button cpeditbtn;
     CardView addfalt,visitor;
     ImageView cpmemberimage;
-    String S_name, Address, CM_Name, C_Email;
+    String S_name, Address, CM_Name, C_Email, S_Code;
 
 
 
@@ -108,6 +108,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
         cptermsorcondition = findViewById(R.id.committee_profile_terms_condition);
         cpversion = findViewById(R.id.committee_profile_version);
         cpeditbtn = findViewById(R.id.committee_profile_edit_button);
+        SocietyCode = findViewById(R.id.committee_profile_societyCode);
         Profile = findViewById(R.id.home_btnprofile);
         mAuth = FirebaseAuth.getInstance();
         cplogout.setOnClickListener(new View.OnClickListener() {
@@ -206,6 +207,9 @@ public class CommitteeM_HomePage extends AppCompatActivity {
                                                         cm_name.setText("Hi, "+CM_Name);
                                                         C_Email = Objects.requireNonNull(document.get("Cm_email")).toString();
                                                         cpmemberemail.setText(C_Email);
+                                                        S_Code = Objects.requireNonNull(document.get("Society_Code")).toString();
+                                                        SocietyCode.setText("Society Code : " +S_Code);
+
                                                     }
 
                                                 }else{

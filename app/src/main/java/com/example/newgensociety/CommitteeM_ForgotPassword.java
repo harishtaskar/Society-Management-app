@@ -65,6 +65,10 @@ public class CommitteeM_ForgotPassword extends AppCompatActivity {
 
                 mAuth = FirebaseAuth.getInstance();
                 String email = Email.getText().toString();
+                String fireBaseEmail = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
+
+                assert fireBaseEmail != null;
+                if(fireBaseEmail.equals(email)) {
                 mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -83,6 +87,10 @@ public class CommitteeM_ForgotPassword extends AppCompatActivity {
                     }
                 });
 
+            }else{
+                    Email.setError("Invalid Email");
+                    Toast.makeText(CommitteeM_ForgotPassword.this, "Invalid Email", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add flat"
+            android:text="Add Flat"
             android:textSize="@dimen/_16sdp"
             android:textStyle="bold"
             android:layout_gravity="center"
@@ -44,6 +44,19 @@
         android:paddingEnd="@dimen/_15sdp"
         android:background="@color/white"
         android:orientation="vertical">
+
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_140sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:src="@drawable/addflats1"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_20sdp">
+
+        </ImageView>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -164,6 +177,7 @@
             android:paddingBottom="@dimen/_8sdp"
             android:layout_marginStart="@dimen/_5sdp"
             android:text="Add flat"
+            android:backgroundTint="#223A7A"
             android:layout_marginRight="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_15sdp"/>
 

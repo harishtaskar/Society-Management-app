@@ -52,7 +52,7 @@ public class CommitteeM_EditProfile extends AppCompatActivity {
     FirebaseAuth mAuth;
     StorageReference storageReference,storageRef;
     Uri imageUri;
-    TextView ChangePass;
+    TextView ChangePass, ForgotPass;
     TextInputEditText SocietyName, CM_name, Mobile, Email;
     String S_name, CM_Contact, CM_Name, C_Email, Address, userId, SocietyCode;
 
@@ -68,11 +68,20 @@ public class CommitteeM_EditProfile extends AppCompatActivity {
         Mobile = findViewById(R.id.Cm_mobile);
         Email = findViewById(R.id.Cm_email);
         Update = findViewById(R.id.Cm_update);
-        ChangePass = findViewById(R.id.Change_Password);
+        ChangePass = findViewById(R.id.Cm_Change_Password);
+        ForgotPass = findViewById(R.id.Cm_Forgot_Password);
         ChangePass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CommitteeM_EditProfile.this,CommitteeM_ChangePass.class);
+                startActivity(intent);
+            }
+        });
+
+        ForgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CommitteeM_EditProfile.this,CommitteeM_ForgotPassword.class);
                 startActivity(intent);
             }
         });

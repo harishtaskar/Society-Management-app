@@ -48,7 +48,7 @@ public class SocietyM_EditProfile extends AppCompatActivity {
 
     private static final int PICK_IMAGE = 100;
     ImageView member_img;
-    TextView email, name, mobile, ChangePass;
+    TextView email, name, mobile, ChangePass, ForgotPass;
     Button select_img_btn, update;
     Uri imageUri;
     String SM_Contact, SM_Name, SM_Email, userId;
@@ -67,12 +67,21 @@ public class SocietyM_EditProfile extends AppCompatActivity {
         email = findViewById(R.id.semail);
         name = findViewById(R.id.sname);
         mobile = findViewById(R.id.smobile);
-        ChangePass = findViewById(R.id.Change_Password);
+        ChangePass = findViewById(R.id.Sm_Change_Password);
+        ForgotPass = findViewById(R.id.Sm_Forgot_Password);
 
         ChangePass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SocietyM_EditProfile.this,SocietyM_ChangePass.class);
+                startActivity(intent);
+            }
+        });
+
+        ForgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SocietyM_EditProfile.this,SocietyM_ForgotPassword.class);
                 startActivity(intent);
             }
         });

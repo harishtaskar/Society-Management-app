@@ -10,6 +10,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -109,13 +110,13 @@ public class SocietyM_HomePage extends AppCompatActivity {
         bottomNavigation.add(new MeowBottomNavigation.Model(2,R.drawable.homek));
         bottomNavigation.add(new MeowBottomNavigation.Model(3,R.drawable.notice));
 
-
+        db = FirebaseFirestore.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         db = FirebaseFirestore.getInstance();
         NoticeArrayList = new ArrayList<Notice>();
         myAdapter = new myRecycleVA_Society_Notice(SocietyM_HomePage.this,NoticeArrayList);
         recyclerView.setAdapter(myAdapter);
-
+        EventChangeListener();
         Profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,7 +177,7 @@ public class SocietyM_HomePage extends AppCompatActivity {
                     }
                 });
 
-        EventChangeListener();
+
 
         bottomNavigation.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {
             @Override
@@ -382,10 +383,11 @@ public class SocietyM_HomePage extends AppCompatActivity {
 
     }
     private void EventChangeListener() {
-        db = FirebaseFirestore.getInstance();
 
-                db.collection("Notice").orderBy("date", Query.Direction.DESCENDING).whereEqualTo("removed",false)
+                db = FirebaseFirestore.getInstance();
+                db.collection("Notice").whereEqualTo("removed",false)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         if (error != null){
@@ -401,6 +403,8 @@ public class SocietyM_HomePage extends AppCompatActivity {
                         }
 
                     }
+
                 });
+
     }
 }

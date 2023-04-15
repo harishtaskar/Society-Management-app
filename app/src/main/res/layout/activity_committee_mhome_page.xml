@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background5"
     tools:context=".CommitteeM_HomePage">
 
 <!--    Profile-->
@@ -86,6 +85,19 @@
                         android:gravity="left"
                         android:textColor="#515151"
                         android:textSize="@dimen/_12sdp"
+                        >
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/committee_profile_societyCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:gravity="left"
+                        android:textStyle="bold"
+                        android:textColor="#001171"
+                        android:textSize="@dimen/_10sdp"
                         >
 
                     </TextView>

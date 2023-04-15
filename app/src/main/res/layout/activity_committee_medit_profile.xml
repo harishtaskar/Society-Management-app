@@ -174,9 +174,10 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             android:layout_gravity="center"
-            android:layout_marginRight="@dimen/_26sdp"
-            android:layout_marginLeft="@dimen/_26sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
+            android:backgroundTint="#223A7A"
             android:text="Update">
 
         </Button>
@@ -191,12 +192,22 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/Change_Password"
-                android:layout_width="match_parent"
+                android:id="@+id/Cm_Change_Password"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_13sdp"
                 android:textColor="@color/blue"
                 android:text="Change Password"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/Cm_Forgot_Password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_13sdp"
+                android:textAlignment="textEnd"
+                android:textColor="@color/blue"
+                android:text="Forgot Password"
                 android:textStyle="bold"/>
 
         </LinearLayout>

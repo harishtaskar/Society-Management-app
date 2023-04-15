@@ -47,22 +47,35 @@
         <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_140sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:src="@drawable/changepassword"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginLeft="@dimen/_20sdp">
+
+            </ImageView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/change_password"
             android:textSize="@dimen/_22sdp"
-            android:textColor="@color/black"/>
+            android:layout_gravity="left"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:textColor="#223A7A"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_20sdp"
                 android:hint="Old Password">
 
@@ -128,7 +141,7 @@
                 android:id="@+id/Forgot_Password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_13sdp"
+                android:textSize="@dimen/_11sdp"
                 android:textColor="@color/blue"
                 android:layout_gravity="left"
                 android:text="@string/forgot_password"
@@ -146,6 +159,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_35sdp"
                 android:text="Change Password"
+                android:backgroundTint="#223A7A"
                 android:layout_marginRight="@dimen/_20sdp"
                 android:textAllCaps="false">
 

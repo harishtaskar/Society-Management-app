@@ -103,17 +103,10 @@ public class Maintenance_Payment extends AppCompatActivity {
                 int DiscountA = (AmountA*DiscountP)/100;
                 int Payableamount = AmountA-DiscountA;
 
-                    Pay.setOnClickListener(new View.OnClickListener() {
+                Pay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    Thread thread = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            PaymentGatewayStart();
-                        }
-                    });
-                    thread.start();
 
                 }
             });
@@ -138,18 +131,4 @@ public class Maintenance_Payment extends AppCompatActivity {
 
     }
 
-    private void PaymentGatewayStart() {
-        String Payee = "HarishTaskar";
-        EasyUpiPayment.Builder builder = new EasyUpiPayment.Builder()
-                .setPayeeName(Payee)
-                .setPayeeVpa("harishtaskar@ybl")
-                .setDescription(FlatNumber.getText().toString())
-                .setAmount(Amount.getText().toString())
-                .setTransactionId("1234")
-                .setTransactionRefId("1234");
-
-        EasyUpiPayment easyUpiPayment = builder.build();
-        easyUpiPayment.startPayment();
-
-    }
 }

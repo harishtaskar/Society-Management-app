@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,12 +34,14 @@ public class CommitteeM_NoticePubllishing_Page extends AppCompatActivity {
     Button btnPublish;
     FirebaseDatabase db;
     FirebaseFirestore dbf;
+
     DatabaseReference rootDatabaseRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_committee_notice_publlishing_page);
+
         dbf = FirebaseFirestore.getInstance();
         CM_name = findViewById(R.id.Committee_NoticePublish_CMname);
         Notice_Subject = findViewById(R.id.Committee_NoticePublish_Subject);

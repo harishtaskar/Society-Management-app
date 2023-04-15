@@ -28,7 +28,7 @@
                 android:textSize="@dimen/_18sdp"
                 android:textStyle="bold"
                 android:text="@string/society_hall1"
-                android:textColor="#3F51B5"
+                android:textColor="#223A7A"
                 >
             </TextView>
 
@@ -48,6 +48,7 @@
                 </TextView>
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,7 +59,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_12sdp"
-                    android:lines="4"
                     android:text="Description"
                     android:textColor="#323232"
                     >
@@ -79,6 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Book"
+                    android:backgroundTint="#223A7A"
                     android:layout_gravity="right"
                     android:textSize="@dimen/_8sdp"/>
 

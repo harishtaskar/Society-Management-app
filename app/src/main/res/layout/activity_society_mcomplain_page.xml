@@ -33,7 +33,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:text="Complain"
-            android:textSize="@dimen/_15sdp"
+            android:textSize="@dimen/_18sdp"
             android:layout_gravity="center"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -41,16 +41,26 @@
 
         </TextView>
 
-
-
-
     </Toolbar>
+
+
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_140sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:src="@drawable/complains1"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_20sdp">
+
+        </ImageView>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -112,13 +122,15 @@
 
         <Button
             android:id="@+id/btnsend"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_6sdp"
-            android:layout_marginRight="@dimen/_13sdp"
+            android:layout_marginRight="@dimen/_15sdp"
             android:paddingLeft="@dimen/_20sdp"
             android:paddingRight="@dimen/_20sdp"
+            android:textSize="@dimen/_12sdp"
             android:text="Send"
+            android:backgroundTint="#223A7A"
             android:layout_gravity="right">
 
         </Button>
