@@ -50,6 +50,7 @@
     <string name="add_new_society">Add New Society</string>
     <string name="login_as_committee_member">Login as Committee Member</string>
     <string name="society_hall1">Society Hall</string>
+    <string name="amenities">Amenities</string>
     <string-array name="array_indian_states">
         <item>Select Your State</item>
         <item>Andaman and Nicobar Islands</item>

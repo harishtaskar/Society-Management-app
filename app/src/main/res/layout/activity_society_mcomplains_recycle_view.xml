@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CommitteeM_showComplains">
+    android:orientation="vertical"
+    tools:context=".SocietyM_ComplainsRecycleView">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,17 +19,16 @@
             android:id="@+id/toolbar"
             android:gravity="center"
             android:elevation="4dp"
-            android:paddingStart="20dp"
             android:background="#BEDFFA"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             >
 
             <ImageView
-                android:id="@+id/Btn_Complain_Back"
+                android:id="@+id/Btn_Sm_Complain_Back"
                 android:layout_width="wrap_content"
                 android:background="#BEDFFA"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:padding="@dimen/_8sdp"
                 android:layout_gravity="left"
                 android:src="@drawable/baseline_arrow_back_24"/>
@@ -36,10 +36,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/complains"
+                android:text="Complain History"
                 android:textSize="@dimen/_16sdp"
                 android:textStyle="bold"
-                android:layout_gravity="center"
+                android:paddingLeft="@dimen/_10sdp"
+                android:layout_gravity="left"
                 android:textColor="@color/black"/>
 
         </Toolbar>
@@ -49,15 +50,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_40sdp"
         android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/Committee_ComplainRecycleView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/SocietyM_ComplainsRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="1dp" />
 
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

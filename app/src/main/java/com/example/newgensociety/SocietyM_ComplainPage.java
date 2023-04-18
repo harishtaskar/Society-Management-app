@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -20,13 +21,15 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class SocietyM_ComplainPage extends AppCompatActivity {
 
     EditText name, about, description;
     ImageView backarrowc;
+    FirebaseAuth mAuth;
     FirebaseFirestore db;
-    Button send;
+    Button send,Complains;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class SocietyM_ComplainPage extends AppCompatActivity {
         send = findViewById(R.id.btnsend);
         backarrowc = findViewById(R.id.imgbackarrowc);
         name = findViewById(R.id.Society_Complain_Name);
+        Complains = findViewById(R.id.btnComplains);
         db = FirebaseFirestore.getInstance();
 
 
@@ -69,12 +73,16 @@ public class SocietyM_ComplainPage extends AppCompatActivity {
                 String About = about.getText().toString();
                 String Description = description.getText().toString();
 
+                mAuth = FirebaseAuth.getInstance();
+                String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+
                 Map<String,Object> complain = new HashMap<>();
                 complain.put("name",Name);
                 complain.put("about",About);
                 complain.put("description",Description);
                 complain.put("date",date);
                 complain.put("isRemoved",isRemoved);
+                complain.put("userId",UserId);
                 db.collection("Complains")
                         .add(complain)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -103,6 +111,15 @@ public class SocietyM_ComplainPage extends AppCompatActivity {
                 finish();
             }
         });
+
+        Complains.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SocietyM_ComplainPage.this,SocietyM_ComplainsRecycleView.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 }

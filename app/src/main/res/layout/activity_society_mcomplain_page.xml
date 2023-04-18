@@ -120,20 +120,49 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnComplains"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:paddingLeft="@dimen/_20sdp"
+                android:paddingRight="@dimen/_20sdp"
+                android:textSize="@dimen/_12sdp"
+                android:text="Complaiins"
+                android:textAllCaps="false"
+                android:backgroundTint="#223A7A"
+                android:layout_gravity="right">
+
+            </Button>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="right"
+                android:layout_height="wrap_content">
+
         <Button
             android:id="@+id/btnsend"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_6sdp"
-            android:layout_marginRight="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_20sdp"
             android:paddingLeft="@dimen/_20sdp"
             android:paddingRight="@dimen/_20sdp"
             android:textSize="@dimen/_12sdp"
             android:text="Send"
             android:backgroundTint="#223A7A"
-            android:layout_gravity="right">
+            >
 
         </Button>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
 
     </LinearLayout>
