@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -55,6 +57,84 @@ public class myRecycleVA_CM_Hall_Request extends RecyclerView.Adapter<myRecycleV
         holder.Description.setText(cm_hall_request.getDescription());
         holder.Date.setText(cm_hall_request.getDate());
         holder.Time.setText(cm_hall_request.getTime());
+        holder.Approved.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String book_id = cm_hall_request.getBookingCode();
+                    db = FirebaseFirestore.getInstance();
+                    boolean status = true;
+                    boolean status_false = false;
+                    db.collection("Booking Requests")
+                            .document(book_id)
+                            .update("isApproved",status,"isNotApproved",status_false)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Toast.makeText(context, "Successful", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+            }
+        });
+
+        holder.NotApproved.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String book_id = cm_hall_request.getBookingCode();
+                db = FirebaseFirestore.getInstance();
+                boolean status = true;
+                boolean status_false = false;
+                db.collection("Booking Requests")
+                        .document(book_id)
+                        .update("isNotApproved",status,"isApproved",status_false)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(context, "Successful", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+            }
+        });
+
+
+        db = FirebaseFirestore.getInstance();
+        String book_id = cm_hall_request.getBookingCode();
+        db.collection("Booking Requests")
+                .document(book_id)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            boolean Status = (boolean) Objects.requireNonNull(task.getResult().get("isApproved"));
+                            boolean StatusNot = (boolean) Objects.requireNonNull(task.getResult().get("isNotApproved"));
+                            if(Status){
+                                holder.Approved.setChecked(true);
+                            }if(StatusNot){
+                                holder.NotApproved.setChecked(true);
+                            }
+
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
 
     }
 
@@ -65,7 +145,7 @@ public class myRecycleVA_CM_Hall_Request extends RecyclerView.Adapter<myRecycleV
 
     public static class MyViewHolder2 extends RecyclerView.ViewHolder {
         TextView HallTitle, Name, Description, Date, Time;
-        CheckBox Approved;
+        RadioButton Approved,NotApproved;
 
         public MyViewHolder2(@NonNull View itemView) {
             super(itemView);
@@ -75,7 +155,7 @@ public class myRecycleVA_CM_Hall_Request extends RecyclerView.Adapter<myRecycleV
             Date = itemView.findViewById(R.id.Committee_Hall_Requests_Date);
             Time = itemView.findViewById(R.id.Committee_Hall_Requests_Time);
             Approved = itemView.findViewById(R.id.Committee_Hall_Requests_isApproved);
-
+            NotApproved = itemView.findViewById(R.id.Committee_Hall_Requests_isNotApproved);
 
         }
     }

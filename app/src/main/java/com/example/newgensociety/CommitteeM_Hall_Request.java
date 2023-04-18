@@ -62,8 +62,8 @@ public class CommitteeM_Hall_Request extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         String UserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
-
-        db.collection("Booking Requests").whereEqualTo("userId", UserId)
+        db = FirebaseFirestore.getInstance();
+        db.collection("Booking Requests")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @SuppressLint("NotifyDataSetChanged")
                     @Override

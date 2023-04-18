@@ -5,7 +5,7 @@ public class Hall_Request {
 
     }
 
-    String hall_title, date, description, name, time;
+    String bookingCode,hall_title, date, description, name, time;
     boolean isApproved;
 
     public Hall_Request(String hall_Title, String date, String description, String name, String time, boolean isApproved) {
@@ -15,6 +15,14 @@ public class Hall_Request {
         this.name = name;
         this.time = time;
         this.isApproved = isApproved;
+    }
+
+    public String getBookingCode() {
+        return bookingCode;
+    }
+
+    public void setBookingCode(String bookingCode) {
+        this.bookingCode = bookingCode;
     }
 
     public String getHall_title() {

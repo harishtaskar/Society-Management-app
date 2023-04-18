@@ -7,15 +7,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class myRecycleVA_Hall_Request extends RecyclerView.Adapter<myRecycleVA_Hall_Request.MyViewHolder2>{
 
     Context context;
+    FirebaseFirestore db;
     ArrayList<Hall_Request> hallRequestsArrayList;
 
     public myRecycleVA_Hall_Request(Context context, ArrayList<Hall_Request> hallRequestsArrayList) {
@@ -40,13 +49,34 @@ public class myRecycleVA_Hall_Request extends RecyclerView.Adapter<myRecycleVA_H
         holder.Date.setText(hall_request.getDate());
         holder.Time.setText(hall_request.getTime());
         holder.Approved = hall_request.isApproved();
+        String book_code = hall_request.getBookingCode();
 
-        Log.i("intent_","==+=="+hall_request.isApproved());
-        Log.i("intent_","==+=="+hall_request.getDate());
-        if(holder.Approved){
-            holder.Status.setTextColor(Color.GREEN);
-            holder.Status.setText("Status : Approved");
-        }
+        db = FirebaseFirestore.getInstance();
+        db.collection("Booking Requests")
+                .document(book_code)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            boolean Status = (boolean) Objects.requireNonNull(task.getResult().get("isApproved"));
+                            boolean NotApprovedStatus = (boolean) Objects.requireNonNull(task.getResult().get("isNotApproved"));
+                            if(Status){
+                                holder.Status.setTextColor(Color.parseColor("#07C900"));
+                                holder.Status.setText("Status : Approved");
+                            }if(NotApprovedStatus) {
+                                holder.Status.setTextColor(Color.parseColor("#FF0000"));
+                                holder.Status.setText("Status : Not Approved");
+                            }
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
     }
 
     @Override

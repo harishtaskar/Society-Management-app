@@ -60,7 +60,7 @@ public class SocietyM_HelpPage extends AppCompatActivity {
                 date = currentDate.toString();
 
                 String Name = name.getText().toString();
-                Integer Flat = Integer.parseInt(flatno.getText().toString());
+                String Flat = flatno.getText().toString();
                 String Help = helpText.getText().toString();
                 boolean isRemoved = false;
 

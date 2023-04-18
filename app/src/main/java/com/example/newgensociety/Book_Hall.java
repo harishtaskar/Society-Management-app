@@ -16,8 +16,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -117,7 +119,7 @@ public class Book_Hall extends AppCompatActivity {
 
                 int leftLimit = 65; // letter 'a'
                 int rightLimit = 90; // letter 'z'
-                int targetStringLength = 6;
+                int targetStringLength = 10;
                 Random random = new Random();
                 StringBuilder buffer = new StringBuilder(targetStringLength);
                 for (int i = 0; i < targetStringLength; i++) {
@@ -138,6 +140,7 @@ public class Book_Hall extends AppCompatActivity {
                 String time = Time.getText().toString();
                 String description = Description.getText().toString();
                 boolean approved = false;
+                boolean NotApproved = false;
 
                 Map<String,Object> booking = new HashMap<>();
                 booking.put("name",name);
@@ -149,13 +152,18 @@ public class Book_Hall extends AppCompatActivity {
                 booking.put("bookingCode",bookingCode);
                 booking.put("isApproved",approved);
                 booking.put("userId",UserId);
+                booking.put("isNotApproved",NotApproved);
 
                 db = FirebaseFirestore.getInstance();
-                db.collection("Booking Requests")
-                        .add(booking)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                db.collection("Booking Requests").document(bookingCode)
+                        .set(booking).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onSuccess(DocumentReference documentReference) {
+                            public void onSuccess(Void unused) {
+
+                            }
+                        }).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
                                 Toast.makeText(getApplicationContext(),"Request Send Successful", Toast.LENGTH_SHORT).show();
                                 Name.setText(null);
                                 Flat.setText("");
@@ -168,8 +176,10 @@ public class Book_Hall extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Toast.makeText(getApplicationContext(),"failed", Toast.LENGTH_SHORT).show();
+
                             }
                         });
+
             }
         });
 

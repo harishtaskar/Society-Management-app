@@ -52,6 +52,9 @@ public class CommitteeM_showHelp extends AppCompatActivity {
 
     }
     private void EventChangeListener() {
+
+        db = FirebaseFirestore.getInstance();
+
         db.collection("HelpRequests").whereEqualTo("isRemoved",false)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @SuppressLint("NotifyDataSetChanged")
