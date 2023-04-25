@@ -1,11 +1,11 @@
 package com.example.newgensociety;
 
 import static android.content.ContentValues.TAG;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -18,35 +18,47 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.shreyaspatil.EasyUpiPayment.EasyUpiPayment;
+import com.razorpay.Checkout;
+import com.razorpay.PaymentResultListener;
 
-import java.text.DateFormat;
+import org.json.JSONObject;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 import java.util.TimeZone;
 
-public class Maintenance_Payment extends AppCompatActivity {
+public class Maintenance_Payment extends AppCompatActivity implements PaymentResultListener {
 
     TextView FlatNumber, DueDate, Amount, Discount, PayableAmount,PayeeName;
     Button Pay;
     ImageView Back;
     FirebaseFirestore db;
-    String PayerName;
+    String PayerName, PayerMobile, PayerEmail, MaintenanceCode;
     FirebaseAuth mAuth;
 
-    int payableAmount, discount;
+    int Payableamount, discount;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maintenance_payment);
+
+        Checkout.preload(getApplicationContext());
+        Checkout checkout = new Checkout();
+        // ...
+        checkout.setKeyID("rzp_test_K0HCOn28gs21j7");
+
         FlatNumber = findViewById(R.id.Maintenance_Payment_flat_no);
         DueDate = findViewById(R.id.Maintenance_Payment_DueDate);
         Amount = findViewById(R.id.Maintenance_Payment_Amount);
@@ -68,6 +80,9 @@ public class Maintenance_Payment extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + "=>" + document.getData());
                                 PayerName = Objects.requireNonNull(document.get("Member_Name")).toString();
+                                PayerMobile = Objects.requireNonNull(document.get("Mobile")).toString();
+                                PayerEmail = Objects.requireNonNull(document.get("Email")).toString();
+
                             }
                             PayeeName.setText(PayerName);
                         }
@@ -96,20 +111,14 @@ public class Maintenance_Payment extends AppCompatActivity {
             dateFormat.setTimeZone(TimeZone.getTimeZone("GMT-5"));
             int AmountA = Integer.parseInt(intent.getStringExtra("amount"));
             int DiscountP = Integer.parseInt(intent.getStringExtra("discount"));
+            MaintenanceCode = intent.getStringExtra("Code");
+
             if(currentDate.after(date1)){
                 DiscountP = 0;
                 DueDate.setTextColor(Color.RED);
             }
                 int DiscountA = (AmountA*DiscountP)/100;
-                int Payableamount = AmountA-DiscountA;
-
-                Pay.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-
-                }
-            });
+                Payableamount = AmountA-DiscountA;
 
             Log.i("intent_","==a=="+AmountA);
             Log.i("intent_","==f=="+Flat_Number);
@@ -129,6 +138,82 @@ public class Maintenance_Payment extends AppCompatActivity {
             }
         });
 
+        Pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startPayment();
+            }
+        });
+
+    }
+
+    public void startPayment() {
+        Checkout checkout = new Checkout();
+        checkout.setKeyID("rzp_test_K0HCOn28gs21j7");
+        /**
+         * Instantiate Checkout
+         */
+        /**
+         * Set your logo here
+         */
+        checkout.setImage(R.drawable.iconmain);
+
+        /**
+         * Reference to current activity
+         */
+        final Activity activity = this;
+
+        /**
+         * Pass your payment options to the Razorpay Checkout as a JSONObject
+         */
+        try {
+            JSONObject options = new JSONObject();
+
+            options.put("name", "New Generation Society");
+            options.put("description", "Reference No. #123456");
+            options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.jpg");
+//            options.put("order_id", "order_DBJOWzybf0sJbb");//from response of step 3.
+            options.put("theme.color", "#3399cc");
+            options.put("currency", "INR");
+            options.put("amount", Payableamount * 100 );//pass amount in currency subunits
+            options.put("prefill.email", PayerEmail);
+            options.put("prefill.contact",PayerMobile);
+            JSONObject retryObj = new JSONObject();
+            retryObj.put("enabled", true);
+            retryObj.put("max_count", 4);
+            options.put("retry", retryObj);
+            checkout.open(activity, options);
+
+        } catch(Exception e) {
+            Log.e("TAG", "Error in starting Razorpay Checkout", e);
+        }
+    }
+
+    @Override
+    public void onPaymentSuccess(String s) {
+        Toast.makeText(this, "Payment Successful "+s, Toast.LENGTH_SHORT).show();
+        boolean Status = true;
+        db = FirebaseFirestore.getInstance();
+        db.collection("Maintenance")
+                .document(MaintenanceCode)
+                .update("isPaid",Status)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(Maintenance_Payment.this, "Successful", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Maintenance_Payment.this, "Error", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
+
+    @Override
+    public void onPaymentError(int i, String s) {
+        Toast.makeText(this, "Payment Failed "+s, Toast.LENGTH_SHORT).show();
     }
 
 }

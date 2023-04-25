@@ -1,21 +1,28 @@
 package com.example.newgensociety;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -30,6 +37,7 @@ public class SocietyM_ComplainPage extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseFirestore db;
     Button send,Complains;
+    String SM_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +51,25 @@ public class SocietyM_ComplainPage extends AppCompatActivity {
         name = findViewById(R.id.Society_Complain_Name);
         Complains = findViewById(R.id.btnComplains);
         db = FirebaseFirestore.getInstance();
-
+        mAuth = FirebaseAuth.getInstance();
+        String UserId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        db.collection("Society_Members").whereEqualTo("userId",UserId)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + "=>" + document.getData());
+                                SM_name = Objects.requireNonNull(document.get("Member_Name")).toString();
+                            }
+                            name.setText(SM_name);
+                        }
+                        else{
+                            Toast.makeText(SocietyM_ComplainPage.this, "Failed to fetch name", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override

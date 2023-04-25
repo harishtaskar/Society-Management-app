@@ -1,9 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AboutUs">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:text="About Us"
+            android:textStyle="bold"
+            android:textSize="@dimen/_20sdp"
+            >
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="Mail : harishtaskar001@gmail.com"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/_12sdp"
+            >
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:text="Being specialists in everything computerized, ‘New Generation Society’ is a confided in accomplice to open, private, and third segment associations crosswise over businesses in the UK and around the globe.
+
+The ‘New Generation Society’ group comprises enthusiastic engineers and creators with aptitude web improvement, versatile application advancement, increased reality, augmented reality, and amusement improvement.
+
+We Are Loyal to Our Core Values
+
+We are dedicated to our fundamental beliefs that give included advantages in our customer’s business that extend past the underlying venture, be it in website composition or a versatile application advancement venture.
+
+We Build Strong Relationships
+
+We put vigorously in building long haul connections by giving quality, client encounters, and execution in your product items"
+            android:textSize="@dimen/_12sdp"
+            >
+        </TextView>
+
+    </LinearLayout>
+
+</LinearLayout>

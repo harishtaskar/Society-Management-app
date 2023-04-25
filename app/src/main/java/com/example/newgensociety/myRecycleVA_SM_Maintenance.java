@@ -1,5 +1,6 @@
 package com.example.newgensociety;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -8,18 +9,27 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Objects;
 
 public class myRecycleVA_SM_Maintenance extends RecyclerView.Adapter<myRecycleVA_SM_Maintenance.MyViewHolder1>{
     Context context;
     ArrayList<Maintenance> maintenanceArrayList;
+
 
 //    public class myRecycleViewAdapter extends ArrayAdapter<Maintenance>  {
 //
@@ -78,7 +88,7 @@ public class myRecycleVA_SM_Maintenance extends RecyclerView.Adapter<myRecycleVA
     }
 
     @Override
-    public void onBindViewHolder(@NonNull myRecycleVA_SM_Maintenance.MyViewHolder1 holder, int position) {
+    public void onBindViewHolder(@NonNull myRecycleVA_SM_Maintenance.MyViewHolder1 holder, @SuppressLint("RecyclerView") int position) {
         Maintenance maintenance = maintenanceArrayList.get(position);
 
         holder.flat_no.setText("Flat Number : "+maintenance.getFlat_no());
@@ -86,6 +96,31 @@ public class myRecycleVA_SM_Maintenance extends RecyclerView.Adapter<myRecycleVA
         holder.due_date.setText("Due On : "+maintenance.getDue_date());
         holder.discription.setText(maintenance.getDiscription());
         holder.discount.setText("Pay Before Due and Get "+String.valueOf(maintenance.getDiscount())+"% Discount");
+        String Code = maintenance.getMaintenanceCode();
+
+        db = FirebaseFirestore.getInstance();
+        db.collection("Maintenance").document(Code)
+                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            boolean Status = (boolean) Objects.requireNonNull(task.getResult().get("isPaid"));
+                            if(Status) {
+                                Calendar calendar = Calendar.getInstance();
+                                String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+                                String date;
+                                date = currentDate.toString();
+                                holder.isPaid.setText("Paid : "+date);
+                                holder.PayNow.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(context, "Failed To Get isPaid Status", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
         holder.PayNow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +130,7 @@ public class myRecycleVA_SM_Maintenance extends RecyclerView.Adapter<myRecycleVA
                 i.putExtra("amount",String.valueOf(maintenanceArrayList.get(position).getAmount()));
                 i.putExtra("dueDate",maintenanceArrayList.get(position).getDue_date());
                 i.putExtra("discount",String.valueOf(maintenanceArrayList.get(position).getDiscount()));
+                i.putExtra("Code",String.valueOf(maintenanceArrayList.get(position).getMaintenanceCode()));
                 context.startActivity(i);
             }
         });
@@ -106,7 +142,7 @@ public class myRecycleVA_SM_Maintenance extends RecyclerView.Adapter<myRecycleVA
     }
     public static class MyViewHolder1 extends RecyclerView.ViewHolder{
 
-        TextView flat_no, amount, due_date, discription, discount;
+        TextView flat_no, amount, due_date, discription, discount, isPaid;
         Button PayNow;
 
         public MyViewHolder1(@NonNull View itemView,OnItemClickListener listener) {
@@ -117,7 +153,7 @@ public class myRecycleVA_SM_Maintenance extends RecyclerView.Adapter<myRecycleVA
             discription = itemView.findViewById(R.id.Society_MaintenanceR_Discription);
             discount = itemView.findViewById(R.id.Society_MaintenanceR_DiscountText);
             PayNow = itemView.findViewById(R.id.Society_MaintenanceR_PayText);
-
+            isPaid = itemView.findViewById(R.id.Society_MaintenanceR_DateOfPayment);
 //            String FlatNumber = flat_no.getText().toString();
 //            String Amount = amount.getText().toString();
 //            String DueDate = due_date.getText().toString();

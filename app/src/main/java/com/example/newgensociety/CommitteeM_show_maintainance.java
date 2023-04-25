@@ -39,7 +39,7 @@ public class CommitteeM_show_maintainance extends AppCompatActivity {
         EventChangeListener();
     }
     private void EventChangeListener() {
-        db.collection("Maintenance").orderBy("flat_no", Query.Direction.ASCENDING)
+        db.collection("Maintenance").orderBy("isPaid", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {

@@ -126,7 +126,6 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_3sdp"
                     android:textSize="@dimen/_13sdp"
-                    android:text="Paid On : 31/2/2023"
                     android:textStyle="bold"
                     android:textColor="#000000">
                 </TextView>

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +29,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -42,7 +42,6 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -68,9 +67,9 @@ public class CommitteeM_HomePage extends AppCompatActivity {
     StorageReference storageRef;
 //    ProgressDialog progressDialog;
     //profile page
-    TextView cpsocietyname,cpsocietyaddress,cpmembername,cpmemberemail,cpabout,cpfeedback,cplogout,cptermsorcondition,cpversion;
+    TextView cpsocietyname,cpsocietyaddress,cpmembername,cpmemberemail, cpshare, cpabout,cplogout,cptermsorcondition,cpversion;
     Button cpeditbtn;
-    CardView addfalt,visitor;
+    CardView addfalt;
     ImageView cpmemberimage;
     String S_name, Address, CM_Name, C_Email, S_Code;
 
@@ -94,16 +93,14 @@ public class CommitteeM_HomePage extends AppCompatActivity {
 
         //profile page
         cpmemberimage = findViewById(R.id.committee_profile_img);
-        addfalt = findViewById(R.id.committee_profile_add_flat);
         Helps2 = findViewById(R.id.committee_profile_help);
-        addfalt = findViewById(R.id.committee_profile_add_flat);
         cpsocietyname = findViewById(R.id.committee_profile_society_name);
         cpsocietyaddress = findViewById(R.id.committee_profile_society_address);
         cpmembername = findViewById(R.id.committee_profile_member_name);
         cpmemberemail = findViewById(R.id.committee_profile_member_email);
         cpmembername = findViewById(R.id.committee_profile_member_name);
-        cpabout = findViewById(R.id.committee_profile_about);
-        cpfeedback = findViewById(R.id.committee_profile_support_feedback);
+        cpshare = findViewById(R.id.committee_profile_about);
+        cpabout = findViewById(R.id.committee_profile_support_feedback);
         cplogout = findViewById(R.id.committee_profile_logout);
         cptermsorcondition = findViewById(R.id.committee_profile_terms_condition);
         cpversion = findViewById(R.id.committee_profile_version);
@@ -123,7 +120,7 @@ public class CommitteeM_HomePage extends AppCompatActivity {
         Helps2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CommitteeM_HomePage.this,CommitteeM_show_Meetings.class);
+                Intent intent = new Intent(CommitteeM_HomePage.this,CommitteeM_showHelp.class);
                 startActivity(intent);
             }
         });
@@ -143,6 +140,24 @@ public class CommitteeM_HomePage extends AppCompatActivity {
             }
         });
 
+        String appUrl = getString(R.string.app_url);
+        cpshare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, appUrl);
+                startActivity(Intent.createChooser(shareIntent, "Share via"));
+            }
+        });
+
+        cpabout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CommitteeM_HomePage.this,AboutUs.class);
+                startActivity(intent);
+            }
+        });
 //        progressDialog = new ProgressDialog(this);
 //        progressDialog.setCancelable(false);
 //        progressDialog.setMessage("Fetching Data");
@@ -320,7 +335,9 @@ public class CommitteeM_HomePage extends AppCompatActivity {
                 return null;
             }
         });
-        cpmemberimage.setClipToOutline(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            cpmemberimage.setClipToOutline(true);
+        }
         storageRef = FirebaseStorage.getInstance().getReference("image/"+UserId);
         try {
             File localFile = File.createTempFile("tempfile",".jpeg");

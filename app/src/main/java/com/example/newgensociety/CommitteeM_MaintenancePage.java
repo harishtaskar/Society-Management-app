@@ -16,8 +16,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -87,7 +89,7 @@ public class CommitteeM_MaintenancePage extends AppCompatActivity {
 
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'
-        int targetStringLength = 6;
+        int targetStringLength = 12;
         Random random = new Random();
         StringBuilder buffer = new StringBuilder(targetStringLength);
         for (int i = 0; i < targetStringLength; i++) {
@@ -150,11 +152,11 @@ public class CommitteeM_MaintenancePage extends AppCompatActivity {
                 maintenance.put("isRemoved",removed);
                 maintenance.put("upiId", UpiId);
 
-                db.collection("Maintenance")
-                        .add(maintenance)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                db.collection("Maintenance").document(generatedString)
+                        .set(maintenance)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
-                            public void onSuccess(DocumentReference documentReference) {
+                            public void onComplete(@NonNull Task<Void> task) {
                                 Toast.makeText(getApplicationContext(),"Successful", Toast.LENGTH_SHORT).show();
                                 FlatNo.setText("");
                                 Discription.setText("");
@@ -166,9 +168,11 @@ public class CommitteeM_MaintenancePage extends AppCompatActivity {
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getApplicationContext(),"Failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CommitteeM_MaintenancePage.this, "Failed", Toast.LENGTH_SHORT).show();
                             }
                         });
+
+
             }
         });
 

@@ -87,7 +87,7 @@
             android:id="@+id/society_home_cardview_help_flatno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"/>
+            android:inputType="text"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

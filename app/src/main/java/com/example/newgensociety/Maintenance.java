@@ -3,20 +3,29 @@ package com.example.newgensociety;
 import java.util.Date;
 
 public class Maintenance {
-    String flat_no, discription;
+    String flat_no, discription, MaintenanceCode;
     int amount, discount;
     String due_date;
 
     public Maintenance(){
     }
 
-    public Maintenance(String flat_no, int amount, String due_date, String discription, int discount) {
+    public Maintenance(String flat_no, int amount, String due_date, String discription, int discount, String MaintenanceCode) {
         this.flat_no = flat_no;
         this.discription = discription;
         this.due_date = due_date;
         this.amount = amount;
         this.discount = discount;
 
+
+    }
+
+    public String getMaintenanceCode() {
+        return MaintenanceCode;
+    }
+
+    public void setMaintenanceCode(String maintenanceCode) {
+        MaintenanceCode = maintenanceCode;
     }
 
     public int getAmount() {

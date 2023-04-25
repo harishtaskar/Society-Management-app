@@ -14,6 +14,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
@@ -63,13 +64,12 @@ public class SocietyM_HomePage extends AppCompatActivity {
     FirebaseFirestore db;
     Button EditProfile;
     CardView complain,maintenance,help,meeting,amenity,profileHelp,Addflat,Addflatp;
-    TextView logout,SocietyM_name,SocietyM_email,SocietyName,SocietyAddress,SM_Name,SM_Share;
+    TextView logout,SocietyM_name,SocietyM_email,SocietyName,SocietyAddress,SM_Name,SM_Share,S_About;
     RelativeLayout profile,home,notice;
     FirebaseAuth mAuth;
     String S_name,Address;
     ImageView imageView, Profile;
 
-    private DatabaseReference mDatabase;
 
 
     @Override
@@ -95,6 +95,7 @@ public class SocietyM_HomePage extends AppCompatActivity {
         SM_Name = findViewById(R.id.Society_Home_sm_name);
         Profile = findViewById(R.id.home_btnprofile);
         SM_Share = findViewById(R.id.Society_profile_share);
+        S_About = findViewById(R.id.Society_profile_support_feedback);
         mAuth = FirebaseAuth.getInstance();
 
         bottomNavigation = findViewById(R.id.bottomNavigation);
@@ -111,7 +112,6 @@ public class SocietyM_HomePage extends AppCompatActivity {
         bottomNavigation.add(new MeowBottomNavigation.Model(3,R.drawable.notice));
 
         db = FirebaseFirestore.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
         db = FirebaseFirestore.getInstance();
         NoticeArrayList = new ArrayList<Notice>();
         myAdapter = new myRecycleVA_Society_Notice(SocietyM_HomePage.this,NoticeArrayList);
@@ -269,7 +269,9 @@ public class SocietyM_HomePage extends AppCompatActivity {
             }
         });
 
-        imageView.setClipToOutline(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            imageView.setClipToOutline(true);
+        }
         StorageReference storageRef = FirebaseStorage.getInstance().getReference("image/" + UserId);
         try {
             File localFile = File.createTempFile("tempfile",".jpeg");
@@ -331,6 +333,14 @@ public class SocietyM_HomePage extends AppCompatActivity {
                 shareIntent.setType("text/plain");
                 shareIntent.putExtra(Intent.EXTRA_TEXT, appUrl);
                 startActivity(Intent.createChooser(shareIntent, "Share via"));
+            }
+        });
+
+        S_About.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SocietyM_HomePage.this,AboutUs.class);
+                startActivity(intent);
             }
         });
         complain.setOnClickListener(new View.OnClickListener() {

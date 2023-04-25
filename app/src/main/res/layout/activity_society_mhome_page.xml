@@ -297,7 +297,7 @@
                         android:textColor="@color/black"
                         android:padding="@dimen/_10sdp"
                         android:gravity="left"
-                        android:text="Support and feedback ">
+                        android:text="About">
                     </TextView>
 
                     <View

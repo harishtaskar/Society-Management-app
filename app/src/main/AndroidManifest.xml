@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-sdk
+        android:minSdkVersion="19"
+        android:targetSdkVersion="27"
+        tools:overrideLibrary="com.razorpay" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.NFC_PREFERRED_PAYMENT_INFO" />
 
@@ -15,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NewGenSociety"
         tools:targetApi="31">
+        <activity
+            android:name=".AboutUs"
+            android:exported="false" />
         <activity
             android:name=".SocietyM_ComplainsRecycleView"
             android:exported="false" />
