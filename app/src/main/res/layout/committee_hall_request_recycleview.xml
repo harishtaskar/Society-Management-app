@@ -39,44 +39,7 @@
                     android:textColor="#3F51B5"
                     tools:ignore="HardcodedText" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right|top">
 
-                    <RadioGroup
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                    <RadioButton
-                        android:id="@+id/Committee_Hall_Requests_isApproved"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_10sdp"
-                        android:paddingRight="@dimen/_10sdp"
-                        android:textStyle="bold"
-                        android:text="Approve"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:textColor="#303030"
-                        >
-                    </RadioButton>
-
-                    <RadioButton
-                        android:id="@+id/Committee_Hall_Requests_isNotApproved"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_10sdp"
-                        android:paddingRight="@dimen/_10sdp"
-                        android:textStyle="bold"
-                        android:text="Dismiss"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:textColor="#303030"
-                        >
-                    </RadioButton>
-
-                    </RadioGroup>
-
-                </LinearLayout>
 
             </LinearLayout>
 
@@ -140,6 +103,47 @@
                     android:textColor="@color/black"
                     >
                 </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_10sdp"
+                >
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <RadioButton
+                        android:id="@+id/Committee_Hall_Requests_isApproved"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_10sdp"
+                        android:paddingRight="@dimen/_10sdp"
+                        android:textStyle="bold"
+                        android:text="Approve"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:textColor="#303030"
+                        >
+                    </RadioButton>
+
+                    <RadioButton
+                        android:id="@+id/Committee_Hall_Requests_isNotApproved"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_10sdp"
+                        android:paddingRight="@dimen/_10sdp"
+                        android:textStyle="bold"
+                        android:text="Dismiss"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:textColor="#303030"
+                        >
+                    </RadioButton>
+
+                </RadioGroup>
 
             </LinearLayout>
         </LinearLayout>
